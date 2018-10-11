@@ -1,7 +1,24 @@
-研究，自己分析，制作物のアイデア出し，目標実現のための計画のときに，頭の中をうまく言語化して整理することの難しさを解決したい
-大学生向けの
-質問に答えるだけであなたのアイデアがまとまることを実現する
-cogitoです。
-これは、考えをまとめるコツを実践することができ、
-One Noteなどのノートアプリとは違って、
-質問や読み上げによって思考をサポートするエージェント，考えることが得意な人の思考法を真似できるテンプレート共有機能が備わっています。
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
