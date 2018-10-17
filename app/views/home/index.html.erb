@@ -116,18 +116,16 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">エディタ</label>
+              <label for="exampleFormControlTextarea1">Answer</label>
               <textarea v-model="message" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
             </div>
             <div class="card">
               <div class="card-header">
-                カードのヘッダ
+                質問
               </div>
               <div class="card-body">
-                <h5 class="card-title">カードのタイトル</h5>
-                <p class="card-text">以下のテキストを追加のコンテンツへの自然な導入としてサポート。</p>
-                <a href="#" class="btn btn-primary">ボタン</a>
-                <br><br><br><br><br><br>
+                <h5 class="card-title">Q1</h5>
+                <p class="card-text"><%=@question%></p>
               </div>
             </div>
             <br>
