@@ -98,7 +98,8 @@
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <span data-feather="file-text"></span>
-                年末販売
+                年末販売{{answer}}-----
+                {{note}}
               </a>
               <hr>
             </li>
@@ -111,13 +112,18 @@
           <div class="col-md-8">
             <div class="form-group">
               <label for="exampleFormControlTextarea1">エディタ</label>
-              <textarea v-model="message" class="form-control" id="exampleFormControlTextarea1" rows="37"></textarea>
+              <textarea v-model="note" class="form-control" id="exampleFormControlTextarea1" rows="37"></textarea>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
+
               <label for="exampleFormControlTextarea1">Answer</label>
-              <textarea v-model="message" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
+              <textarea v-model="answer" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
+            </div>
+            <div class="form-group">
+              <button  @click="addAnswerToNote" class="btn btn-primary btn-lg btn-block">回答</button>
+
             </div>
             <div class="card">
               <div class="card-header">

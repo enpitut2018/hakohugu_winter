@@ -4,7 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: '#app',
     data: {
-      message: "foooooooooooooooo!"
+      answer: "",
+      note: ""
     },
+    methods: {
+      addAnswerToNote: function (){
+        this.note += this.answer
+        this.note += "\n"
+        this.answer = ""
+      }
+    }
   })
 })
