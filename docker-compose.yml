@@ -8,6 +8,9 @@ services:
       - "POSTGRES_PASSWORD=root"
     ports:
       - "5432:5432"
+    volumes:
+      - datavol:/var/lib/postgresql/data
+
   web:
     build: .
     image: app
@@ -25,3 +28,5 @@ services:
       - 8080:8080
     depends_on:
       - db
+volumes:
+  datavol:
