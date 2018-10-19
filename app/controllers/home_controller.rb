@@ -1,5 +1,6 @@
+# coding: utf-8
 class HomeController < ApplicationController
   def index
-  @question="研究の動機は？";
+  @question="何が課題か？";
   end
 end
