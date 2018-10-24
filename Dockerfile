@@ -19,6 +19,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 
 # Cannot find module node-sass対策
 RUN yarn add node-sass
+RUN yarn add axios
 
 RUN mkdir /hakohugu_winter
 
