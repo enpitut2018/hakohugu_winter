@@ -23,8 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         axios.get(`api/questions/${id}`)
              .then(res => {
                this.question.push(res.data.title);
+               this.addAnswerToNote();
              });
-        setTimeout(this.addAnswerToNote,500);
+
       }
     }
   })
