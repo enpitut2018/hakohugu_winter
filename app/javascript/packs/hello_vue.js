@@ -13,13 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     arg[kv[0]]=kv[1];
   }
 
+
   //ここからvueインスタンス
   const app = new Vue({
     el: '#app',
     data: {
       answer: "",
       note: "",
-      question:""
+      question: "",
+      count: 0
     },
 
     mounted: function () {
@@ -31,11 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     methods: {
       addAnswerToNote: function (){
-        this.note += this.question.title
+        this.note += ("Q" + this.question[this.count].qtext)
         this.note += "\n"
         this.note += this.answer
         this.note += "\n"
         this.answer = ""
+        this.count += 1
       }
     }
   })
