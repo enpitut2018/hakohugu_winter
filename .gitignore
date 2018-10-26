@@ -5,6 +5,7 @@
 capybara-*.html
 .rspec
 /log/
+/log/development.log
 !/log/.keep
 /tmp
 !/tmp/.keep
