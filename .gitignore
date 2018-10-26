@@ -4,7 +4,7 @@
 *.rbc
 capybara-*.html
 .rspec
-/log
+/log/
 !/log/.keep
 /tmp
 !/tmp/.keep
@@ -53,7 +53,7 @@ bower.json
 node_modules/
 
 # Ignore precompiled javascript packs
-/public/packs
+/public/packs/
 /public/packs-test
 
 # Ignore yarn files
