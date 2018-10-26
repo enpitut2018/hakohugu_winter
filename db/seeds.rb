@@ -20,7 +20,7 @@ q8 = Question.create!(qtext:'自分の提案との差分')
 
 category1 = Category.create!(name:'研究')
 
-template1 = user1.template.create!(title:'研究アイデア出しノート',category_id:category1.id,scope:1)
+template1 = Template.create!(title:'研究アイデア出しノート',user_id:user1.id,category_id:category1.id,scope:1)
 
 Contain.create!(template_id:template1.id,question_id:q1.id)
 Contain.create!(template_id:template1.id,question_id:q2.id)

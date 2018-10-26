@@ -1,3 +1,6 @@
 {
-
+  "application.js": "/packs/application-b80295cdd2b19c8c0752.js",
+  "application.js.map": "/packs/application-b80295cdd2b19c8c0752.js.map",
+  "hello_vue.js": "/packs/hello_vue-402e8e3671b6c77d707a.js",
+  "hello_vue.js.map": "/packs/hello_vue-402e8e3671b6c77d707a.js.map"
 }
