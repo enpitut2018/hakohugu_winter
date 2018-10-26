@@ -1,2 +1,4 @@
 # coding: utf-8
-json.title     "何が課題か？"
+json.array! @questions do |question|
+   json.qtext question.question.qtext
+end
