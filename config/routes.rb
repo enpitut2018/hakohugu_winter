@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-   root to: 'home#index'
+   get '/' , to: 'home#index'
+
    namespace :api do
-	  resources :questions, only: %i(show)
+	   get 'questions/(:template_id)' , to: 'questions#show'
    end
 end
