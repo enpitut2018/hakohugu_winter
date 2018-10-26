@@ -2633,3 +2633,161 @@ Completed 200 OK in 20ms (Views: 19.2ms | ActiveRecord: 0.0ms)
   ↳ db/seeds.rb:29
   [1m[35m (4.0ms)[0m  [1m[35mCOMMIT[0m
   ↳ db/seeds.rb:29
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "User1"], ["created_at", "2018-10-26 07:00:20.251801"], ["updated_at", "2018-10-26 07:00:20.251801"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "User2"], ["created_at", "2018-10-26 07:00:20.257205"], ["updated_at", "2018-10-26 07:00:20.257205"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "研究テーマ名"], ["created_at", "2018-10-26 07:00:20.288281"], ["updated_at", "2018-10-26 07:00:20.288281"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:13
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "何が課題か"], ["created_at", "2018-10-26 07:00:20.294009"], ["updated_at", "2018-10-26 07:00:20.294009"]]
+  ↳ db/seeds.rb:13
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:13
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "課題の背景"], ["created_at", "2018-10-26 07:00:20.298573"], ["updated_at", "2018-10-26 07:00:20.298573"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:15
+  [1m[36mQuestion Create (0.5ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "自分の提案　どう解決するか"], ["created_at", "2018-10-26 07:00:20.303390"], ["updated_at", "2018-10-26 07:00:20.303390"]]
+  ↳ db/seeds.rb:15
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:15
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "関連研究　何が課題か"], ["created_at", "2018-10-26 07:00:20.307886"], ["updated_at", "2018-10-26 07:00:20.307886"]]
+  ↳ db/seeds.rb:16
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "関連リンク"], ["created_at", "2018-10-26 07:00:20.312381"], ["updated_at", "2018-10-26 07:00:20.312381"]]
+  ↳ db/seeds.rb:17
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "カテゴリ"], ["created_at", "2018-10-26 07:00:20.316753"], ["updated_at", "2018-10-26 07:00:20.316753"]]
+  ↳ db/seeds.rb:18
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["qtext", "自分の提案との差分"], ["created_at", "2018-10-26 07:00:20.321706"], ["updated_at", "2018-10-26 07:00:20.321706"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "研究"], ["created_at", "2018-10-26 07:00:20.341683"], ["updated_at", "2018-10-26 07:00:20.341683"]]
+  ↳ db/seeds.rb:21
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mTemplate Create (4.0ms)[0m  [1m[32mINSERT INTO "templates" ("title", "user_id", "category_id", "scope", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "研究アイデア出しノート"], ["user_id", 7], ["category_id", 4], ["scope", 1], ["created_at", "2018-10-26 07:00:20.404871"], ["updated_at", "2018-10-26 07:00:20.404871"]]
+  ↳ db/seeds.rb:23
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:25
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ db/seeds.rb:25
+  [1m[36mContain Create (3.2ms)[0m  [1m[32mINSERT INTO "contains" ("template_id", "question_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["template_id", 1], ["question_id", 25], ["created_at", "2018-10-26 07:00:20.437388"], ["updated_at", "2018-10-26 07:00:20.437388"]]
+  ↳ db/seeds.rb:25
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:25
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ db/seeds.rb:26
+  [1m[36mContain Create (0.4ms)[0m  [1m[32mINSERT INTO "contains" ("template_id", "question_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["template_id", 1], ["question_id", 26], ["created_at", "2018-10-26 07:00:20.448719"], ["updated_at", "2018-10-26 07:00:20.448719"]]
+  ↳ db/seeds.rb:26
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:27
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ db/seeds.rb:27
+  [1m[36mContain Create (0.6ms)[0m  [1m[32mINSERT INTO "contains" ("template_id", "question_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["template_id", 1], ["question_id", 27], ["created_at", "2018-10-26 07:00:20.456520"], ["updated_at", "2018-10-26 07:00:20.456520"]]
+  ↳ db/seeds.rb:27
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:27
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mContain Create (0.4ms)[0m  [1m[32mINSERT INTO "contains" ("template_id", "question_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["template_id", 1], ["question_id", 28], ["created_at", "2018-10-26 07:00:20.464077"], ["updated_at", "2018-10-26 07:00:20.464077"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:29
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ db/seeds.rb:29
+  [1m[36mContain Create (0.5ms)[0m  [1m[32mINSERT INTO "contains" ("template_id", "question_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["template_id", 1], ["question_id", 29], ["created_at", "2018-10-26 07:00:20.471551"], ["updated_at", "2018-10-26 07:00:20.471551"]]
+  ↳ db/seeds.rb:29
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:29
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.4ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTemplate Load (1.1ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mContain Load (0.5ms)[0m  [1m[34mSELECT  "contains".* FROM "contains" WHERE "contains"."template_id" = $1 LIMIT $2[0m  [["template_id", 1], ["LIMIT", 11]]
+  [1m[36mTemplate Load (1.0ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mContain Load (0.4ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.9ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mContain Load (0.5ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.3ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
