@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       count: 0
     },
 
-    mounted: function () {
+    created: function () {
       axios.get(`api/questions/${arg.template_id}`)
            .then(res => {
              this.question = res.data;
