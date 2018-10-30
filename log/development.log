@@ -3201,3 +3201,396 @@ Processing by Api::QuestionsController#show as HTML
 Completed 200 OK in 41ms (Views: 34.6ms | ActiveRecord: 3.4ms)
 
 
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 01:57:23 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (1.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (1.0ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (32.9ms)
+Completed 200 OK in 70ms (Views: 59.1ms | ActiveRecord: 6.7ms)
+
+
+Started GET "/" for 172.20.0.1 at 2018-10-30 02:00:07 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 319ms (Views: 304.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/undefined" for 172.20.0.1 at 2018-10-30 02:00:08 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"undefined"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+Completed 404 Not Found in 5ms (ActiveRecord: 0.6ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Template with 'id'=undefined):
+  
+app/controllers/api/questions_controller.rb:4:in `show'
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:00:20 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 260ms (Views: 242.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:00:21 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.6ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (20.5ms)
+Completed 200 OK in 48ms (Views: 40.7ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:04:04 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 265ms (Views: 250.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:04:05 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.7ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (23.0ms)
+Completed 200 OK in 60ms (Views: 51.9ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:04:18 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 240ms (Views: 229.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:04:19 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.7ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (1.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.2ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (33.6ms)
+Completed 200 OK in 70ms (Views: 60.7ms | ActiveRecord: 6.1ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:06:32 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.5ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (15.1ms)
+Completed 200 OK in 38ms (Views: 31.6ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:07:15 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 235ms (Views: 221.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:07:15 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.6ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (17.5ms)
+Completed 200 OK in 42ms (Views: 35.7ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:08:26 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 226ms (Views: 214.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:08:26 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.5ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (22.4ms)
+Completed 200 OK in 57ms (Views: 50.1ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:09:34 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 226ms (Views: 212.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:09:35 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.7ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (1.1ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (25.6ms)
+Completed 200 OK in 69ms (Views: 61.0ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:09:45 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 247ms (Views: 234.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:09:46 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.8ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (1.6ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (22.5ms)
+Completed 200 OK in 53ms (Views: 43.3ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:12:31 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 244ms (Views: 231.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:12:31 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.8ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.6ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (22.8ms)
+Completed 200 OK in 53ms (Views: 45.0ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:12:34 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 259ms (Views: 243.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:12:35 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (0.8ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (20.8ms)
+Completed 200 OK in 58ms (Views: 50.7ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:12:42 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 219ms (Views: 205.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:12:43 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (1.0ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.0ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (22.0ms)
+Completed 200 OK in 48ms (Views: 39.8ms | ActiveRecord: 5.7ms)
+
+
+Started GET "/?template_id=1" for 172.20.0.1 at 2018-10-30 02:30:37 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 236ms (Views: 220.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.20.0.1 at 2018-10-30 02:30:38 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (1.1ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (1.1ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (25.6ms)
+Completed 200 OK in 57ms (Views: 47.6ms | ActiveRecord: 5.2ms)
+
+

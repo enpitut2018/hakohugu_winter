@@ -131,7 +131,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title">Q{{this.count+1}}</h5>
-                <p class="card-text">{{question[this.count].qtext}}</p>
+                <p class="card-text" v-if="question">{{question[this.count].qtext}}</p>
               </div>
             </div>
             <br>

@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue/dist/vue.esm';
 import axios from 'axios';
 
 
@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     methods: {
       addAnswerToNote: function (){
-        this.note += ("Q" + this.question[this.count].qtext)
-        this.note += "\n"
-        this.note += this.answer
-        this.note += "\n"
-        this.answer = ""
-        this.count += 1
+        this.note += ("Q" + this.question[this.count].qtext);
+        this.note += "\n";
+        this.note += this.answer;
+        this.note += "\n";
+        this.answer = "";
+        this.count += 1;
       }
     }
-  })
-})
+  });
+});
