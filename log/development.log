@@ -4299,3 +4299,49 @@ Processing by Api::QuestionsController#show as HTML
 Completed 200 OK in 41ms (Views: 34.5ms | ActiveRecord: 4.4ms)
 
 
+Started GET "/?template_id=1" for 172.22.0.1 at 2018-10-31 02:20:17 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 255ms (Views: 242.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.22.0.1 at 2018-10-31 02:20:17 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mContain Load (3.3ms)[0m  [1m[34mSELECT "contains".* FROM "contains" WHERE "contains"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  [1m[36mQuestion Load (0.7ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:3
+  Rendered api/questions/show.json.jbuilder (29.5ms)
+Completed 200 OK in 56ms (Views: 45.5ms | ActiveRecord: 7.6ms)
+
+
+Started GET "/" for 172.23.0.1 at 2018-10-31 03:12:32 +0000
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (12.4ms)
+Started GET "/" for 172.23.0.1 at 2018-10-31 03:12:36 +0000
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 26239ms (Views: 26218.9ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 24920ms (Views: 24939.1ms | ActiveRecord: 0.0ms)
+
+
