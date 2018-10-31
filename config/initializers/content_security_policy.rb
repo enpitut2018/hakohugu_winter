@@ -9,13 +9,12 @@ Rails.application.config.content_security_policy do |policy|
   policy.font_src    :self, :https, :data
   policy.img_src     :self, :https, :data
   policy.object_src  :none
-  # 条件分岐を追加. すでにpolicy.script_srcは書いてある
+  policy.connect_src :self, :https, 'http://localhost:3035', 'ws://localhost:3035' if Rails.env.development?
   if Rails.env.development?
     policy.script_src :self, :https, :unsafe_eval
   else
     policy.script_src :self, :https
   end
-  policy.style_src   :self, :https
 end
 # If you are using UJS then enable automatic nonce generation
 # Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
