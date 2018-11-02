@@ -4,16 +4,18 @@
 // to the head of your layout file,
 // like app/views/layouts/application.html.erb.
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.esm.js';
 import App from '../app.vue'
- document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     el: "#app",
-    render: h => h(App)
+    //render: h => h(App)
+    components: { App },
+    template: '<app></app>'
   })
-   console.log(app)
+  console.log(app)
 })
- // The above code uses Vue without the compiler, which means you cannot
+// The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
 // need to always use single file components.
 // To be able to target elements in your existing html/erb templates,
@@ -25,7 +27,7 @@ import App from '../app.vue'
 //   {{message}}
 //   <app></app>
 // </div>
- // import Vue from 'vue/dist/vue.esm'
+// import Vue from 'vue/dist/vue.esm'
 // import App from '../app.vue'
 //
 // document.addEventListener('DOMContentLoaded', () => {
