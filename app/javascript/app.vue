@@ -1,33 +1,32 @@
 <template>
-  <div id="app">
-    <div v-if="ok" class="row">
-      <div class="col-md-8">
-        <div id="conversation">
-          <template v-if="questions" v-for="conversationLog in conversationLogs">
-            <div class="question-balloon">
-              <p>{{conversationLog.question}}</p>
-            </div>
-            <br>
-            <div v-if="conversationLog.answer" class="answer-balloon float-right">
-              <p>{{conversationLog.answer}}</p>
-            </div>
-            <br><br><br>
-          </template>
-        </div>
-        <div id="transmissionMessage" class="border">
-          <button @click="transmissionMessage" type="button" class="btn btn-success float-right">send</button>
-        </div>
-        <div id="inputText">
-          <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
-        </div>
+  <div v-if="ok" class="row">
+    <div class="col-md-8">
+      <div id="conversation">
+        <template v-if="questions" v-for="conversationLog in conversationLogs">
+          <div class="question-balloon">
+            <p>{{conversationLog.question}}</p>
+          </div>
+          <br>
+          <div v-if="conversationLog.answer" class="answer-balloon float-right">
+            <p>{{conversationLog.answer}}</p>
+          </div>
+          <br><br><br>
+        </template>
       </div>
-      <div class="col-md-4">
+      <div id="transmissionMessage" class="border">
+        <button @click="transmissionMessage" type="button" class="btn btn-success float-right">send</button>
+      </div>
+      <div id="inputText">
+        <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
     </div>
-    <div v-else class="row">
-      <div class="col-md-8">
-        fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
-      </div>
+    <div class="col-md-4">
+      aa
+    </div>
+  </div>
+  <div v-else class="row">
+    <div class="col-md-8">
+      fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
     </div>
   </div>
 </template>
