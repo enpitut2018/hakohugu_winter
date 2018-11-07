@@ -1,49 +1,28 @@
 <template>
-
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">エディタ</label>
-          <textarea v-model="note" class="form-control" id="exampleFormControlTextarea1" rows="37"></textarea>
-        </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div id="conversation">
+        <template v-if="questions" v-for="conversationLog in conversationLogs">
+          <div class="question-balloon">
+            <p>{{conversationLog.question}}</p>
+          </div>
+          <br>
+          <div v-if="conversationLog.answer" class="answer-balloon float-right">
+            <p>{{conversationLog.answer}}</p>
+          </div>
+          <br><br><br>
+        </template>
       </div>
-      <div class="col-md-4">
-        <div class="form-group">
-
-          <label for="exampleFormControlTextarea1">Answer</label>
-          <textarea v-model="answer" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
-        </div>
-        <div class="form-group">
-          <button  @click='addAnswerToNote' class="btn btn-primary btn-lg btn-block">回答</button>
-
-        </div>
-        <div class="card">
-          <div class="card-header">
-            質問
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Q{{this.count+1}}</h5>
-            <p class="card-text" v-if="question">{{question[this.count].qtext}}</p>
-          </div>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-header">
-            カードのヘッダ
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">カードのタイトル</h5>
-            <p class="card-text">以下のテキストを追加のコンテンツへの自然な導入としてサポート。</p>
-            <a href="#" class="btn btn-primary">ボタン</a>
-            <br><br>
-          </div>
-        </div>
+      <div id="transmissionMessage" class="border">
+        <button @click="transmissionMessage" type="button" class="btn btn-success float-right">send</button>
+      </div>
+      <div id="inputText">
+        <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
     </div>
-  </main>
-    </div><!-- /.table-responsive -->
-    </div>
+    <div class="col-md-4">aa</div>
+  </div>
+
 
 </template>
 
@@ -51,41 +30,65 @@
 <script>
  import axios from 'axios';
 
- //変数argにgetメソッドのパラメータを格納
- //arg.template_idとしてアクセス。
- var arg = new Object;
- var pair=location.search.substring(1).split('&');
- for(var i=0;pair[i];i++) {
-   var kv = pair[i].split('=');
-   arg[kv[0]]=kv[1];
- }
-
 
  export default {
    data: () => {
      return {
        answer: "",
        note: "",
-       question: "",
-       count: 0
+       questions: "",
+       count: 0,
+       conversationLogs: []
      }
    },
 
    created: function () {
+     //変数argにgetメソッドのパラメータを格納
+     //arg.template_idとしてアクセス。
+     var arg = new Object;
+     var pair=location.search.substring(1).split('&');
+     for(var i=0;pair[i];i++) {
+       var kv = pair[i].split('=');
+       arg[kv[0]]=kv[1];
+     }
+
      axios.get(`api/questions/${arg.template_id}`)
           .then(res => {
-            this.question = res.data;
+            this.questions = res.data;
+            this.conversationLogs.push({question: this.questions[0].qtext});
           });
    },
 
    methods: {
      addAnswerToNote: function (){
-       this.note += ("Q" + this.question[this.count].qtext);
+       this.note += (`Q${this.count+1}` + this.questions[this.count].qtext);
        this.note += "\n";
        this.note += this.answer;
        this.note += "\n";
        this.answer = "";
        this.count += 1;
+     },
+     transmissionMessage: function(){
+       //会話ログに解答を格納
+       if(this.questions[this.count]){
+         this.$set(this.conversationLogs[this.count],"answer", this.answer)
+       }
+
+       this.answer=""
+       //次の質問に進める。
+       this.count += 1
+
+       if(this.questions[this.count]){
+         this.conversationLogs.push({question: this.questions[this.count].qtext})
+       }
+       /* スクロール位置を更新*/
+       this.$nextTick(function() {
+         this.scrollToEnd("#conversation")
+       })
+     },
+     scrollToEnd: function(query){
+       var container = document.querySelector(query)
+       container.scrollTop = container.scrollHeight
      }
    }
  }
