@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user1 = User.create!(name:'User1')
-user2 = User.create!(name:'User2')
+user1 = User.create!(name:'User1',email:'user1@gmail.com')
+user2 = User.create!(name:'User2',email:'user2@gmail.com')
 
 q1 = Question.create!(qtext:'研究テーマ名')
 q2 = Question.create!(qtext:'何が課題か')
