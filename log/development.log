@@ -5675,3 +5675,103 @@ Migrating to AddIndexToUsersEmail (20181107032937)
   ↳ bin/rails:9
   [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to DestroyContent (20181107035934)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.3ms)[0m  [1m[35mDROP TABLE "content"[0m
+  ↳ db/migrate/20181107035934_destroy_content.rb:3
+  [1m[35m (0.8ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (2.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to DropTableContains (20181107042909)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (14.7ms)[0m  [1m[35mDROP TABLE "contains"[0m
+  ↳ db/migrate/20181107042909_drop_table_contains.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181107042909"]]
+  ↳ bin/rails:9
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddTemplateIdToQuestions (20181107045416)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (4.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "template_id_id" bigint[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_template_id_id" ON "questions"  ("template_id_id")[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_f50c16bd0f"
+FOREIGN KEY ("template_id_id")
+  REFERENCES "template_ids" ("id")
+[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (0.7ms)[0m  [1m[31mROLLBACK[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddTemplateIdToQuestions (20181107045416)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "template_id" bigint[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_template_id" ON "questions"  ("template_id")[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (11.1ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_1f469ddcb8"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181107045416"]]
+  ↳ bin/rails:9
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9

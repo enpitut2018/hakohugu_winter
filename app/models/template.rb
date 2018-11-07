@@ -4,7 +4,7 @@ class Template < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   #validates :scope, presence: true
   has_many :documents
-  has_many :questions, through: :contains
-  has_many :contains
-  accepts_nested_attributes_for :contains
+  has_many :questions
+  #has_many :contains
+  #accepts_nested_attributes_for :contains
 end

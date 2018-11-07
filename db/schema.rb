@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_032937) do
+ActiveRecord::Schema.define(version: 2018_11_07_045416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,15 +41,6 @@ ActiveRecord::Schema.define(version: 2018_11_07_032937) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contains", force: :cascade do |t|
-    t.bigint "template_id"
-    t.bigint "question_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_contains_on_question_id"
-    t.index ["template_id"], name: "index_contains_on_template_id"
-  end
-
   create_table "documents", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id"
@@ -65,6 +56,8 @@ ActiveRecord::Schema.define(version: 2018_11_07_032937) do
     t.text "qtext"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "template_id"
+    t.index ["template_id"], name: "index_questions_on_template_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -90,10 +83,9 @@ ActiveRecord::Schema.define(version: 2018_11_07_032937) do
   add_foreign_key "access_docs", "users"
   add_foreign_key "access_templates", "templates"
   add_foreign_key "access_templates", "users"
-  add_foreign_key "contains", "questions"
-  add_foreign_key "contains", "templates"
   add_foreign_key "documents", "templates"
   add_foreign_key "documents", "users"
+  add_foreign_key "questions", "templates"
   add_foreign_key "templates", "categories"
   add_foreign_key "templates", "users"
 end
