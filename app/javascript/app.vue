@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div v-if="ok" class="row">
     <div class="col-md-8">
       <div id="conversation">
         <template v-if="questions" v-for="conversationLog in conversationLogs">
@@ -20,10 +20,14 @@
         <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
     </div>
-    <div class="col-md-4">aa</div>
+    <div class="col-md-4">
+    </div>
   </div>
-
-
+  <div v-else class="row">
+    <div class="col-md-8">
+      fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
+    </div>
+  </div>
 </template>
 
 
@@ -38,7 +42,8 @@
        note: "",
        questions: "",
        count: 0,
-       conversationLogs: []
+       conversationLogs: [],
+       ok: true
      }
    },
 
