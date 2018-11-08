@@ -1,6 +1,7 @@
 <template>
-  <div v-if="ok" class="row">
-    <div class="col-md-8">
+  <div class="row">
+
+    <div v-if="page_id == 0" class="col-md-8">
       <div id="conversation">
         <template v-if="questions" v-for="conversationLog in conversationLogs">
           <div class="question-balloon">
@@ -20,20 +21,24 @@
         <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
     </div>
+
+    <div v-else-if="page_id == 1" class="col-md-8">
+      fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
+    </div>
+
     <div class="col-md-4">
       aa
     </div>
+
   </div>
-  <div v-else class="row">
-    <div class="col-md-8">
-      fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
-    </div>
-  </div>
+
+
+
 </template>
 
 
 <script>
- import axios from 'axios';
+ import axios from 'axios'
 
 
  export default {
@@ -44,7 +49,7 @@
        questions: "",
        count: 0,
        conversationLogs: [],
-       ok: true
+       page_id: 0
      }
    },
 
