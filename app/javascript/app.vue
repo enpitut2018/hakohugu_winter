@@ -1,9 +1,20 @@
 <template>
   <div class="row">
-    <div class="col-md-8">
+<div class="col-md-8">  
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button @click="viewChange" v-if="page_id==1" class="nav-link active">質問に答える</button>
+    </li>
+    <li class="nav-item">
+      <button  @click="viewChange" v-if="page_id==0" class="nav-link active">回答の編集</button>
+    </li>
+  </ul>
+
+    <div v-show="page_id == 0" >  <!-- タブボタン部分 -->
+  
       <div id="conversation">
         <template v-if="questions" v-for="conversationLog in conversationLogs">
-          <div class="question-balloon">
+          <div class="question-balloon" >
             <p>{{conversationLog.question}}</p>
           </div>
           <br>
@@ -13,23 +24,43 @@
           <br><br><br>
         </template>
       </div>
-      <div id="transmissionMessage" class="border">
-        <button @click="transmissionMessage" type="button" class="btn btn-success float-right">send</button>
-      </div>
+      
       <div id="inputText">
         <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
+      <div id="transmissionMessage" class="border">
+        <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
+      </div>
     </div>
-    <div class="col-md-4">aa</div>
+
+    <div v-show="page_id == 1" class="col-md-8" id="noteArea">
+      <textarea id="MyID"></textarea>
+    </div>
+</div>
+    <div class="col-md-4 border">
+      <div class="menu-list" style="m">
+        <p class="text-center">Voice over</p>
+        <p class="text-center">Record</p>
+        <p class="text-center">Play / Stop</p>
+        <p v-if="page_id == 0" @click="viewChange"　class="text-center">View</p>
+        <p v-if="page_id == 1" @click="viewChange" class="text-center">戻る</p>
+        
+        <p class="text-center">Save</p>
+      </div>
+    </div>
+
   </div>
+
 
 
 </template>
 
 
 <script>
- import axios from 'axios';
+ import axios from 'axios'
+ import SimpleMDE from 'simplemde'
 
+ var simplemde
 
  export default {
    data: () => {
@@ -38,7 +69,9 @@
        note: "",
        questions: "",
        count: 0,
-       conversationLogs: []
+       conversationLogs: [],
+       page_id: 0,
+       note_flag: false
      }
    },
 
@@ -61,19 +94,15 @@
 
    methods: {
      addAnswerToNote: function (){
-       this.note += (`Q${this.count+1}` + this.questions[this.count].qtext);
-       this.note += "\n";
-       this.note += this.answer;
-       this.note += "\n";
-       this.answer = "";
-       this.count += 1;
+       this.note += (`## Q${this.count+1}` + this.questions[this.count].qtext + "\n")
+       this.note += ("\t" + this.answer + "\n")
      },
      transmissionMessage: function(){
        //会話ログに解答を格納
        if(this.questions[this.count]){
          this.$set(this.conversationLogs[this.count],"answer", this.answer)
        }
-
+       this.addAnswerToNote()
        this.answer=""
        //次の質問に進める。
        this.count += 1
@@ -89,6 +118,22 @@
      scrollToEnd: function(query){
        var container = document.querySelector(query)
        container.scrollTop = container.scrollHeight
+     },
+     viewChange: function(){
+      if(this.page_id==0){
+        this.page_id = 1
+        if(this.note_flag==false){
+          simplemde = new SimpleMDE({ element: document.getElementById("MyID") })
+          simplemde.value(this.note)
+          this.note_flag = true
+        }
+        else{
+          simplemde.value(this.note)
+        }
+       }
+      else{
+        this.page_id = 0
+      }
      }
    }
  }
