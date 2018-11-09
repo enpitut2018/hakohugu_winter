@@ -1,10 +1,10 @@
 <template>
   <div class="row">
 
-    <div v-if="page_id == 0" class="col-md-8">
+    <div v-show="page_id == 0" class="col-md-8">
       <div id="conversation">
         <template v-if="questions" v-for="conversationLog in conversationLogs">
-          <div class="question-balloon">
+          <div class="question-balloon" >
             <p>{{conversationLog.question}}</p>
           </div>
           <br>
@@ -14,20 +14,29 @@
           <br><br><br>
         </template>
       </div>
-      <div id="transmissionMessage" class="border">
-        <button @click="transmissionMessage" type="button" class="btn btn-success float-right">send</button>
-      </div>
+      
       <div id="inputText">
         <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
+      <div id="transmissionMessage" class="border">
+        <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">send</button>
+      </div>
     </div>
 
-    <div v-else-if="page_id == 1" class="col-md-8">
-      fdsnfasdfnasdnflaksdnfalksdnfkladsnfaklsdnfklasdf
+    <div v-show="page_id == 1" class="col-md-8" id="noteArea">
+      <textarea id="MyID"></textarea>
     </div>
 
-    <div class="col-md-4">
-      aa
+    <div class="col-md-4 border">
+      <div class="menu-list" style="m">
+        <p class="text-center">Voice over</p>
+        <p class="text-center">Record</p>
+        <p class="text-center">Play / Stop</p>
+        <p v-if="page_id == 0" @click="viewChange"　class="text-center">View</p>
+        <p v-if="page_id == 1" @click="viewChange" class="text-center">戻る</p>
+        
+        <p class="text-center">Save</p>
+      </div>
     </div>
 
   </div>
@@ -39,7 +48,7 @@
 
 <script>
  import axios from 'axios'
-
+ import SimpleMDE from 'simplemde'
 
  export default {
    data: () => {
@@ -49,7 +58,8 @@
        questions: "",
        count: 0,
        conversationLogs: [],
-       page_id: 0
+       page_id: 0,
+       note_flag: false
      }
    },
 
@@ -72,19 +82,15 @@
 
    methods: {
      addAnswerToNote: function (){
-       this.note += (`Q${this.count+1}` + this.questions[this.count].qtext);
-       this.note += "\n";
-       this.note += this.answer;
-       this.note += "\n";
-       this.answer = "";
-       this.count += 1;
+       this.note += (`Q${this.count+1}` + this.questions[this.count].qtext + "\n")
+       this.note += ("\t" + this.answer + "\n")
      },
      transmissionMessage: function(){
        //会話ログに解答を格納
        if(this.questions[this.count]){
          this.$set(this.conversationLogs[this.count],"answer", this.answer)
        }
-
+       this.addAnswerToNote()
        this.answer=""
        //次の質問に進める。
        this.count += 1
@@ -100,6 +106,18 @@
      scrollToEnd: function(query){
        var container = document.querySelector(query)
        container.scrollTop = container.scrollHeight
+     },
+     viewChange: function(){
+      if(this.page_id==0){
+        this.page_id = 1
+        if(this.note_flag==false){
+          var simplemde = new SimpleMDE({ element: document.getElementById("MyID") })
+          this.note_flag = true
+        }
+       }
+      else{
+        this.page_id = 0
+      }
      }
    }
  }
