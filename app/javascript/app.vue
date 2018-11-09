@@ -1,7 +1,17 @@
 <template>
   <div class="row">
+<div class="col-md-8">  
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <button @click="viewChange" v-if="page_id==1" class="nav-link active">質問に答える</button>
+    </li>
+    <li class="nav-item">
+      <button  @click="viewChange" v-if="page_id==0" class="nav-link active">回答の編集</button>
+    </li>
+  </ul>
 
-    <div v-show="page_id == 0" class="col-md-8">
+    <div v-show="page_id == 0" >  <!-- タブボタン部分 -->
+  
       <div id="conversation">
         <template v-if="questions" v-for="conversationLog in conversationLogs">
           <div class="question-balloon" >
@@ -26,7 +36,7 @@
     <div v-show="page_id == 1" class="col-md-8" id="noteArea">
       <textarea id="MyID"></textarea>
     </div>
-
+</div>
     <div class="col-md-4 border">
       <div class="menu-list" style="m">
         <p class="text-center">Voice over</p>
