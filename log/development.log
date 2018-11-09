@@ -5785,3 +5785,517 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 28538ms (Views: 28532.9ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (5.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (11.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (115.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "hakohugu_winter_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (109.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "hakohugu_winter_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (349.7ms)[0m  [1m[35mCREATE DATABASE "hakohugu_winter_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (285.5ms)[0m  [1m[35mCREATE DATABASE "hakohugu_winter_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181017054037)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181017054037_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181017054037"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCategories (20181019045937)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181019045937_create_categories.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019045937"]]
+  ↳ bin/rails:9
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateQuestions (20181019051211)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "text" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181019051211_create_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019051211"]]
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTemplates (20181019053227)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "templates" ("id" bigserial primary key, "name" character varying, "user_id" bigint, "category_id" bigint, "scope" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_68700cea77"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_dc2faa3794"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  ↳ db/migrate/20181019053227_create_templates.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_templates_on_user_id" ON "templates"  ("user_id")[0m
+  ↳ db/migrate/20181019053227_create_templates.rb:3
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE  INDEX  "index_templates_on_category_id" ON "templates"  ("category_id")[0m
+  ↳ db/migrate/20181019053227_create_templates.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019053227"]]
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDocuments (20181019072847)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "name" character varying, "user_id" bigint, "template_id" bigint, "scope" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2be0318c46"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f3923eee15"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+)[0m
+  ↳ db/migrate/20181019072847_create_documents.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_user_id" ON "documents"  ("user_id")[0m
+  ↳ db/migrate/20181019072847_create_documents.rb:3
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_template_id" ON "documents"  ("template_id")[0m
+  ↳ db/migrate/20181019072847_create_documents.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019072847"]]
+  ↳ bin/rails:9
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateContains (20181019145334)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "contains" ("id" bigserial primary key, "template_id" bigint, "question_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b12094a2bf"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+, CONSTRAINT "fk_rails_4e3660dd3a"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  ↳ db/migrate/20181019145334_create_contains.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_contains_on_template_id" ON "contains"  ("template_id")[0m
+  ↳ db/migrate/20181019145334_create_contains.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_contains_on_question_id" ON "contains"  ("question_id")[0m
+  ↳ db/migrate/20181019145334_create_contains.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019145334"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateAccessDocs (20181019151216)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "access_docs" ("id" bigserial primary key, "document_id" bigint, "user_id" bigint, "level" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_4566cefe37"
+FOREIGN KEY ("document_id")
+  REFERENCES "documents" ("id")
+, CONSTRAINT "fk_rails_623e43215f"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20181019151216_create_access_docs.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_access_docs_on_document_id" ON "access_docs"  ("document_id")[0m
+  ↳ db/migrate/20181019151216_create_access_docs.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_access_docs_on_user_id" ON "access_docs"  ("user_id")[0m
+  ↳ db/migrate/20181019151216_create_access_docs.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019151216"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateAccessTemplates (20181019151628)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "access_templates" ("id" bigserial primary key, "template_id" bigint, "user_id" bigint, "level" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_44c405c5a8"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+, CONSTRAINT "fk_rails_ba2bdc8e5e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20181019151628_create_access_templates.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_access_templates_on_template_id" ON "access_templates"  ("template_id")[0m
+  ↳ db/migrate/20181019151628_create_access_templates.rb:3
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE  INDEX  "index_access_templates_on_user_id" ON "access_templates"  ("user_id")[0m
+  ↳ db/migrate/20181019151628_create_access_templates.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019151628"]]
+  ↳ bin/rails:9
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to RenameTextColumnToQuestions (20181019153803)
+  [1m[35m (2.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "questions" RENAME COLUMN "text" TO "qtext"[0m
+  ↳ db/migrate/20181019153803_rename_text_column_to_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019153803"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to ChangeDatatypeQtextOfQuestions (20181019154650)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "questions" ALTER COLUMN "qtext" TYPE text[0m
+  ↳ db/migrate/20181019154650_change_datatype_qtext_of_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019154650"]]
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to RenameNameColumnToDocuments (20181019155206)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "documents" RENAME COLUMN "name" TO "title"[0m
+  ↳ db/migrate/20181019155206_rename_name_column_to_documents.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019155206"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to RenameNameColumnToTemplates (20181019155536)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "templates" RENAME COLUMN "name" TO "title"[0m
+  ↳ db/migrate/20181019155536_rename_name_column_to_templates.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181019155536"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddEmailToUsers (20181031075512)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  ↳ db/migrate/20181031075512_add_email_to_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181031075512"]]
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddIndexToUsersEmail (20181107032937)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20181107032937_add_index_to_users_email.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181107032937"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to DropTableContains (20181107042909)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE "contains"[0m
+  ↳ db/migrate/20181107042909_drop_table_contains.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (3.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181107042909"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddTemplateIdToQuestions (20181107045416)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "questions" ADD "template_id" bigint[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_template_id" ON "questions"  ("template_id")[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_1f469ddcb8"
+FOREIGN KEY ("template_id")
+  REFERENCES "templates" ("id")
+[0m
+  ↳ db/migrate/20181107045416_add_template_id_to_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181107045416"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-09 00:22:08.128776"], ["updated_at", "2018-11-09 00:22:08.128776"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_advisory_unlock(4950031062239354805)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:9
+  [1m[36mUser Exists (1.0ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "user1@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:9
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "User1"], ["created_at", "2018-11-09 00:23:07.644789"], ["updated_at", "2018-11-09 00:23:07.644789"], ["email", "user1@gmail.com"]]
+  ↳ db/seeds.rb:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:10
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER($1) LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ db/seeds.rb:10
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "User2"], ["created_at", "2018-11-09 00:23:07.653478"], ["updated_at", "2018-11-09 00:23:07.653478"], ["email", "user2@gmail.com"]]
+  ↳ db/seeds.rb:10
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:10
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:12
+  [1m[36mCategory Create (0.9ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "研究"], ["created_at", "2018-11-09 00:23:07.671318"], ["updated_at", "2018-11-09 00:23:07.671318"]]
+  ↳ db/seeds.rb:12
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:12
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:14
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:14
+  [1m[36mTemplate Create (1.1ms)[0m  [1m[32mINSERT INTO "templates" ("title", "user_id", "category_id", "scope", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["title", "研究アイデア出しノート"], ["user_id", 1], ["category_id", 1], ["scope", 1], ["created_at", "2018-11-09 00:23:07.726944"], ["updated_at", "2018-11-09 00:23:07.726944"]]
+  ↳ db/seeds.rb:14
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:14
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:16
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:16
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "研究テーマ名"], ["created_at", "2018-11-09 00:23:07.755459"], ["updated_at", "2018-11-09 00:23:07.755459"], ["template_id", 1]]
+  ↳ db/seeds.rb:16
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:16
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:17
+  [1m[36mTemplate Load (1.1ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:17
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "何が課題か"], ["created_at", "2018-11-09 00:23:07.768402"], ["updated_at", "2018-11-09 00:23:07.768402"], ["template_id", 1]]
+  ↳ db/seeds.rb:17
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:17
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:18
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:18
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "課題の背景"], ["created_at", "2018-11-09 00:23:07.776814"], ["updated_at", "2018-11-09 00:23:07.776814"], ["template_id", 1]]
+  ↳ db/seeds.rb:18
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:18
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mTemplate Load (0.5ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "自分の提案　どう解決するか"], ["created_at", "2018-11-09 00:23:07.785461"], ["updated_at", "2018-11-09 00:23:07.785461"], ["template_id", 1]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:20
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:20
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "関連研究　何が課題か"], ["created_at", "2018-11-09 00:23:07.794112"], ["updated_at", "2018-11-09 00:23:07.794112"], ["template_id", 1]]
+  ↳ db/seeds.rb:20
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:20
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:21
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:21
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "関連リンク"], ["created_at", "2018-11-09 00:23:07.802747"], ["updated_at", "2018-11-09 00:23:07.802747"], ["template_id", 1]]
+  ↳ db/seeds.rb:21
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:21
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:22
+  [1m[36mTemplate Load (0.4ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:22
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "カテゴリ"], ["created_at", "2018-11-09 00:23:07.810460"], ["updated_at", "2018-11-09 00:23:07.810460"], ["template_id", 1]]
+  ↳ db/seeds.rb:22
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:22
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:23
+  [1m[36mTemplate Load (0.4ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:23
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("qtext", "created_at", "updated_at", "template_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["qtext", "自分の提案との差分"], ["created_at", "2018-11-09 00:23:07.818563"], ["updated_at", "2018-11-09 00:23:07.818563"], ["template_id", 1]]
+  ↳ db/seeds.rb:23
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:23
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:23:50 +0000
+Started GET "/?template_id=1" for 172.27.0.1 at 2018-11-09 00:23:50 +0000
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /usr/local/bundle/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+  ↳ /usr/local/bundle/gems/activerecord-5.2.0/lib/active_record/log_subscriber.rb:98
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 26428ms (Views: 26440.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+Completed 500 Internal Server Error in 26599ms (ActiveRecord: 5.9ms)
+
+
+  
+NoMethodError (undefined method `contains' for #<Template:0x00007f8312910810>):
+  
+app/controllers/api/questions_controller.rb:4:in `show'
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:24:18 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (18.4ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 27.8ms)
+
+
+  
+NoMethodError (undefined method `contains' for #<Template:0x00007f8311ac0c88>):
+  
+app/controllers/api/questions_controller.rb:4:in `show'
+Started GET "/?template_id=1" for 172.27.0.1 at 2018-11-09 00:41:05 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 348ms (Views: 335.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:41:16 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.8ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mQuestion Load (0.6ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  Rendered api/questions/show.json.jbuilder (47.4ms)
+Completed 500 Internal Server Error in 130ms (ActiveRecord: 12.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `question' for #<Question:0x00007f83129a96a0>):
+    1: 
+    2: json.array! @questions do |question|
+    3:    json.qtext question.question.qtext
+    4: end
+  
+app/views/api/questions/show.json.jbuilder:3:in `block in _app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464494100'
+app/views/api/questions/show.json.jbuilder:2:in `_app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464494100'
+app/controllers/api/questions_controller.rb:5:in `show'
+Started GET "/?template_id=1" for 172.27.0.1 at 2018-11-09 00:42:22 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 319ms (Views: 306.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:42:22 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (0.7ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  Rendered api/questions/show.json.jbuilder (37.6ms)
+Completed 200 OK in 96ms (Views: 79.0ms | ActiveRecord: 1.6ms)
+
+
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" WHERE "questions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Load (0.9ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" LIMIT $1[0m  [["LIMIT", 11]]
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:49:17 +0000
+Started GET "/?template_id=1" for 172.27.0.1 at 2018-11-09 00:49:17 +0000
+Processing by HomeController#index as HTML
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (12.2ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  Rendering home/index.html.erb within layouts/application
+  Rendered api/questions/show.json.jbuilder (239.7ms)
+  Rendered home/index.html.erb within layouts/application (1.5ms)
+Completed 500 Internal Server Error in 296ms (ActiveRecord: 13.3ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `questions' for #<#<Class:0x00007f8312925fa8>:0x00007f8312979838>):
+    1: 
+    2: json.array! @questions do |question|
+    3:    json.qtext questions.qtext
+    4: end
+  
+app/views/api/questions/show.json.jbuilder:3:in `block in _app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464681560'
+app/views/api/questions/show.json.jbuilder:2:in `_app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464681560'
+app/controllers/api/questions_controller.rb:5:in `show'
+Completed 200 OK in 772ms (Views: 736.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:49:18 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (5.1ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mQuestion Load (1.3ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  Rendered api/questions/show.json.jbuilder (283.6ms)
+Completed 500 Internal Server Error in 328ms (ActiveRecord: 6.3ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `questions' for #<#<Class:0x00007f8312925fa8>:0x00007f83128ef638>):
+    1: 
+    2: json.array! @questions do |question|
+    3:    json.qtext questions.qtext
+    4: end
+  
+app/views/api/questions/show.json.jbuilder:3:in `block in _app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464399000'
+app/views/api/questions/show.json.jbuilder:2:in `_app_views_api_questions_show_json_jbuilder___3517719514792246906_70100464399000'
+app/controllers/api/questions_controller.rb:5:in `show'
+Started GET "/?template_id=1" for 172.27.0.1 at 2018-11-09 00:49:41 +0000
+Processing by HomeController#index as HTML
+  Parameters: {"template_id"=>"1"}
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 416ms (Views: 398.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/questions/1" for 172.27.0.1 at 2018-11-09 00:49:42 +0000
+Processing by Api::QuestionsController#show as HTML
+  Parameters: {"template_id"=>"1"}
+  [1m[36mTemplate Load (2.0ms)[0m  [1m[34mSELECT  "templates".* FROM "templates" WHERE "templates"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/questions_controller.rb:4
+  Rendering api/questions/show.json.jbuilder
+  [1m[36mQuestion Load (0.8ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."template_id" = $1[0m  [["template_id", 1]]
+  ↳ app/views/api/questions/show.json.jbuilder:2
+  Rendered api/questions/show.json.jbuilder (4.9ms)
+Completed 200 OK in 49ms (Views: 33.0ms | ActiveRecord: 2.8ms)
+
+
