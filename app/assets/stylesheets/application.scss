@@ -172,3 +172,8 @@ li.nav-item.active {
       color: green;
     }
 }
+
+
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 200px;
+}

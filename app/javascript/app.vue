@@ -19,7 +19,7 @@
         <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
       </div>
       <div id="transmissionMessage" class="border">
-        <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">send</button>
+        <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
       </div>
     </div>
 
@@ -49,6 +49,8 @@
 <script>
  import axios from 'axios'
  import SimpleMDE from 'simplemde'
+
+ var simplemde
 
  export default {
    data: () => {
@@ -82,7 +84,7 @@
 
    methods: {
      addAnswerToNote: function (){
-       this.note += (`Q${this.count+1}` + this.questions[this.count].qtext + "\n")
+       this.note += (`## Q${this.count+1}` + this.questions[this.count].qtext + "\n")
        this.note += ("\t" + this.answer + "\n")
      },
      transmissionMessage: function(){
@@ -111,8 +113,12 @@
       if(this.page_id==0){
         this.page_id = 1
         if(this.note_flag==false){
-          var simplemde = new SimpleMDE({ element: document.getElementById("MyID") })
+          simplemde = new SimpleMDE({ element: document.getElementById("MyID") })
+          simplemde.value(this.note)
           this.note_flag = true
+        }
+        else{
+          simplemde.value(this.note)
         }
        }
       else{
