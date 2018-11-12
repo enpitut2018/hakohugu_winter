@@ -129,12 +129,22 @@ export default {
         this.page_id = 1
         if (this.note_flag == false) {
           simplemde = new SimpleMDE({
-            element: document.getElementById("MyID")
+            element: document.getElementById("MyID"),
+            forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
+            autofocus: true //エディタに自動フォーカスする
           })
           simplemde.value(this.note)
+          setTimeout(function() {
+            simplemde.codemirror.refresh();
+          }, 1);
+          //simplemde.codemirror.refresh()
           this.note_flag = true
         } else {
           simplemde.value(this.note)
+          setTimeout(function() {
+            simplemde.codemirror.refresh();
+          }, 1);
+          //simplemde.codemirror.refresh()
         }
       } else {
         this.page_id = 0
