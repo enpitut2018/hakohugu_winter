@@ -46,9 +46,6 @@
       <p class="text-center">Voice over</p>
       <p class="text-center">Record</p>
       <p class="text-center">Play / Stop</p>
-      <!--<p v-if="page_id == 0" @click="viewChange"　class="text-center">View</p>
-        <p v-if="page_id == 1" @click="viewChange" class="text-center">戻る</p>-->
-
       <p class="text-center">Save</p>
     </div>
   </div>
@@ -71,7 +68,6 @@ export default {
       questions: "",
       count: 0,
       conversationLogs: [],
-      page_id: 0,
       note_flag: false
     }
   },
@@ -125,29 +121,22 @@ export default {
       container.scrollTop = container.scrollHeight
     },
     viewChange: function() {
-      if (this.page_id == 0) {
-        this.page_id = 1
-        if (this.note_flag == false) {
-          simplemde = new SimpleMDE({
-            element: document.getElementById("MyID"),
-            forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
-            autofocus: true //エディタに自動フォーカスする
-          })
-          simplemde.value(this.note)
-          setTimeout(function() {
-            simplemde.codemirror.refresh();
-          }, 1);
-          //simplemde.codemirror.refresh()
-          this.note_flag = true
-        } else {
-          simplemde.value(this.note)
-          setTimeout(function() {
-            simplemde.codemirror.refresh();
-          }, 1);
-          //simplemde.codemirror.refresh()
-        }
+      if (this.note_flag == false) {
+        simplemde = new SimpleMDE({
+          element: document.getElementById("MyID"),
+          forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
+          autofocus: true //エディタに自動フォーカスする
+        })
+        simplemde.value(this.note)
+        setTimeout(function() {
+          simplemde.codemirror.refresh();
+        }, 1);
+        this.note_flag = true
       } else {
-        this.page_id = 0
+        simplemde.value(this.note)
+        setTimeout(function() {
+          simplemde.codemirror.refresh();
+        }, 1);
       }
     }
   }
