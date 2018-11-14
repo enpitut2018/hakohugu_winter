@@ -55,10 +55,10 @@
 
 
 <script>
-import axios from 'axios'
-import SimpleMDE from 'simplemde'
+import axios from "axios";
+import SimpleMDE from "simplemde";
 
-var simplemde
+var simplemde;
 
 export default {
   data: () => {
@@ -69,56 +69,56 @@ export default {
       count: 0,
       conversationLogs: [],
       note_flag: false
-    }
+    };
   },
 
   created: function() {
     //変数argにgetメソッドのパラメータを格納
     //arg.template_idとしてアクセス。
-    var arg = new Object;
-    var pair = location.search.substring(1).split('&');
+    var arg = new Object();
+    var pair = location.search.substring(1).split("&");
     for (var i = 0; pair[i]; i++) {
-      var kv = pair[i].split('=');
+      var kv = pair[i].split("=");
       arg[kv[0]] = kv[1];
     }
 
-    axios.get(`api/questions/${arg.template_id}`)
-      .then(res => {
-        this.questions = res.data;
-        this.conversationLogs.push({
-          question: this.questions[0].qtext
-        });
+    axios.get(`/api/questions/${arg.template_id}`).then(res => {
+      this.questions = res.data;
+      this.conversationLogs.push({
+        question: this.questions[0].qtext
       });
+    });
   },
 
   methods: {
     addAnswerToNote: function() {
-      this.note += (`## Q${this.count+1}` + this.questions[this.count].qtext + "\n")
-      this.note += ("\t" + this.answer + "\n")
+      this.note +=
+        `## Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+      this.note += "\t" + this.answer + "\n";
     },
     transmissionMessage: function() {
       //会話ログに解答を格納
       if (this.questions[this.count]) {
-        this.$set(this.conversationLogs[this.count], "answer", this.answer)
+        this.$set(this.conversationLogs[this.count], "answer", this.answer);
       }
-      this.addAnswerToNote()
-      this.answer = ""
+      this.addAnswerToNote();
+      this.answer = "";
       //次の質問に進める。
-      this.count += 1
+      this.count += 1;
 
       if (this.questions[this.count]) {
         this.conversationLogs.push({
           question: this.questions[this.count].qtext
-        })
+        });
       }
       /* スクロール位置を更新*/
       this.$nextTick(function() {
-        this.scrollToEnd("#conversation")
-      })
+        this.scrollToEnd("#conversation");
+      });
     },
     scrollToEnd: function(query) {
-      var container = document.querySelector(query)
-      container.scrollTop = container.scrollHeight
+      var container = document.querySelector(query);
+      container.scrollTop = container.scrollHeight;
     },
     viewChange: function() {
       if (this.note_flag == false) {
@@ -126,19 +126,19 @@ export default {
           element: document.getElementById("MyID"),
           forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
           autofocus: true //エディタに自動フォーカスする
-        })
-        simplemde.value(this.note)
+        });
+        simplemde.value(this.note);
         setTimeout(function() {
           simplemde.codemirror.refresh();
         }, 1);
-        this.note_flag = true
+        this.note_flag = true;
       } else {
-        simplemde.value(this.note)
+        simplemde.value(this.note);
         setTimeout(function() {
           simplemde.codemirror.refresh();
         }, 1);
       }
     }
   }
-}
+};
 </script>
