@@ -1,0 +1,80 @@
+<%= javascript_pack_tag 'hello_vue' %>
+<nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
+  <a class="navbar-brand col-md-2 text-center text-warning" href="#">Cogito</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link font-weight-bold" href="#">研究ノート</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link font-weight-bold" href="#">研究</a>
+      </li>
+    </ul>
+    <span class="circle"></span>
+    <span class="navbar-text h3">
+      username
+    </span>
+    <span class="navbar-text">
+      <a href="">logout</a>
+    </span>
+
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-white sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              ノート一覧
+            </a>
+            <hr>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              新規ノート作成
+            </a>
+            <hr>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+             テンプレート一覧
+            </a>
+            <hr>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              テンプレート作成
+            </a>
+            <hr>
+          </li>
+          <li class="nav-item">
+            <hr>
+          </li>
+          <li class="nav-item">
+            <hr>
+          </li>
+          <li class="nav-item">
+            <hr>
+          </li>
+          <li class="nav-item">
+            <hr>
+          </li>
+          <li class="nav-item">
+            <hr>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              設定
+            </a>
+            <hr>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div id ="app"></div>
+    </main>
+  </div><!-- /.table-responsive -->
+</div>
