@@ -46,7 +46,7 @@
       <p class="text-center">Voice over</p>
       <p class="text-center">Record</p>
       <p class="text-center">Play / Stop</p>
-      <p class="text-center">Save</p>
+      <p class="text-center" @click="saveNote">Save</p>
     </div>
   </div>
 
@@ -57,6 +57,10 @@
 <script>
 import axios from "axios";
 import SimpleMDE from "simplemde";
+import { csrfToken } from "rails-ujs";
+
+//axiosでPOSTを送るときのCSRF対策のトークンをrails-ujsを使って作成
+axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 
 var simplemde;
 
@@ -138,6 +142,25 @@ export default {
           simplemde.codemirror.refresh();
         }, 1);
       }
+    },
+    saveNote: function() {
+      if (this.note_flag == false) {
+        this.viewChange();
+      }
+
+      let note = simplemde.value();
+      axios
+        .patch("", {
+          content: note
+        })
+        .then(function(response) {
+          console.log(response);
+          alert("保存しました!");
+        })
+        .catch(error => {
+          console.log(error.response);
+          alert("保存に失敗しました");
+        });
     }
   }
 };
