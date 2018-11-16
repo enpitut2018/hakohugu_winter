@@ -10,7 +10,6 @@
       </li>
     </ul>
 
-
     <div class="tab-content">
       <div id="tab1" class="tab-pane active">
         <div id="conversation">
@@ -29,17 +28,29 @@
         <div id="inputText">
           <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
         </div>
-        <div id="transmissionMessage" class="border">
-          <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
+
+        <!-- 回答ボタンの横に次の質問へスキップするボタンを追加 -->
+        <div id="transmission">
+          <div class="transmissionBox">
+            <div class="row">
+              <div id="transmissionMessage" class="col-sm-10 messageBox-col">
+                <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
+              </div>
+              <div id="skipQuestion" class="col-sm-2 skipBox-col">
+                <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">Skip</button>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div id="tab2" class="tab-pane">
         <textarea id="MyID"></textarea>
       </div>
+
     </div>
   </div>
-
 
   <div class="col-md-4 border">
     <div class="menu-list" style="m">
@@ -121,6 +132,34 @@ export default {
         this.scrollToEnd("#conversation");
       });
     },
+    /*質問を飛ばす時に行う処理*/
+    addSkipQuestionToNote: function(){
+      this.note +=
+        `## Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+      this.note += "\t" + '' + "\n";
+    },
+    skipQuestion: function() {
+      //会話ログに「次の質問」と格納
+      if (this.questions[this.count]) {
+        this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
+      }
+      this.addSkipQuestionToNote();
+      this.answer = "";
+      //次の質問に進める。
+      this.count += 1;
+
+      if (this.questions[this.count]) {
+        this.conversationLogs.push({
+          question: this.questions[this.count].qtext
+        });
+      }
+      /* スクロール位置を更新*/
+      this.$nextTick(function() {
+        this.scrollToEnd("#conversation");
+      });
+    },
+    /*質問飛ばす処理ここまで*/
+
     scrollToEnd: function(query) {
       var container = document.querySelector(query);
       container.scrollTop = container.scrollHeight;

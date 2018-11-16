@@ -1,3 +1,10 @@
 // Place all the styles related to the Notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//回答ボタンエリアのcss上書き
+.transmissionBox{
+  .row{margin: 0 0px};
+  .messageBox-col{padding: 0 0px;}
+  .skipBox-col{padding: 0 0px;}
+}
