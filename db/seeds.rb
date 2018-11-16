@@ -14,7 +14,7 @@ Template.create!(title:'研究アイデア出しノート',user_id:1,category_id
 Template.create!(title:'自己分析',user_id:1,category_id:1,scope:1)
 
 
-Question.create!(qtext:'研究テーマ名',template_id:1)
+Question.create!(qtext:'研究テーマ名',template_id:1,qdetail:'興味のあるテーマを書いてみましょう',example:'電気刺激によるリズム学習')
 Question.create!(qtext:'何が課題か',template_id:1)
 Question.create!(qtext:'課題の背景',template_id:1)
 Question.create!(qtext:'自分の提案　どう解決するか',template_id:1)
@@ -23,7 +23,7 @@ Question.create!(qtext:'関連リンク',template_id:1)
 Question.create!(qtext:'カテゴリ',template_id:1)
 Question.create!(qtext:'自分の提案との差分',template_id:1)
 
-Question.create!(qtext:'自分が今興味を持ってるものはなんですか',template_id:2)
+Question.create!(qtext:'自分が今興味を持ってるものはなんですか',template_id:2,qdetail:'まずはどんな領域のことでも自由に書いてみましょう',example:'構造色、物理的な構造による発色の原理')
 Question.create!(qtext:'なぜ興味を持っていますか？',template_id:2)
 Question.create!(qtext:'いつから興味を持っていますか？',template_id:2)
 Question.create!(qtext:'子供(小学生まで)の頃すきだったものはなんですか？',template_id:2)
