@@ -13,6 +13,9 @@ Category.create!(name:'研究')
 Template.create!(title:'研究アイデア出しノート',user_id:1,category_id:1,scope:1)
 Template.create!(title:'自己分析',user_id:1,category_id:1,scope:1)
 
+Document.create!(title:'研究アイデア',user_id:1,template_id:1,scope: 0,content: nil)
+Document.create!(title:'自己分析',user_id:1,template_id:2,scope: 0,content: nil)
+
 
 Question.create!(qtext:'研究テーマ名',template_id:1,qdetail:'興味のあるテーマを書いてみましょう',example:'電気刺激によるリズム学習')
 Question.create!(qtext:'何が課題か',template_id:1)
