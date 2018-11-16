@@ -1,6 +1,11 @@
 <template>
 <div class="row">
   <div class="col-md-8">
+    <div class=“card”>
+      <p>質問の詳細と回答例</p>
+      <p>詳細：{{questions[count].qdetail}}</p>
+      <p>回答：{{questions[count].example}}</p>
+    </div>
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a href="#tab1" @click="viewChange" class="nav-link active" data-toggle="tab">質問に答える</a>
