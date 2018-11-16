@@ -58,6 +58,7 @@
 import axios from "axios";
 import SimpleMDE from "simplemde";
 import { csrfToken } from "rails-ujs";
+import swal from "sweetalert";
 
 //axiosでPOSTを送るときのCSRF対策のトークンをrails-ujsを使って作成
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
@@ -154,12 +155,14 @@ export default {
           content: note
         })
         .then(function(response) {
-          console.log(response);
-          alert("保存しました!");
+          swal("Complete!", "ノートの保存が完了しました。", "success");
         })
         .catch(error => {
-          console.log(error.response);
-          alert("保存に失敗しました");
+          swal(
+            "Oops!",
+            "ノートの保存に失敗しました。もう一度お試しください",
+            "error"
+          );
         });
     }
   }
