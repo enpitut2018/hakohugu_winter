@@ -13,12 +13,12 @@ class NotesController < ApplicationController
 
   def update
     @document = Document.find(params[:id])
-    @document.update_attributes(update_params)    
+    @document.update_attributes(update_params)
   end
 
    private
 
     def update_params
-      params.require(:note).permit(:content)                             
+      params.require(:note).permit(:content)
     end
 end

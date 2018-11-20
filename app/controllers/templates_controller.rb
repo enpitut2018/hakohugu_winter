@@ -1,5 +1,6 @@
 class TemplatesController < ApplicationController
   def index
+    @template=Template.all
   end
 
   def new
@@ -8,6 +9,8 @@ class TemplatesController < ApplicationController
 
   def create
     @template=Template.new(template_params)
+    @template.save
+    redirect_to templates_path
   end
 
   private
