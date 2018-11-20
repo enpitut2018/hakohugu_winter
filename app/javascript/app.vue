@@ -1,5 +1,15 @@
 <template>
 <div id = "app">
+
+  <div class="form-row mb-md-3">
+    <div class="col">
+      <input type="text" class="form-control" id="Input" placeholder="ノート１" style=""> 
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-success" @click="saveNote" >ノートを保存</button>
+    </div>
+  </div>
+
   <ul class="nav nav-tabs">
     <li class="nav-item">
       <a href="#tab1" @click="viewChange" class="nav-link active" data-toggle="tab">質問に答える</a>
