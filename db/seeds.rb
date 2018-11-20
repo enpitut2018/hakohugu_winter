@@ -9,6 +9,7 @@
 User.create!(name:'User1',email:'user1@gmail.com')
 User.create!(name:'User2',email:'user2@gmail.com')
 Category.create!(name:'研究')
+Category.create!(name:'自己分析')
 
 Template.create!(title:'研究アイデア出しノート',user_id:1,category_id:1,scope:1)
 Template.create!(title:'自己分析',user_id:1,category_id:1,scope:1)
