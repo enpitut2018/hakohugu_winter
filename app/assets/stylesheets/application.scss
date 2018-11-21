@@ -16,16 +16,24 @@
 
 @import "bootstrap";
 @import "simplemde/dist/simplemde.min";
+
 body {
     font-size: .875rem;
     padding-top:80px;
 }
 
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
 .navbar-brand{
     font-size: 2rem;
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
 }
 li.nav-item.active {
-    padding-right: 10rem;
+    padding-right: 3rem;
 }
 .circle{
   display: inline-block;
@@ -37,63 +45,17 @@ li.nav-item.active {
   margin-right: 15px;
 }
 
-.navbar-text{
-    margin-right: 25px;
+.nav-link {
+    display: block;
+    padding: 0.2rem 1rem;
 }
 
-/* サイドバーの設定 */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 80px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
-
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-}
-
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
-  text-transform: uppercase;
+span.navbar-text.h3{
+	margin-right: 25px;
 }
 
 #conversation{
-    height: 450px;
+    height: 370px;
     background-color: #CCFFFF;
     overflow: scroll;
     border-radius: 20px 20px 0px 0px;
@@ -107,7 +69,7 @@ li.nav-item.active {
 }
 
 #inputText{
-    height: 150px;
+    height: 100px;
 }
 
 .question-balloon {
@@ -163,18 +125,6 @@ li.nav-item.active {
 	padding: 0;
 }
 
-.menu-list p {
-  cursor: pointer;
-  color: orange;
-  font-size: 1.5em;
-  margin: 70px; 
-  /*text-decoration: line-through;*/
-    &:hover{
-      color: green;
-    }
-}
-
-
 .CodeMirror, .CodeMirror-scroll {
-	min-height: 500px;
+	min-height: 443px;
 }

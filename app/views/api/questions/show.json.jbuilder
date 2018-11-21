@@ -1,6 +1,8 @@
 # coding: utf-8
-json.array! @questions do |question|
-   json.qtext question.qtext
-   json.qdetail question.qdetail
-   json.example question.example
+json.questions do
+   json.array! @questions, :qtext,:qdetail,:example 
 end
+json.title @document.title
+json.content @document.content
+
+

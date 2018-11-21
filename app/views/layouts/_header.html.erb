@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
+    <a class="navbar-brand  text-center text-warning" href="/">Cogito</a>
+    <button type="button" 
+            class= "navbar-toggler" 
+            data-toggle="collapse" 
+            data-target="#Navber" 
+            aria-controls="Navber" 
+            aria-expanded="false" 
+            aria-label="レスポンシブ・ナビゲーションバー">
+            <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="Navber">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <%= link_to 'ノート一覧' , documents_path , :class => 'nav-link' %>
+            </li>
+            <li class="nav-item active">
+                <%= link_to '新規ノート作成' , new_document_path , :class => 'nav-link' %>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">マイアシスタント一覧</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">アシスタント作成</a>
+            </li>
+        </ul>
+        <span class="circle"></span>
+        <span class="navbar-text h3">
+            username
+        </span>
+        <span class="navbar-text">
+         <a href="">logout</a>
+        </span>
+    </div>
+</nav>
