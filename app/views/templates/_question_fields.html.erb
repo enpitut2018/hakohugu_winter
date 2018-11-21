@@ -1,14 +1,14 @@
 <div class="nested-fields">
-  <div class="field">
+  <div class="form-group">
     <%= f.label :qtext, "質問" %>
-    <%= f.text_field :qtext %>
+    <%= f.text_field :qtext, class: 'form-control' %>
     <br/>
     <%= f.label :qdetail, "質問の詳細" %>
-    <%= f.text_field :qdetail %>
+    <%= f.text_field :qdetail, class: 'form-control' %>
     <br/>
     <%= f.label :example, "回答例" %>
-    <%= f.text_field :example %>
+    <%= f.text_field :example, class: 'form-control' %>
     <br/>
   </div>
-  <%= link_to_remove_association "remove question", f %>
+  <%= link_to_remove_association "この質問を削除", f %>
 </div>

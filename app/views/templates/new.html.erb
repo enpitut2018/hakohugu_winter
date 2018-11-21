@@ -1,93 +1,10 @@
-<!--<h1>Templates#new</h1> <p>Find me in app/views/templates/new.html.erb</p>-->
-
-<!-- ここから「フッターとサイドバー あとからパッケージ化-」-->
-<nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
-  <a class="navbar-brand col-md-2 text-center text-warning" href="#">Cogito</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link font-weight-bold" href="#">研究ノート</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link font-weight-bold" href="#">研究</a>
-      </li>
-    </ul>
-    <span class="circle"></span>
-    <span class="navbar-text h3">
-      username
-    </span>
-    <span class="navbar-text">
-      <a href="">logout</a>
-    </span>
+<div class="container">
+  <!--indexからコピペ-->
+  <div class="starter-template">
+    <h1>新規テンプレート作成</h1>
   </div>
-</nav>
-<div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-white sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              ノート一覧
-            </a>
-            <hr>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              新規ノート作成
-            </a>
-            <hr>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              テンプレート一覧
-            </a>
-            <hr>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              テンプレート作成
-            </a>
-            <hr>
-          </li>
-          <li class="nav-item">
-            <hr>
-          </li>
-          <li class="nav-item">
-            <hr>
-          </li>
-          <li class="nav-item">
-            <hr>
-          </li>
-          <li class="nav-item">
-            <hr>
-          </li>
-          <li class="nav-item">
-            <hr>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              設定
-            </a>
-            <hr>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
-    <!--indexからコピペ-->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <!--ここから「入力フォーム」-->
-      <div class="row">
-        <div class="col-md-8">
-          <h1>新規テンプレート作成</h1>
-          <%= render 'form', {template: @template}%>
-        </div>
-      </div>
+  <!--ここから「入力フォーム」-->
+  <%= render 'form', {template: @template}%>
 
-      <!--ここまで「入力フォーム」-->
-    </main>
-
-  </div>
 </div>
-<!-- ここまで「フッターとサイドバー あとからパッケージ化-」-->

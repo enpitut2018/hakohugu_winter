@@ -1,7 +1,19 @@
 <%= form_for @template do |f| %>
-<div class="field">
+<div class="form-group">
   <%= f.label :title, "テンプレートタイトル" %>
-  <%= f.text_field :title%>
+  <%= f.text_field :title, class: 'form-control'%>
+</div>
+
+<!-- ここから ログイン実装までの決め打ちのuserID-->
+<div class="form-group">
+  <%= f.hidden_field(:user_id, :value => 1)%>
+
+</div>
+<!-- ここまで ログイン実装までの決め打ちのuserID-->
+
+<div class="form-group">
+  <%= f.label :category_id, "カテゴリ" %>
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {:class => "custom-select"}) %>
 </div>
 
 <h3>質問</h3>
@@ -10,12 +22,12 @@
   <%= render 'question_fields', f: question %>
 <% end %>
 <div class="links">
-  <%= link_to_add_association 'add question', f, :questions %>
+  <%= link_to_add_association '質問を追加', f, :questions %>
 </div>
 </div>
 
 <div class="actions">
-<%= f.submit "作成する" %>
+<%= f.submit "作成", class: "btn btn-primary"%>
 </div>
 
 <% end %>
