@@ -15,6 +15,6 @@ class TemplatesController < ApplicationController
 
   private
   def template_params
-    params.require(:template).permit(:title, questions_attributes: [:qtext, :qdetail, :example, :_destroy] )
+    params.require(:template).permit(:title,:user_id,:category_id ,questions_attributes: [:qtext, :qdetail, :example, :_destroy] )
   end
 end
