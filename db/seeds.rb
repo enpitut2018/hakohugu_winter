@@ -10,8 +10,8 @@ User.create!(name:'User1',email:'user1@gmail.com')
 User.create!(name:'User2',email:'user2@gmail.com')
 Category.create!(name:'研究')
 
-Template.create!(title:'研究アイデア出しノート',user_id:1,category_id:1,scope:1)
-Template.create!(title:'自己分析',user_id:1,category_id:1,scope:1)
+Template.create!(title:'研究アイデア出しアシスタント',user_id:1,category_id:1,scope:1,topic:'研究アイデア')
+Template.create!(title:'自己分析アシスタント',user_id:1,category_id:1,scope:1,topic:'自己分析')
 
 Document.create!(title:'研究アイデア',user_id:1,template_id:1,scope: 0,content: nil)
 Document.create!(title:'自己分析',user_id:1,template_id:2,scope: 0,content: nil)
