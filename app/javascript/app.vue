@@ -79,7 +79,18 @@ export default {
       note: "",
       questions: "",
       count: 0,
+      count_t: 0,
       conversationLogs: [],
+      tutorials: [
+        'こんにちは、私はエージェント名です。あなたがtopicについて考えるサポートをさせて頂きます。会話を進めるには送信ボタンを押してください。チュートリアルをスキップしたい方はskipボタンを押してください。',
+        'これから私エージェント名がtopicについて質問していきます。質問と、あなたが入力した回答はノートとして成形されます。質問は全部でn問です。',
+        '回答の一覧はノートの編集のタブをクリックすることでいつでも編集できます。',
+        '質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。',
+        '他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。',
+        'どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。',
+        'これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。',
+        '長くなってきましたので、そろそろ始めましょうか。'
+      ],
       note_flag: false
     };
   },
@@ -96,7 +107,7 @@ export default {
         this.note = "";
       }
       this.conversationLogs.push({
-        question: this.questions[0].qtext
+        question: this.tutorials[0]
       });
     });
   },
@@ -110,17 +121,26 @@ export default {
     transmissionMessage: function() {
       //会話ログに解答を格納
       if (this.questions[this.count]) {
-        this.$set(this.conversationLogs[this.count], "answer", this.answer);
+        this.$set(this.conversationLogs[this.count+this.count_t], "answer", this.answer);
       }
-      this.addAnswerToNote();
-      this.answer = "";
-      //次の質問に進める。
-      this.count += 1;
-
+      if (this.count_t>=this.tutorials.length){
+        this.addAnswerToNote();
+        this.answer = "";
+        //次の質問に進める。
+        this.count += 1;
+      }else{
+        this.count_t +=1 ;
+      }
       if (this.questions[this.count]) {
-        this.conversationLogs.push({
-          question: this.questions[this.count].qtext
-        });
+        if (this.count_t>=this.tutorials.length){
+          this.conversationLogs.push({
+            question: this.questions[this.count].qtext
+          });
+        }else{
+          this.conversationLogs.push({
+            question: this.tutorials[this.count_t]
+          });
+        }
       }
       /* スクロール位置を更新*/
       this.$nextTick(function() {
