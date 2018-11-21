@@ -92,6 +92,9 @@ export default {
       this.questions = res.data.questions;
       this.title = res.data.title;
       this.note = res.data.content;
+      if (this.note == null) {
+        this.note = "";
+      }
       this.conversationLogs.push({
         question: this.questions[0].qtext
       });

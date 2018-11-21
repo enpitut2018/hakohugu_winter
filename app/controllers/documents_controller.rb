@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
-      redirect_to "/documents/#{@document.id}?template_id=#{@document.template_id}&title=#{@document.title}"
+      redirect_to "/documents/#{@document.id}"
     else
       render 'new'
     end
