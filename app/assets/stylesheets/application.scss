@@ -45,9 +45,12 @@ li.nav-item.active {
     padding: 0.2rem 1rem;
 }
 
+span.navbar-text.h3{
+	margin-right: 25px;
+}
 
 #conversation{
-    height: 400px;
+    height: 370px;
     background-color: #CCFFFF;
     overflow: scroll;
     border-radius: 20px 20px 0px 0px;
@@ -118,5 +121,5 @@ li.nav-item.active {
 }
 
 .CodeMirror, .CodeMirror-scroll {
-	min-height: 500px;
+	min-height: 443px;
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
-    <a class="navbar-brand  text-center text-warning" href="#">Cogito</a>
+    <a class="navbar-brand  text-center text-warning" href="/">Cogito</a>
     <button type="button" 
             class= "navbar-toggler" 
             data-toggle="collapse" 
@@ -12,10 +12,10 @@
     <div class="collapse navbar-collapse" id="Navber">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="#">ノート一覧</a>
+                <%= link_to 'ノート一覧' , documents_path , :class => 'nav-link' %>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">新規ノート作成</a>
+                <%= link_to '新規ノート作成' , new_document_path , :class => 'nav-link' %>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">マイアシスタント一覧</a>

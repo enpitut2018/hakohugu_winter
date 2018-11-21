@@ -1,9 +1,8 @@
 <template>
 <div id = "app">
-
   <div class="form-row mb-md-3">
     <div class="col">
-      <input type="text" class="form-control" id="Input" placeholder="ノート１" style=""> 
+      <input type="text" class="form-control" id="Input" :value="title" disabled="disabled"> 
     </div>
     <div class="col">
       <button type="button" class="btn btn-success" @click="saveNote" >ノートを保存</button>
@@ -70,12 +69,12 @@ import swal from "sweetalert";
 
 //axiosでPOSTを送るときのCSRF対策のトークンをrails-ujsを使って作成
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
-
 var simplemde;
 
 export default {
   data: () => {
     return {
+      title: "",
       answer: "",
       note: "",
       questions: "",
@@ -86,17 +85,13 @@ export default {
   },
 
   created: function() {
-    //変数argにgetメソッドのパラメータを格納
-    //arg.template_idとしてアクセス。
-    var arg = new Object();
-    var pair = location.search.substring(1).split("&");
-    for (var i = 0; pair[i]; i++) {
-      var kv = pair[i].split("=");
-      arg[kv[0]] = kv[1];
-    }
+    let path = location.pathname.split("/");
+    let documentNumber = path[2];
 
-    axios.get(`/api/questions/${arg.template_id}`).then(res => {
-      this.questions = res.data;
+    axios.get(`/api/questions/${documentNumber}`).then(res => {
+      this.questions = res.data.questions;
+      this.title = res.data.title;
+      this.note = res.data.content;
       this.conversationLogs.push({
         question: this.questions[0].qtext
       });
@@ -185,10 +180,10 @@ export default {
         this.viewChange();
       }
 
-      let note = simplemde.value();
+      let document = simplemde.value();
       axios
         .patch("", {
-          content: note
+          content: document
         })
         .then(function(response) {
           swal("Complete!", "ノートの保存が完了しました。", "success");
