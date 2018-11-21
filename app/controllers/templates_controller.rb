@@ -9,8 +9,11 @@ class TemplatesController < ApplicationController
 
   def create
     @template=Template.new(template_params)
-    @template.save
-    redirect_to templates_path
+    if @template.save
+      redirect_to templates_path
+    else
+      render 'new'
+    end
   end
 
   private
