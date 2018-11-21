@@ -122,6 +122,12 @@ export default {
           question: this.questions[this.count].qtext
         });
       }
+
+      if (this.questions.length == this.count) {
+        this.conversationLogs.push({
+          question: "この質問で終わりです"
+        });
+      }
       /* スクロール位置を更新*/
       this.$nextTick(function() {
         this.scrollToEnd("#conversation");
@@ -148,6 +154,13 @@ export default {
           question: this.questions[this.count].qtext
         });
       }
+
+      if (this.questions.length == this.count) {
+        this.conversationLogs.push({
+          question: "この質問で終わりです"
+        });
+      }
+
       /* スクロール位置を更新*/
       this.$nextTick(function() {
         this.scrollToEnd("#conversation");
