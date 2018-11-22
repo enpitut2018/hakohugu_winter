@@ -84,7 +84,7 @@ export default {
       tutorials: [
         '',
         '',
-        '回答の一覧はノートの編集のタブをクリックすることでいつでも編集できます。',
+        '回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。',
         '質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。',
         '他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。',
         'どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。',
@@ -103,7 +103,7 @@ export default {
       this.questions = res.data.questions;
       this.title = res.data.title;
       this.note = res.data.content;
-      this.tutorials[0] = 'こんにちは、私は' + res.data.temp_title + 'です。あなたが' + res.data.topic + 'について考えるサポートをさせて頂きます。会話を進めるには送信ボタンを押してください。チュートリアルをスキップしたい方はskipボタンを押してください。';
+      this.tutorials[0] = 'こんにちは、私は' + res.data.temp_title + 'です。あなたが' + res.data.topic + 'について考えるサポートをさせて頂きます。会話を進めるには回答ボタンを押してください。チュートリアルをスキップしたい方はskipボタンを押してください。';
       this.tutorials[1] = 'これから私' + res.data.temp_title + 'が' + res.data.topic + 'について質問していきます。質問と、あなたが入力した回答はノートとして成形されます。質問は全部で' + this.questions.length + '問です。';
       if (this.note == null) {
         this.note = "";
