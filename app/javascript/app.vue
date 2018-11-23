@@ -79,7 +79,9 @@ export default {
       note: "",
       questions: "",
       count: 0,
-      count_t: 0,
+      count_t: 0, //チュートリアル用カウント変数
+      count_d: 0, //詳細を出す時のカウント変数
+      count_e: 0, //例を出す時のカウント変数
       conversationLogs: [],
       tutorials: [
         '',
@@ -123,16 +125,41 @@ export default {
     transmissionMessage: function() {
       //会話ログに解答を格納
       if (this.questions[this.count]) {
-        this.$set(this.conversationLogs[this.count+this.count_t], "answer", this.answer);
+        this.$set(this.conversationLogs[this.count_t + this.count + this.count_d + this.count_e], "answer", this.answer);
       }
-      if (this.count_t>=this.tutorials.length){
-        this.addAnswerToNote();
-        this.answer = "";
-        //次の質問に進める。
-        this.count += 1;
+      //チュートリアル中と本番の質問で場合分け
+      if (this.count_t<this.tutorials.length){ //チュートリアル中は回答をノートに記録しない
+        this.count_t += 1 ;
       }else{
-        this.count_t +=1 ;
+        //特殊回答による分岐
+        if (this.answer == '詳しく' || this.answer == 'くわしく') { //詳しくorくわしくで詳細を表示
+          this.conversationLogs.push({
+            question: this.questions[this.count].qdetail
+          });
+          this.answer = "";
+          this.count_d += 1;
+          this.$nextTick(function() {
+            this.scrollToEnd("#conversation");
+          });
+          transmissionMessage();
+        }else if (this.answer == '例えば' || this.answer == 'たとえば') { //例えばorたとえばで例を表示
+          this.conversationLogs.push({
+            question: this.questions[this.count].example
+          });
+          this.answer = "";
+          this.count_e += 1;
+          this.$nextTick(function() {
+            this.scrollToEnd("#conversation");
+          });
+          transmissionMessage();
+        }else{
+          this.addAnswerToNote();
+          this.answer = "";
+          //次の質問に進める。
+          this.count += 1;
+        }
       }
+      //次の質問を会話ログに格納
       if (this.questions[this.count]) {
         if (this.count_t>=this.tutorials.length){
           this.conversationLogs.push({
