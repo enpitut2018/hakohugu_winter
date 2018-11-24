@@ -45,7 +45,7 @@
               <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
             </div>
             <div id="skipQuestion" class="col-sm-2 skipBox-col">
-              <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">Skip</button>
+              <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
             </div>
           </div>
         </div>
@@ -93,7 +93,8 @@ export default {
         'これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。',
         '長くなってきましたので、そろそろ始めましょうか。'
       ],
-      note_flag: false
+      note_flag: false,
+      tutorial_flag: true
     };
   },
 
@@ -105,7 +106,7 @@ export default {
       this.questions = res.data.questions;
       this.title = res.data.title;
       this.note = res.data.content;
-      this.tutorials[0] = 'こんにちは、私は' + res.data.temp_title + 'です。あなたが' + res.data.topic + 'について考えるサポートをさせて頂きます。会話を進めるには回答ボタンを押してください。チュートリアルをスキップしたい方はskipボタンを押してください。';
+      this.tutorials[0] = 'こんにちは、私は' + res.data.temp_title + 'です。あなたが' + res.data.topic + 'について考えるサポートをさせて頂きます。会話を進めるには回答ボタンを押してください。チュートリアルをスキップしたい方はスキップボタンを押してください。';
       this.tutorials[1] = 'これから私' + res.data.temp_title + 'が' + res.data.topic + 'について質問していきます。質問と、あなたが入力した回答はノートとして成形されます。質問は全部で' + this.questions.length + '問です。';
       if (this.note == null) {
         this.note = "";
@@ -131,6 +132,7 @@ export default {
       if (this.count_t<this.tutorials.length){ //チュートリアル中は回答をノートに記録しない
         this.count_t += 1 ;
       }else{
+        tutorial_flag: false;
         //特殊回答による分岐
         if (this.answer == '詳しく' || this.answer == 'くわしく') { //詳しくorくわしくで詳細を表示
           this.conversationLogs.push({
@@ -183,14 +185,18 @@ export default {
       this.note += "\t" + "" + "\n";
     },
     skipQuestion: function() {
-      //会話ログに「次の質問」と格納
-      if (this.questions[this.count]) {
-        this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
+      if (this.tutorial_flag) { //チュートリアル中に押されたら、チュートリアルを中止
+        this.tutorial_flag = false;
+      }else{
+        //会話ログに「次の質問」と格納
+        if (this.questions[this.count]) {
+          this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
+        }
+        this.addSkipQuestionToNote();
+        this.answer = "";
+        //次の質問に進める。
+        this.count += 1;
       }
-      this.addSkipQuestionToNote();
-      this.answer = "";
-      //次の質問に進める。
-      this.count += 1;
 
       if (this.questions[this.count]) {
         this.conversationLogs.push({
