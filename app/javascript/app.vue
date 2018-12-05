@@ -129,7 +129,7 @@ export default {
         this.$set(this.conversationLogs[this.count_t + this.count + this.count_d + this.count_e], "answer", this.answer);
       }
       //チュートリアル中と本番の質問で場合分け
-      if (this.count_t<this.tutorials.length){ //チュートリアル中は回答をノートに記録しない
+      if (this.tutorial_flag && this.count_t<this.tutorials.length){ //チュートリアル中は回答をノートに記録しない
         this.count_t += 1 ;
       }else{
         tutorial_flag: false;
@@ -143,7 +143,7 @@ export default {
           this.$nextTick(function() {
             this.scrollToEnd("#conversation");
           });
-          transmissionMessage();
+          return false;
         }else if (this.answer == '例えば' || this.answer == 'たとえば') { //例えばorたとえばで例を表示
           this.conversationLogs.push({
             question: this.questions[this.count].example
@@ -153,7 +153,7 @@ export default {
           this.$nextTick(function() {
             this.scrollToEnd("#conversation");
           });
-          transmissionMessage();
+　　　　　　return false;
         }else{
           this.addAnswerToNote();
           this.answer = "";
@@ -163,7 +163,7 @@ export default {
       }
       //次の質問を会話ログに格納
       if (this.questions[this.count]) {
-        if (this.count_t>=this.tutorials.length){
+        if ( this.tutorial_flag==false || this.count_t>=this.tutorials.length){
           this.conversationLogs.push({
             question: this.questions[this.count].qtext
           });
@@ -187,6 +187,7 @@ export default {
     skipQuestion: function() {
       if (this.tutorial_flag) { //チュートリアル中に押されたら、チュートリアルを中止
         this.tutorial_flag = false;
+        this.count_t += 1;
       }else{
         //会話ログに「次の質問」と格納
         if (this.questions[this.count]) {
