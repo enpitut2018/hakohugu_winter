@@ -132,7 +132,7 @@ export default {
       if (this.tutorial_flag && this.count_t<this.tutorials.length){ //チュートリアル中は回答をノートに記録しない
         this.count_t += 1 ;
       }else{
-        tutorial_flag: false;
+        this.tutorial_flag = false;
         //特殊回答による分岐
         if (this.answer == '詳しく' || this.answer == 'くわしく') { //詳しくorくわしくで詳細を表示
           this.conversationLogs.push({
