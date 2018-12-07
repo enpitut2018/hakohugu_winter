@@ -19,11 +19,17 @@
       </li>
     </ul>
     <span class="circle"></span>
-    <span class="navbar-text h3">
-      username
-    </span>
-    <span class="navbar-text">
-      <a href="">logout</a>
-    </span>
+    <% if logged_in? %>
+      <span class="navbar-text h3">
+        <%= current_user.name %>
+      </span>
+      <span class="navbar-text">
+        <%= link_to "ログアウト", logout_path, method: "delete" %>
+      </span>
+    <% else %>
+      <span class="navbar-text h3">
+        <%= link_to "ログイン", login_path %>
+      </span>
+    <% end %>
   </div>
 </nav>
