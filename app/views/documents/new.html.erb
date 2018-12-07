@@ -9,7 +9,7 @@
         <%= f.text_field :title, class: 'form-control' %>
     </div>
 
-    <% @document.user_id = 1 %>
+    <% @document.user_id = current_user.id %>
     <%= f.hidden_field :user_id%>
 
     <div class="form-group">
