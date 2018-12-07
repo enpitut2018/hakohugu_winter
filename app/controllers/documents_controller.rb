@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
   before_action :logged_in_user, only: [:index,:new, :update,:show]
-  #before_action :correct_user,   only: [:show]
+  before_action :correct_user,   only: [:show]
   def index
     @user = User.find(current_user.id)
     @documents = @user.documents.all
@@ -52,7 +52,7 @@ class DocumentsController < ApplicationController
     # 正しいユーザーかどうか確認
     def correct_user
       document = Document.find(params[:id])
-      @user = document.user_id
-      redirect_to(document_path) unless current_user?(@user)
+      @user = User.find(document.user_id)
+      redirect_to('/') unless current_user?(@user)
     end
 end
