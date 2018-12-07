@@ -40,19 +40,19 @@
         </div>
 
         <!-- 回答ボタンの横に次の質問へスキップするボタンを追加 -->
-      <div id="transmission">
-        <div class="transmissionBox">
-          <div class="row">
-            <div id="transmissionMessage" class="col-sm-10 messageBox-col">
-              <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
-            </div>
-            <div id="skipQuestion" class="col-sm-2 skipBox-col">
-              <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
+        <div id="transmission">
+          <div class="transmissionBox">
+            <div class="row">
+              <div id="transmissionMessage" class="col-sm-10 messageBox-col">
+                <button @click="transmissionMessage" type="button" class="btn btn-success btn-block">回答</button>
+              </div>
+              <div id="skipQuestion" class="col-sm-2 skipBox-col">
+                <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <div id="tab2" class="tab-pane">
         <textarea id="MyID"></textarea>
       </div>
