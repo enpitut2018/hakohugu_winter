@@ -1,6 +1,8 @@
 class TemplatesController < ApplicationController
   def index
-    @template=Template.all
+    @templates=Template.all
+    @user = User.find(1)
+    @my_templates=@user.templates
   end
 
   def new
