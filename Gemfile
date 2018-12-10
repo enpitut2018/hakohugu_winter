@@ -40,11 +40,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
- # ここを追加
+ # vueの自動コンパイル
 gem 'foreman'
 
 #cocoonの追加 1対多フォームのため
 gem 'cocoon'
+
+#エラーメッセージの日本語化
+gem 'rails-i18n'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
