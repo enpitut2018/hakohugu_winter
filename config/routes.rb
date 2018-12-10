@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
     get '/' , to: 'sessions#new'
     resources :users, :only => [:new,:create]
+    post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
     resources :documents, :only => [:index,:new,:show,:create,:update]
     resources :templates, :only => [:index,:new,:create]
