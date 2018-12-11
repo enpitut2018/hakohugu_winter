@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :users, :only => [:new,:create]
     resources :sessions, :only => [:new,:create]
     resources :documents, :only => [:index,:new,:show,:create,:update]
-    resources :templates, :only => [:index,:new,:create]
+    resources :templates, :only => [:index,:new,:show,:create,:edit,:update,:destroy]
 
     namespace :api do
         get 'questions/(:document_id)' , to: 'questions#show'

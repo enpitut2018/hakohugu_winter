@@ -27,12 +27,12 @@
   <%= render 'question_fields', f: question %>
 <% end %>
 <div class="links">
-  <%= link_to_add_association '質問を追加', f, :questions %>
+  <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light'%>
 </div>
 </div>
 
 <div class="actions">
-<%= f.submit "作成", class: "btn btn-primary"%>
+<%= f.submit @submit, class: "btn btn-primary"%>
 </div>
 
 <% end %>
