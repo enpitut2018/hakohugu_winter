@@ -1,11 +1,14 @@
 <%= form_for @template do |f| %>
 <div class="form-group">
-  <%= f.label :title, "テンプレートタイトル" %>
+  <%= f.label :title, "アシスタント名" %>
   <%= f.text_field :title, class: 'form-control'%>
 </div>
 
 <div class="form-group">
-  <%= f.label :topic, "トピック" %>
+  <%= f.label :topic, "概要" %>
+  <p>
+    誰がどんな目的で何をすることを助けるアシスタントなのかの説明
+  </p>
   <%= f.text_field :topic, class: 'form-control'%>
 </div>
 
