@@ -8,7 +8,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    @templates = Template.all
+    #@templates = Template.all
   end
 
   def create
