@@ -22,6 +22,8 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    @document = Document.find(params[:id])
+    @template = Template.find(@document.template_id)
   end
 
   def update
