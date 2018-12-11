@@ -7,4 +7,5 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
     has_many :documents
     has_many :templates
+    has_secure_password
 end
