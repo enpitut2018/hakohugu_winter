@@ -45,7 +45,7 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title,:user_id,:template_id)
+      params.require(:document).permit(:title,:template_id).merge(user_id: current_user.id)
     end
 
      # beforeアクション
@@ -57,7 +57,7 @@ class DocumentsController < ApplicationController
         redirect_to login_url
       end
     end
-    
+
     # 正しいユーザーかどうか確認
     def correct_user
       document = Document.find(params[:id])

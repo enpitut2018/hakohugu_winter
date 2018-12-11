@@ -215,9 +215,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
   activejob (>= 5.2.1.1)
   activestorage (>= 5.2.1.1)
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.1)
   byebug
@@ -246,4 +246,4 @@ RUBY VERSION
    ruby 2.5.0p0
 
 BUNDLED WITH
-   1.17.1
+   1.17.2

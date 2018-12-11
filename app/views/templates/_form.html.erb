@@ -9,13 +9,6 @@
   <%= f.text_field :topic, class: 'form-control'%>
 </div>
 
-<!-- ここから ログイン実装までの決め打ちのuserID-->
-<div class="form-group">
-  <%= f.hidden_field(:user_id, :value => 1)%>
-
-</div>
-<!-- ここまで ログイン実装までの決め打ちのuserID-->
-
 <div class="form-group">
   <%= f.label :category_id, "カテゴリ" %>
   <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {:class => "custom-select"}) %>
