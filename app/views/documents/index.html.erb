@@ -12,12 +12,16 @@
                             <p style="font-size:4px;">アシスタント</p>
                             <p style="font-size:4px;">・<%= document.template.title %></p>
                             </h5>
+                          <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %>
                         </div>
                     </div>
                 </div>
                 <% end %>
             </div>
+          </div>
+        <% end %>
+      </div>
 
-        </div>
     </div>
+  </div>
 </div>

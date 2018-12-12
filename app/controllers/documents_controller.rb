@@ -22,11 +22,22 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    @document = Document.find(params[:id])
+    @template = Template.find(@document.template_id)
   end
 
   def update
     @document = Document.find(params[:id])
-    @document.update_attributes(update_params)    
+    @document.update_attributes(update_params)
+  end
+
+  def destroy
+    if Document.find(params[:id]).destroy
+      redirect_to documents_path
+    else
+      redirect_to documents_path
+    end
+
   end
 
    private
@@ -36,7 +47,24 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:title,:user_id,:template_id)                             
+      params.require(:document).permit(:title,:template_id).merge(user_id: current_user.id)
+    end
+
+     # beforeアクション
+
+    # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url
+      end
+    end
+
+    # 正しいユーザーかどうか確認
+    def correct_user
+      document = Document.find(params[:id])
+      @user = User.find(document.user_id)
+      redirect_to('/') unless current_user?(@user)
     end
 
      # beforeアクション
