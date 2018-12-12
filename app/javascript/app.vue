@@ -11,15 +11,27 @@
 
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a href="#tab1" @click="viewChange" class="nav-link active" data-toggle="tab">質問に答える</a>
+        <a
+          href="#tab1"
+          @click="viewChange"
+          class="nav-link"
+          v-bind:class="{ active: tab1 }"
+          data-toggle="tab"
+        >質問に答える</a>
       </li>
       <li class="nav-item">
-        <a href="#tab2" @click="viewChange" class="nav-link" data-toggle="tab">回答の編集</a>
+        <a
+          href="#tab2"
+          @click="viewChange"
+          class="nav-link"
+          v-bind:class="{ active: tab2 }"
+          data-toggle="tab"
+        >回答の編集</a>
       </li>
     </ul>
 
     <div class="tab-content">
-      <div id="tab1" class="tab-pane active">
+      <div id="tab1" class="tab-pane" v-bind:class="{ active: tab1 }">
         <div id="conversation">
           <template v-if="questions" v-for="conversationLog in conversationLogs">
             <div class="question-balloon">
@@ -57,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div id="tab2" class="tab-pane">
+      <div id="tab2" class="tab-pane" v-bind:class="{ active: tab2 }">
         <textarea id="MyID"></textarea>
       </div>
     </div>
@@ -86,6 +98,8 @@ export default {
       count_t: 0, //チュートリアル用カウント変数
       count_d: 0, //詳細を出す時のカウント変数
       count_e: 0, //例を出す時のカウント変数
+      conversation_count:
+        this.count_t + this.count + this.count_d + this.count_e,
       conversationLogs: [],
       tutorials: [
         "",
@@ -97,7 +111,9 @@ export default {
         "これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。",
         "長くなってきましたので、そろそろ始めましょうか。"
       ],
-      tutorial_flag: true
+      tutorial_flag: true,
+      tab1: true,
+      tab2: false
     };
   },
 
@@ -129,6 +145,11 @@ export default {
         that.questions = res.data.questions;
         that.title = res.data.title;
         that.note = res.data.content;
+        that.count = res.data.question_number;
+        that.count_t = res.data.count_t;
+        that.count_d = res.data.count_d;
+        that.count_e = res.data.count_e;
+        that.conversationLogs = JSON.parse(res.data.conversation_logs);
         that.tutorials[0] =
           "こんにちは、私は" +
           res.data.temp_title +
@@ -146,9 +167,17 @@ export default {
         if (that.note == null) {
           that.note = "";
         }
-        that.conversationLogs.push({
-          question: that.tutorials[0]
-        });
+
+        if (that.conversationLogs == null) {
+          that.conversationLogs = [];
+          that.conversationLogs.push({
+            question: that.tutorials[0]
+          });
+        } else {
+          that.tutorial_flag = false;
+          that.tab1 = false;
+          that.tab2 = true;
+        }
         resolve();
       });
     },
@@ -295,12 +324,21 @@ export default {
       setTimeout(function() {
         simplemde.codemirror.refresh();
       }, 1);
+      /* スクロール位置を更新*/
+      this.$nextTick(function() {
+        this.scrollToEnd("#conversation");
+      });
     },
     saveNote: function() {
       let document = this.note;
       axios
         .patch("", {
-          content: document
+          content: document,
+          conversation_logs: JSON.stringify(this.conversationLogs),
+          question_number: this.count,
+          count_t: this.count_t,
+          count_d: this.count_d,
+          count_e: this.count_e
         })
         .then(function(response) {
           swal("Complete!", "ノートの保存が完了しました。", "success");

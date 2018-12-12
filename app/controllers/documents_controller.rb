@@ -32,7 +32,7 @@ class DocumentsController < ApplicationController
    private
 
     def update_params
-      params.require(:document).permit(:content)                             
+      params.require(:document).permit(:content,:conversation_logs,:question_number,:count_t,:count_d,:count_e)                             
     end
 
     def document_params
