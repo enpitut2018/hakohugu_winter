@@ -9,14 +9,22 @@
       </div>
     </div>
 
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a href="#tab1" @click="viewChange" class="nav-link active" data-toggle="tab">質問に答える</a>
-      </li>
-      <li class="nav-item">
-        <a href="#tab2" @click="viewChange" class="nav-link" data-toggle="tab">回答の編集</a>
-      </li>
-    </ul>
+    <div class="nav-col">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="#tab1" @click="viewChange" class="nav-link active" data-toggle="tab">質問に答える</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab2" @click="viewChange" class="nav-link" data-toggle="tab">回答の編集</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="text-right">
+      <p>現在{{count+1}}/{{questions.length}}問目</p>
+      </div>
+    </div>
 
     <div class="tab-content">
       <div id="tab1" class="tab-pane active">
