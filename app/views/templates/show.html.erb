@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="starter-template">
+    <h1><%= @template.title%></h1>
+  </br>
+  <h2><%= link_to "編集", edit_template_path(@template.id)%></h2>
+  <h2><%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %></h2>
+</div>
+<h3>トピック</h3>
+<p>
+  <%= @template.topic%>
+</p>
+</br>
+<h3>カテゴリ</h3>
+<p>
+<%= @category.name%>
+</p>
+</br>
+<% @questions.each do |question|%>
+<h3><%= "質問"%></h3>
+</br>
+<p>
+<%= question.qtext%>
+</p>
+</br>
+<p>
+質問の詳細：<%=question.qdetail%>
+</p>
+</br>
+<p>
+回答例：<%=question.example%>
+</p>
+</br>
+
+<%end%>
+
+</div>

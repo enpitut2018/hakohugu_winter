@@ -1,7 +1,25 @@
 <div class="container">
-    <div class="starter-template">
-        <h1> 新しいアシスタントとのトークを作成します </h1>
+  <div class="starter-template">
+    <h1>
+      新しいアシスタントとのトークを作成します
+    </h1>
+  </div>
+
+    <!-- エラーメッセージを表示 -->
+    <% if @document.errors.any? %>
+    <div id="error_explanation">
+        <div class="alert alert-danger">
+            <%= @document.errors.count %>つのエラーが見つかりました。
+        </div>
+        <ul>
+            <% @document.errors.full_messages.each do |msg| %>
+            <li>
+                <%= msg %>
+            </li>
+            <% end %>
+        </ul>
     </div>
+    <% end %>
 
     <%= form_for(@document) do |f| %>
     <div class="form-group">
@@ -9,14 +27,13 @@
         <%= f.text_field :title, class: 'form-control' %>
     </div>
 
-    <% @document.user_id = 1 %>
-    <%= f.hidden_field :user_id%>
 
     <div class="form-group">
         <%= f.label :template_id, "使用するアシスタント" %>
-        <%= f.collection_select(:template_id,@templates, :id, :title, {},{:class => "custom-select"}) %>
+        <%= f.collection_select(:template_id, ::Template.all , :id, :title, {},{:class => "custom-select"}) %>
     </div>
 
-    <%= f.submit "アシスタントとトークを開始", class: "btn btn-primary" %>
-    <% end %>
+
+  <%= f.submit "アシスタントとトークを開始", class: "btn btn-primary" %>
+<% end %>
 </div>

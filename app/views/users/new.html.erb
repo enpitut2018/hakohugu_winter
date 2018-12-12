@@ -1,2 +1,35 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="container">
+  <div class="starter-template">
+    <h1>ユーザー新規作成</h1>
+  </div>
+
+  <%= form_for(@user,url: '/users/new') do |f| %>
+
+    <%= render 'shared/error_messages' %>
+
+    <div class="form-group">
+      <%= f.label :名前 %>
+      <%= f.text_field :name , class: 'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :メールアドレス %>
+      <%= f.email_field :email , class: 'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :パスワード %>
+      <%= f.password_field :password , class: 'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :パスワードの確認%>
+      <%= f.password_field :password_confirmation , class: 'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+</div>
