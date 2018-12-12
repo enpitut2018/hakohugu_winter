@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_054222) do
+ActiveRecord::Schema.define(version: 2018_12_12_012918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(version: 2018_12_05_054222) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "content"
+    t.json "conversation_logs"
+    t.integer "question_number", default: 0
+    t.integer "count_t", default: 0
+    t.integer "count_d", default: 0
+    t.integer "count_e", default: 0
     t.index ["template_id"], name: "index_documents_on_template_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
