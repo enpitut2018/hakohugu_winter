@@ -9,6 +9,7 @@
       </div>
     </div>
 
+<div class="nav-col">
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a
@@ -29,6 +30,13 @@
         >回答の編集</a>
       </li>
     </ul>
+    </div>
+    
+     <div>
+      <div class="text-right">
+      <p>現在{{count+1}}/{{questions.length}}問目</p>
+      </div>
+    </div>
 
     <div class="tab-content">
       <div id="tab1" class="tab-pane" v-bind:class="{ active: tab1 }">
