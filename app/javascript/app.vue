@@ -98,22 +98,33 @@ export default {
       count_t: 0, //チュートリアル用カウント変数
       count_d: 0, //詳細を出す時のカウント変数
       count_e: 0, //例を出す時のカウント変数
-      conversation_count:
-        this.count_t + this.count + this.count_d + this.count_e,
+      count_h: 0, //ヘルプ用
+      count_called_h: 0,
+      sum_h: 0,
       conversationLogs: [],
       tutorials: [
-        "",
-        "",
-        "回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。",
-        "質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。",
-        "他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。",
-        "どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。",
-        "これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。",
-        "長くなってきましたので、そろそろ始めましょうか。"
+        '',
+        '',
+        '★回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。',
+        '★質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。',
+        '★他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。',
+        '★どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。',
+        '★これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。',
+        '★長くなってきましたので、そろそろ始めましょうか。'
+      ],
+      helps: [
+        '★もう一度使い方を説明します。回答ボタンをクリックして次に進みます。',
+        '★回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。',
+        '★質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。',
+        '★他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。',
+        '★どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。',
+        '★これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。',
+        '★それでは、先ほどの質問から再開します。'
       ],
       tutorial_flag: true,
+      help_flag: false,
       tab1: true,
-      tab2: false
+      tab2: false 
     };
   },
 
@@ -151,13 +162,13 @@ export default {
         that.count_e = res.data.count_e;
         that.conversationLogs = JSON.parse(res.data.conversation_logs);
         that.tutorials[0] =
-          "こんにちは、私は" +
+          "★こんにちは、私は" +
           res.data.temp_title +
           "です。あなたが" +
           res.data.topic +
           "について考えるサポートをさせて頂きます。会話を進めるには回答ボタンを押してください。チュートリアルをスキップしたい方はスキップボタンを押してください。";
         that.tutorials[1] =
-          "これから私" +
+          "★これから私" +
           res.data.temp_title +
           "が" +
           res.data.topic +
@@ -207,7 +218,7 @@ export default {
       if (this.questions[this.count]) {
         this.$set(
           this.conversationLogs[
-            this.count_t + this.count + this.count_d + this.count_e
+            this.count_t + this.count + this.count_d + this.count_e　+ this.sum_h + this.count_called_h
           ],
           "answer",
           this.answer
@@ -217,13 +228,18 @@ export default {
       if (this.tutorial_flag && this.count_t < this.tutorials.length) {
         //チュートリアル中は回答をノートに記録しない
         this.count_t += 1;
-      } else {
+      } 
+      else if (this.help_flag && this.count_h<this.helps.length){
+        this.count_h += 1;
+        this.sum_h += 1;
+      }else {
         this.tutorial_flag = false;
+        this.help_flag = false;
         //特殊回答による分岐
         if (this.answer == "詳しく" || this.answer == "くわしく") {
           //詳しくorくわしくで詳細を表示
           this.conversationLogs.push({
-            question: this.questions[this.count].qdetail
+            question: '【質問意図・答え方】' + this.questions[this.count].qdetail
           });
           this.answer = "";
           this.count_d += 1;
@@ -234,15 +250,27 @@ export default {
         } else if (this.answer == "例えば" || this.answer == "たとえば") {
           //例えばorたとえばで例を表示
           this.conversationLogs.push({
-            question: this.questions[this.count].example
+            question: '【答え方の例】' + this.questions[this.count].example
           });
           this.answer = "";
           this.count_e += 1;
           this.$nextTick(function() {
             this.scrollToEnd("#conversation");
           });
+　　　　　　return false;
+        }else if(this.answer == 'ヘルプ'){
+          this.count_called_h += 1;
+          this.count_h = 0;
+          this.help_flag = true;
+          this.conversationLogs.push({
+            question: this.helps[this.count_h]
+          });
+          this.answer = "";
+          this.$nextTick(function() {
+            this.scrollToEnd("#conversation");
+          });
           return false;
-        } else {
+        }else{
           this.addAnswerToNote();
           this.answer = "";
           //次の質問に進める。
@@ -251,16 +279,17 @@ export default {
       }
       //次の質問を会話ログに格納
       if (this.questions[this.count]) {
-        if (
-          this.tutorial_flag == false ||
-          this.count_t >= this.tutorials.length
-        ) {
+        if (this.tutorial_flag && this.count_t<this.tutorials.length){
           this.conversationLogs.push({
-            question: this.questions[this.count].qtext
+            question: this.tutorials[this.count_t]
+          });
+        }else if(this.help_flag && this.count_h<this.helps.length){
+          this.conversationLogs.push({
+            question: this.helps[this.count_h]
           });
         } else {
           this.conversationLogs.push({
-            question: this.tutorials[this.count_t]
+            question: this.questions[this.count].qtext
           });
         }
       }
@@ -286,7 +315,11 @@ export default {
         //チュートリアル中に押されたら、チュートリアルを中止
         this.tutorial_flag = false;
         this.count_t += 1;
-      } else {
+      }else if (this.help_flag) { //ヘルプ中に押されたら、ヘルプを中止
+        this.help_flag = false;
+        this.count_h += 1;
+        this.sum_h += 1;
+      }else{
         //会話ログに「次の質問」と格納
         if (this.questions[this.count]) {
           this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
