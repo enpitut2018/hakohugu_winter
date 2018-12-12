@@ -4,5 +4,7 @@ json.questions do
 end
 json.title @document.title
 json.content @document.content
+json.temp_title @template.title
+json.topic @template.topic
 
 
