@@ -62,8 +62,7 @@ gem 'bootstrap-will_paginate'
 gem 'carrierwave',             '1.1.0'
 gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
-gem 'cloudinary’,		‘1.11.0’
-
+gem 'cloudinary',		'1.11.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
