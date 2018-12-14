@@ -32,9 +32,9 @@
       </ul>
     </div>
 
-    <div>
+     <div>
       <div class="text-right">
-        <p>現在{{count+1}}/{{questions.length}}問目</p>
+      <p>{{getNowQuestion}}</p>
       </div>
     </div>
 
@@ -161,6 +161,17 @@ export default {
           that.note = simplemde.value();
         });
       });
+  },
+
+  computed: {
+    getNowQuestion: function () {
+     if(this.count+1 < this.questions.length){
+		  return `現在${this.count+1}/${this.questions.length}問目`;
+	   }
+	   else{
+		  return `現在${this.questions.length}/${this.questions.length}問目`;
+	   }
+    }
   },
 
   methods: {
