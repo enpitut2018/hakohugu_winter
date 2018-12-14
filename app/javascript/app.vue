@@ -9,27 +9,27 @@
       </div>
     </div>
 
-<div class="nav-col">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a
-          href="#tab1"
-          @click="viewChange"
-          class="nav-link"
-          v-bind:class="{ active: tab1 }"
-          data-toggle="tab"
-        >質問に答える</a>
-      </li>
-      <li class="nav-item">
-        <a
-          href="#tab2"
-          @click="viewChange"
-          class="nav-link"
-          v-bind:class="{ active: tab2 }"
-          data-toggle="tab"
-        >回答の編集</a>
-      </li>
-    </ul>
+    <div class="nav-col">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a
+            href="#tab1"
+            @click="viewChange"
+            class="nav-link"
+            v-bind:class="{ active: tab1 }"
+            data-toggle="tab"
+          >質問に答える</a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="#tab2"
+            @click="viewChange"
+            class="nav-link"
+            v-bind:class="{ active: tab2 }"
+            data-toggle="tab"
+          >回答の編集</a>
+        </li>
+      </ul>
     </div>
 
      <div>
@@ -56,7 +56,13 @@
         </div>
 
         <div id="inputText">
-          <textarea v-model="answer" placeholder="解答を入力" style="width:100%;height:100%;"></textarea>
+          <textarea
+            @keyup.ctrl.enter="transmissionMessage"
+            @keyup.ctrl.delete="skipQuestion"
+            v-model="answer"
+            placeholder="解答を入力"
+            style="width:100%;height:100%;"
+          ></textarea>
         </div>
 
         <!-- 回答ボタンの横に次の質問へスキップするボタンを追加 -->
