@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
   def index
-    @templates=Template.all
+    @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search])
     @user = User.find(current_user.id)
     @my_templates=@user.templates
   end
@@ -18,8 +18,11 @@ class TemplatesController < ApplicationController
 
   def create
     @template=Template.new(template_params)
-    @template.save
-    redirect_to templates_path
+    if @template.save
+      redirect_to templates_path
+    else
+      render 'new'
+    end
   end
 
   def edit

@@ -9,4 +9,14 @@ class Template < ApplicationRecord
   accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
   #has_many :contains
   #accepts_nested_attributes_for :contains
+
+
+  def self.search(search)
+    if search
+      where(['title LIKE ?', "%#{search}%"])
+    else
+      all
+    end
+  end
+
 end
