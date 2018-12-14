@@ -20,6 +20,9 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 # Cannot find module node-sass対策
 RUN yarn add node-sass
 
+# 画像リサイズのための環境構築
+RUN apt-get update && apt-get install imagemagick --fix-missing
+
 RUN mkdir /hakohugu_winter
 
 WORKDIR /hakohugu_winter

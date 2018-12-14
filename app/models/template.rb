@@ -7,6 +7,15 @@ class Template < ApplicationRecord
   has_many :documents
   has_many :questions, inverse_of: :template, dependent: :destroy
   accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
-  #has_many :contains
-  #accepts_nested_attributes_for :contains
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
+  
+  private
+  
+  # アップロードされた画像のサイズをバリデーションする
+  def picture_size
+      if picture.size > 5.megabytes
+          errors.add(:picture, "should be less than 5MB")
+      end
+  end
 end
