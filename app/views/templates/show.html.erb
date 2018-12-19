@@ -2,8 +2,12 @@
   <div class="starter-template">
     <h1><%= @template.title%></h1>
   </br>
-  <h2><%= link_to "編集", edit_template_path(@template.id)%></h2>
-  <h2><%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %></h2>
+
+  <% if @template.scope == 0 %>
+    <h2><%= link_to "編集", edit_template_path(@template.id)%></h2>
+    <h2><%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %></h2>
+    <h2><%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%></h2>
+  <% end %>
 </div>
 <h3>トピック</h3>
 <p>

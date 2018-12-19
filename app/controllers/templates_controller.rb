@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
   def index
-    @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search])
+    @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search]).where(scope: 1)
     @user = User.find(current_user.id)
     @my_templates=@user.templates.where(scope: 0)
   end
@@ -44,6 +44,16 @@ class TemplatesController < ApplicationController
 
   def destroy
     if Template.find(params[:id]).destroy
+      redirect_to templates_path
+    else
+      render 'show'
+    end
+  end
+
+  def release
+    @template = Template.find(params[:id])
+
+    if @template.update(scope: 1)
       redirect_to templates_path
     else
       render 'show'
