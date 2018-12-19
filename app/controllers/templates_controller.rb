@@ -2,7 +2,7 @@ class TemplatesController < ApplicationController
   def index
     @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search])
     @user = User.find(current_user.id)
-    @my_templates=@user.templates
+    @my_templates=@user.templates.where(scope: 0)
   end
 
   def new
@@ -18,6 +18,7 @@ class TemplatesController < ApplicationController
 
   def create
     @template=Template.new(template_params)
+    @template.scope = 0
     if @template.save
       redirect_to templates_path
     else
