@@ -233,8 +233,8 @@ export default {
     },
     addAnswerToNote: function() {
       this.note +=
-        `## Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
-      this.note += "\t" + this.answer + "\n";
+        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+      this.note += "\t" + '##'+this.answer + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
         simplemde.codemirror.refresh();
