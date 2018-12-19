@@ -2,7 +2,8 @@ class TemplatesController < ApplicationController
   def index
     @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search]).where(scope: 1)
     @user = User.find(current_user.id)
-    @my_templates=@user.templates.where(scope: 0)
+    @my_templates_unreleased=@user.templates.where(scope: 0)
+    @my_templates_released=@user.templates.where(scope: 1)
   end
 
   def new
