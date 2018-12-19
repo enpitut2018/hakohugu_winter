@@ -33,3 +33,6 @@ yarn-debug.log*
 #DS_Storeを無視する
 
 .DS_Store
+
+#環境変数
+.env
