@@ -1,8 +1,9 @@
 class TemplatesController < ApplicationController
   def index
-    @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search])
+    @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search]).where(scope: 1)
     @user = User.find(current_user.id)
-    @my_templates=@user.templates
+    @my_templates_unreleased=@user.templates.where(scope: 0)
+    @my_templates_released=@user.templates.where(scope: 1)
   end
 
   def new
@@ -14,10 +15,12 @@ class TemplatesController < ApplicationController
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
     @questions=Question.where(template_id: @template.id)
+    @document = Document.new
   end
 
   def create
     @template=Template.new(template_params)
+    @template.scope = 0
     if @template.save
       redirect_to templates_path
     else
@@ -43,6 +46,16 @@ class TemplatesController < ApplicationController
 
   def destroy
     if Template.find(params[:id]).destroy
+      redirect_to templates_path
+    else
+      render 'show'
+    end
+  end
+
+  def release
+    @template = Template.find(params[:id])
+
+    if @template.update(scope: 1)
       redirect_to templates_path
     else
       render 'show'
