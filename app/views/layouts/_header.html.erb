@@ -1,5 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
-  <a class="navbar-brand  text-center text-warning" href="/">Cogito</a>
+
+  <% if logged_in? %>
+    <%= link_to 'Cogito' , documents_path , :class => "navbar-brand  text-center text-warning" %>
+  <% else %>
+    <%= link_to 'Cogito' , root_path , :class => "navbar-brand  text-center text-warning" %>
+  <% end %>
+
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー">
     <span class="navbar-toggler-icon"></span>
   </button>
