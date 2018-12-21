@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="starter-template">
+    <h1><%= @template.title%></h1>
+  </br>
+
+  <% if @template.scope == 0 %>
+    <h2><%= link_to "編集", edit_template_path(@template.id)%></h2>
+    <h2><%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %></h2>
+    <% if @questions.present? %>
+      <h2><%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%></h2>
+    <% else %>
+      <div class="alert alert-warning" role="alert">
+        質問が一つ以上ないとこのアシスタントは公開できません
+      </div>
+    <%end%>
+  <% end %>
+
+  <% if @template.scope == 1 %>
+    <%= form_for(@document) do |f| %>
+    <div class="form-group">
+      <%= f.label :ノートタイトル %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.hidden_field :template_id, :value => @template.id %>
+    </div>
+
+    <%= f.submit "このアシスタントとトークを開始", class: "btn btn-primary" %>
+  <% end %>
+
+<% end %>
+
+</div>
+<h3>トピック</h3>
+<p>
+<%= @template.topic%>
+</p>
+</br>
+<h3>カテゴリ</h3>
+<p>
+<%= @category.name%>
+</p>
+</br>
+<% @questions.each do |question|%>
+<h3><%= "質問"%></h3>
+</br>
+<p>
+<%= question.qtext%>
+</p>
+</br>
+<p>
+質問の詳細：<%=question.qdetail%>
+</p>
+</br>
+<p>
+回答例：<%=question.example%>
+</p>
+</br>
+
+<% end %>
+
+</div>

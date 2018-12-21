@@ -1,8 +1,24 @@
 <div class="container">
   <!--indexからコピペ-->
   <div class="starter-template">
-    <h1>新規テンプレート作成</h1>
+    <h1>新規アシスタント作成</h1>
   </div>
+
+  <!-- エラーメッセージを表示 -->
+  <% if @template.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        <%= @template.errors.count %>つのエラーが見つかりました。
+      </div>
+      <ul>
+        <% @template.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <!--ここから「入力フォーム」-->
   <%= render 'form', {template: @template}%>

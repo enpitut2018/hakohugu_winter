@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to documents_path
     else
-      render 'new'
+      render :new
     end
   end
 

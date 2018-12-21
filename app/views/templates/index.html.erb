@@ -1,6 +1,68 @@
-<h1>Templates#index</h1>
-<p>Find me in app/views/templates/index.html.erb</p>
-<%@template.each do |t| %>
-  <p><%=t.title%>
-  </p>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>すべてのアシスタント</h2>
+
+      <!-- 検索 -->
+      <%= form_tag(templates_path, :method => 'get') do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag '検索', :name => nil %>
+    <% end %>
+  </br>
+
+  <div class="card-deck">
+    <% @templates.each do |template| %>
+      <div class="col-md-3">
+        <div class="card">
+          <%= image_tag 'note_image', :size =>'150x150', :class => 'card-img-top' %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</br>
+<%= will_paginate(:renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+</br>
+<h2>マイアシスタント</h2>
+<div class="my_unreleased">
+<h3>未公開</h3>
+<div class="card-deck">
+  <% @my_templates_unreleased.each do |template_u| %>
+    <div class="col-md-3">
+      <div class="card">
+        <%= image_tag 'note_image', :size =>'150x150', :class => 'card-img-top' %>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
+          </h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+
+<div class="my_released">
+<h3>公開済</h3>
+<div class="card-deck">
+  <% @my_templates_released.each do |template| %>
+    <div class="col-md-3">
+      <div class="card">
+        <%= image_tag 'note_image', :size =>'150x150', :class => 'card-img-top' %>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+          </h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>
+</div>
+</div>

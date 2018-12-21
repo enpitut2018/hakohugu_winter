@@ -1,20 +1,26 @@
 <%= form_for @template do |f| %>
 <div class="form-group">
-  <%= f.label :title, "テンプレートタイトル" %>
+  <%= f.label :title, "アシスタント名" %>
   <%= f.text_field :title, class: 'form-control'%>
 </div>
 
 <div class="form-group">
-  <%= f.label :topic, "トピック" %>
+  <%= f.label :title, "アシスタント画像" %>
+  <br>
+  <%= image_tag @template.picture.url , :class => 'ass-pic' if @template.picture?%>
+  <br>
+  <span class = "picture">
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+  </span>
+</div>
+
+<div class="form-group">
+  <%= f.label :topic, "概要" %>
+  <p>
+    誰がどんな目的で何をすることを助けるアシスタントなのかの説明
+  </p>
   <%= f.text_field :topic, class: 'form-control'%>
 </div>
-
-<!-- ここから ログイン実装までの決め打ちのuserID-->
-<div class="form-group">
-  <%= f.hidden_field(:user_id, :value => 1)%>
-
-</div>
-<!-- ここまで ログイン実装までの決め打ちのuserID-->
 
 <div class="form-group">
   <%= f.label :category_id, "カテゴリ" %>
@@ -27,12 +33,21 @@
   <%= render 'question_fields', f: question %>
 <% end %>
 <div class="links">
-  <%= link_to_add_association '質問を追加', f, :questions %>
+  <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light'%>
 </div>
 </div>
 
 <div class="actions">
-<%= f.submit "作成", class: "btn btn-primary"%>
+<%= f.submit @submit, class: "btn btn-primary"%>
 </div>
 
 <% end %>
+
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('ファイルサイズが上限の5MBを超えています。');
+    }
+  });
+</script>

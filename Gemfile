@@ -33,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+#githubでセキュリティ警告が出てたので
+gem "activejob", ">= 5.2.1.1"
+gem "activestorage", ">= 5.2.1.1"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -40,11 +44,28 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
- # ここを追加
+ # vueの自動コンパイル
 gem 'foreman'
 
 #cocoonの追加 1対多フォームのため
 gem 'cocoon'
+
+#エラーメッセージの日本語化
+gem 'rails-i18n'
+
+
+#ページネーション
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
+#画像アップロード
+gem 'carrierwave',             '1.1.0'
+gem 'mini_magick',             '4.7.0'
+gem 'fog',                     '1.40.0'
+gem 'cloudinary'
+
+#環境変数
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
