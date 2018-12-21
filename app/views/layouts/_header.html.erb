@@ -3,7 +3,7 @@
   <% if logged_in? %>
     <%= link_to 'Cogito' , documents_path , :class => "navbar-brand  text-center text-warning" %>
   <% else %>
-    <%= link_to 'Cogito' , root_path , :class => "navbar-brand  text-center text-warning" %>
+    <%= link_to 'Cogito' , '/' , :class => "navbar-brand  text-center text-warning" %>
   <% end %>
 
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー">
