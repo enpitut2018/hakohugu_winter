@@ -8,7 +8,7 @@ class DocumentsController < ApplicationController
 
   def new
     @document = Document.new
-    #@templates = Template.all
+    logger.debug(params[:template_id])
   end
 
   def create
@@ -43,7 +43,7 @@ class DocumentsController < ApplicationController
    private
 
     def update_params
-      params.require(:document).permit(:content,:conversation_logs,:question_number,:count_t,:count_d,:count_e,:count_called_h,:sum_h)                             
+      params.require(:document).permit(:content,:conversation_logs,:question_number,:count_t,:count_d,:count_e,:count_called_h,:sum_h)
     end
 
     def document_params
@@ -76,7 +76,7 @@ class DocumentsController < ApplicationController
         redirect_to login_url
       end
     end
-    
+
     # 正しいユーザーかどうか確認
     def correct_user
       document = Document.find(params[:id])

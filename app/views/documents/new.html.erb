@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <%= f.label :template_id, "使用するアシスタント" %>
-    <%= f.collection_select(:template_id, ::Template.where(scope: 1) , :id, :title, {},{:class => "custom-select"}) %>
+    <%= f.collection_select(:template_id, ::Template.where(scope: 1) , :id, :title, {},{:class => "custom-select"})%>
   </div>
 
   <%= f.submit "アシスタントとトークを開始", class: "btn btn-primary" %>

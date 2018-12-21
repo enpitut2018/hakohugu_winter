@@ -15,6 +15,7 @@ class TemplatesController < ApplicationController
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
     @questions=Question.where(template_id: @template.id)
+    @document = Document.new
   end
 
   def create
