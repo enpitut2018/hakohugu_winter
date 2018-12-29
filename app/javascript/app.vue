@@ -224,6 +224,21 @@ export default {
         simplemde = new SimpleMDE({
           element: document.getElementById("MyID"),
           initialValue: that.note,
+          toolbar: [
+            "bold",
+            "italic",
+            "heading",
+            "|",
+            "quote",
+            "unordered-list",
+            "ordered-list",
+            "|",
+            "link",
+            "image",
+            "|",
+            "preview",
+            "guide"
+          ],
           forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
           autofocus: true //エディタに自動フォーカスする
         });
