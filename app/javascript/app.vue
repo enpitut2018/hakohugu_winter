@@ -58,7 +58,7 @@
         <div id="inputText">
           <textarea
             @keyup.ctrl.enter="transmissionMessage"
-            @keyup.ctrl.delete="skipQuestion"
+            @keyup.ctrl.space="skipQuestion"
             v-model="answer"
             placeholder="解答を入力"
             style="width:100%;height:100%;"
