@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     else
       # エラーメッセージを作成する
       flash.now[:danger] = 'eメールまたはパスワードが違います。'
-      render 'new'
+      render 'new' , :layout => nil
     end
   end
 
