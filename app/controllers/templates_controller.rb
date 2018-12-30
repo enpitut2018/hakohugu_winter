@@ -1,4 +1,6 @@
 class TemplatesController < ApplicationController
+  before_action :logged_in_user
+
   def index
     @templates=Template.paginate(page: params[:page],:per_page => 4).search(params[:search]).where(scope: 1)
     @user = User.find(current_user.id)
@@ -63,7 +65,17 @@ class TemplatesController < ApplicationController
   end
 
   private
-  def template_params
-      params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
-  end
+
+    def template_params
+        params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+    end
+
+  # ログイン済みユーザーかどうか確認
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "ログインしてください"
+        redirect_to login_url
+      end
+    end
+
 end
