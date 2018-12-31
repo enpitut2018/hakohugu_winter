@@ -36,3 +36,6 @@ yarn-debug.log*
 
 #環境変数
 .env
+
+#アップロードされた写真を無視する
+/public/uploads
