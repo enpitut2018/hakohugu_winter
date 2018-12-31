@@ -11,13 +11,13 @@
 
   <div>
     <% if @template.scope == 0 %>
-      <span class='h1 mt-5'>
+      <span class='h4 mt-5'>
         <%= link_to "編集", edit_template_path(@template.id)%>     
         <%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %>
       </span>
 
       <% if @questions.present? %>
-        <p class='h1 mt-5'>
+        <p class='h4 mt-5'>
           <%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%>
         </p>
       <% else %>
