@@ -1,63 +1,81 @@
-<div class="container">
-  <div class="starter-template">
-    <h1><%= @template.title%></h1>
-  </br>
+<div class="starter-template">
+  <div class = 'mb-5'>
+    <h1 class='mb-5'>
+      <%= @template.title%>
+    </h1>
+    <span class='h5'>
+      <span class = 'font-weight-bold'> トピック:</span><span class='mr-3'><%= @template.topic%></span>
+      <span class = 'font-weight-bold ml-3'>カテゴリ: </span><span><%= @category.name%></span>
+    </span>
+  </div>
 
-  <% if @template.scope == 0 %>
-    <h2><%= link_to "編集", edit_template_path(@template.id)%></h2>
-    <h2><%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %></h2>
-    <% if @questions.present? %>
-      <h2><%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%></h2>
-    <% else %>
-      <div class="alert alert-warning" role="alert">
-        質問が一つ以上ないとこのアシスタントは公開できません
-      </div>
-    <%end%>
-  <% end %>
+  <div>
+    <% if @template.scope == 0 %>
+      <span class='h1 mt-5'>
+        <%= link_to "編集", edit_template_path(@template.id)%>     
+        <%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %>
+      </span>
 
-  <% if @template.scope == 1 %>
-    <%= form_for(@document) do |f| %>
-    <div class="form-group">
-      <%= f.label :ノートタイトル %>
-      <%= f.text_field :title, class: 'form-control' %>
-    </div>
+      <% if @questions.present? %>
+        <p class='h1 mt-5'>
+          <%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%>
+        </p>
+      <% else %>
+        <div class="alert alert-warning" role="alert">
+          質問が一つ以上ないとこのアシスタントは公開できません
+        </div>
+      <% end %>
 
-    <div class="form-group">
-      <%= f.hidden_field :template_id, :value => @template.id %>
-    </div>
+    <% elsif @template.scope == 1 %>
+      <%= form_for(@document) do |f| %>
+        <div class="form-group">
+            <%= f.label :ノートタイトル %>
+            <%= f.text_field :title, class: 'form-control w-50 mx-auto', value:'無題'  %>
+        </div>
+           
+        <%= f.hidden_field :template_id, :value => @template.id %>
 
-    <%= f.submit "このアシスタントとトークを開始", class: "btn btn-primary" %>
-  <% end %>
+        <div class="form-group">
+          <%= f.submit "このアシスタントとトークを開始", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 
-<% end %>
-
-</div>
-<h3>トピック</h3>
-<p>
-<%= @template.topic%>
-</p>
-</br>
-<h3>カテゴリ</h3>
-<p>
-<%= @category.name%>
-</p>
-</br>
-<% @questions.each do |question|%>
-<h3><%= "質問"%></h3>
-</br>
-<p>
-<%= question.qtext%>
-</p>
-</br>
-<p>
-質問の詳細：<%=question.qdetail%>
-</p>
-</br>
-<p>
-回答例：<%=question.example%>
-</p>
-</br>
-
-<% end %>
-
+  <div class='mt-5'>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th> </th>
+          <th scope="col">質問名</th>
+          <th scope="col">質問の詳細</th>
+          <th scope="col">回答例</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% count = 1 %>
+        <% @questions.each do |question|%>
+        <tr>
+          <th>質問
+            <%= count %>
+          </th>
+          <td>
+            <%= question.qtext%>
+          </td>
+        
+          <td>
+            質問の詳細：
+            <%=question.qdetail%>
+          </td>
+        
+          <td>
+            回答例：
+            <%=question.example%>
+          </td>
+        </tr>
+        <% count += 1 %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

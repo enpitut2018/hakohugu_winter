@@ -2,7 +2,7 @@
   <div id="app">
     <div class="form-row mb-md-3">
       <div class="col">
-        <input type="text" class="form-control" id="Input" :value="title" disabled="disabled">
+        <input type="text" class="form-control" id="Input" v-model="title">
       </div>
       <div class="col">
         <button type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
@@ -32,9 +32,9 @@
       </ul>
     </div>
 
-     <div>
+    <div>
       <div class="text-right">
-      <p>{{getNowQuestion}}</p>
+        <p>{{getNowQuestion}}</p>
       </div>
     </div>
 
@@ -58,7 +58,7 @@
         <div id="inputText">
           <textarea
             @keyup.ctrl.enter="transmissionMessage"
-            @keyup.ctrl.delete="skipQuestion"
+            @keyup.ctrl.space="skipQuestion"
             v-model="answer"
             placeholder="解答を入力"
             style="width:100%;height:100%;"
@@ -164,13 +164,12 @@ export default {
   },
 
   computed: {
-    getNowQuestion: function () {
-     if(this.count+1 < this.questions.length){
-		  return `現在${this.count+1}/${this.questions.length}問目`;
-	   }
-	   else{
-		  return `現在${this.questions.length}/${this.questions.length}問目`;
-	   }
+    getNowQuestion: function() {
+      if (this.count + 1 < this.questions.length) {
+        return `現在${this.count + 1}/${this.questions.length}問目`;
+      } else {
+        return `現在${this.questions.length}/${this.questions.length}問目`;
+      }
     }
   },
 
@@ -225,6 +224,21 @@ export default {
         simplemde = new SimpleMDE({
           element: document.getElementById("MyID"),
           initialValue: that.note,
+          toolbar: [
+            "bold",
+            "italic",
+            "heading",
+            "|",
+            "quote",
+            "unordered-list",
+            "ordered-list",
+            "|",
+            "link",
+            "image",
+            "|",
+            "preview",
+            "guide"
+          ],
           forceSync: true, //エディタの入力値をdocument.getElementById("MyID").valueで取得できるようになる
           autofocus: true //エディタに自動フォーカスする
         });
@@ -234,7 +248,7 @@ export default {
     addAnswerToNote: function() {
       this.note +=
         ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
-      this.note += (`  ## ${this.answer}` + "\n");
+      this.note += `  ## ${this.answer}` + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
         simplemde.codemirror.refresh();
@@ -399,6 +413,7 @@ export default {
       let document = this.note;
       axios
         .patch("", {
+          title: this.title,
           content: document,
           conversation_logs: JSON.stringify(this.conversationLogs),
           question_number: this.count,
