@@ -353,8 +353,12 @@ export default {
     /*質問を飛ばす時に行う処理*/
     addSkipQuestionToNote: function() {
       this.note +=
-        `## Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
       this.note += "\t" + "" + "\n";
+      simplemde.value(this.note);
+      setTimeout(function() {
+        simplemde.codemirror.refresh();
+      }, 1);
     },
     skipQuestion: function() {
       if (this.tutorial_flag) {
@@ -369,7 +373,18 @@ export default {
       } else {
         //会話ログに「次の質問」と格納
         if (this.questions[this.count]) {
-          this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
+          this.$set(
+            this.conversationLogs[
+              this.count_t +
+                this.count +
+                this.count_d +
+                this.count_e +
+                this.sum_h +
+                this.count_called_h
+            ],
+            "answer",
+            "次の質問は?"
+          );
         }
         this.addSkipQuestionToNote();
         this.answer = "";
