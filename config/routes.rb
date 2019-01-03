@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
     get '/' , to: 'sessions#new'
-    resources :users, :only => [:new,:create]
+    resources :users
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
     resources :documents, :only => [:index,:new,:show,:create,:update,:destroy]
