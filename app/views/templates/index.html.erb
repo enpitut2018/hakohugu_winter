@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mb-4">すべてのアシスタント</h2>
+      <h2 class="mb-4 mt-4">すべてのアシスタント</h2>
 
 
       <!-- 検索 -->
@@ -57,7 +57,6 @@
           <div class="col-md-3">
             <div class="card img-thumbnail">
               <%if template_u.picture?%>
-                <% puts 'foooo' %>
                 <%= image_tag template_u.picture.url , :class => 'ass-pic card-img-top'%>
               <%else%>
                 <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
