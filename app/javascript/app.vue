@@ -45,7 +45,7 @@
             <div class="kaiwa">
               <figure class="kaiwa-img-left">
                 <img :src="image_path1" alt="no-img2">
-                <figcaption class="kaiwa-img-description">名前</figcaption>
+                <figcaption class="kaiwa-img-description">{{temp_title}}</figcaption>
               </figure>
               <div class="kaiwa-text-right">
                 <p class="kaiwa-text">{{conversationLog.question}}</p>
@@ -55,22 +55,12 @@
             <div v-if="conversationLog.answer" class="kaiwa">
               <figure class="kaiwa-img-right">
                 <img :src="image_path2" alt="no-img2">
-                <figcaption class="kaiwa-img-description">名前</figcaption>
+                <figcaption class="kaiwa-img-description">{{user_name}}</figcaption>
               </figure>
               <div class="kaiwa-text-left">
                 <p class="kaiwa-text">{{conversationLog.answer}}</p>
               </div>
             </div>
-            <!--  <div class="question-balloon">
-              <p>{{conversationLog.question}}</p>
-            </div>
-            <br>
-            <div v-if="conversationLog.answer" class="answer-balloon float-right">
-              <p>{{conversationLog.answer}}</p>
-            </div>
-            <br>
-            <br>
-            <br>-->
           </template>
         </div>
 
@@ -200,6 +190,7 @@ export default {
       return new Promise(function(resolve) {
         that.questions = res.data.questions;
         that.title = res.data.title;
+        that.temp_title = res.data.temp_title;
         that.note = res.data.content;
         that.count = res.data.question_number;
         that.count_t = res.data.count_t;
@@ -209,6 +200,7 @@ export default {
         that.sum_h = res.data.sum_h;
         that.image_path1 = res.data.image_path1;
         that.image_path2 = res.data.image_path2;
+        that.user_name = res.data.user_name;
         that.conversationLogs = JSON.parse(res.data.conversation_logs);
         that.tutorials[0] =
           "★こんにちは、私は" +

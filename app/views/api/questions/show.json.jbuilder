@@ -15,6 +15,7 @@ json.count_called_h @document.count_called_h
 json.sum_h @document.sum_h
 json.image_path1 @image_path1
 json.image_path2 @image_path2
+json.user_name @document.user.name
 
 
 

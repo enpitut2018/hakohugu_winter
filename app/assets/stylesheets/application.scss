@@ -91,7 +91,7 @@ span.navbar-text.h3{
   margin: 0;
   float: left;
   width: 60px;
-  height: 60px;
+  /* height: 60px; */
   margin-right: -70px;
 }
 /* 右画像 */
@@ -99,7 +99,7 @@ span.navbar-text.h3{
   margin: 0;
   float: right;
   width: 60px;
-  height: 60px;
+  /* height: 60px; */
   margin-left: -70px;
 }
 .kaiwa figure img {
@@ -112,7 +112,7 @@ span.navbar-text.h3{
 /* 画像の下のテキスト */
 .kaiwa-img-description {
   padding: 5px 0 0;
-  font-size: 10px;
+  font-size: 5px;
   text-align: center;
   /* position: relative; */
   bottom: 15px;
