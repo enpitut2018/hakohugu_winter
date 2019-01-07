@@ -26,6 +26,16 @@
       <%= f.label :パスワードの確認%>
       <%= f.password_field :password_confirmation , class: 'form-control'%>
     </div>
+	
+	<div class="form-group">
+     <%= f.label :プロフィール画像%>
+     <br>
+     <%= image_tag @user.picture.url , :class => 'ass-pic' if @user.picture?%>
+     <br>
+     <span class = "picture">
+       <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+     </span>
+    </div>
 
     <div class="form-group">
       <%= f.submit "アカウントの作成", class: "btn btn-primary" %>
