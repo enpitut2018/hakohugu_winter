@@ -15,9 +15,15 @@ class Template < ApplicationRecord
   #accepts_nested_attributes_for :contains
 
 
-  def self.search(search)
+  def self.search(search,select)
     if search
-      where(['title LIKE ?', "%#{search}%"])
+      if select == 'title'
+        where(['title LIKE ?', "%#{search}%"])
+      elsif select == 'category'
+         joins(:category).where('categories.name LIKE ?', "%#{search}%")
+      else 
+        all
+      end
     else
       all
     end
