@@ -27,7 +27,11 @@
 
     <% if logged_in? %>
       <figure class="header-img">
-        <%= image_tag  "hakohugu2 200X200.png" , class: 'user-img' %>
+        <%if current_user.picture?%>
+              <%= image_tag current_user.picture.url, class: 'user-img'%>
+        <%else%>
+              <%= image_tag 'hakohugu2 200X200.png', class: 'user-img'%>
+        <%end%>
       </figure>
 
       <div class="btn-group">

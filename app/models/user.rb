@@ -8,4 +8,5 @@ class User < ApplicationRecord
     has_many :documents
     has_many :templates
     has_secure_password
+    mount_uploader :picture, PictureUploader
 end
