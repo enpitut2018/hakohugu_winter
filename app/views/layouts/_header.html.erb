@@ -27,10 +27,10 @@
 
     <% if logged_in? %>
       <figure class="header-img">
-        <%if @user.picture?%>
-              <%= image_tag @user.picture.url, :class => 'ass-pic card-img-top'%>
+        <%if current_user.picture?%>
+              <%= image_tag current_user.picture.url, class: 'user-img'%>
         <%else%>
-              <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu2 200X200.png', class: 'user-img'%>
         <%end%>
       </figure>
 
