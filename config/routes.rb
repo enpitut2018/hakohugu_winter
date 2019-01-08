@@ -9,15 +9,12 @@ Rails.application.routes.draw do
         get 'release'
       end
     end
-
+    resources :likes, only: [:create, :destroy]
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
-
-    
-
-
     post 'templates/:id' => 'templates#index'
+
 
     namespace :api do
         get 'questions/(:document_id)' , to: 'questions#show'

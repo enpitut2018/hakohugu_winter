@@ -44,6 +44,9 @@ gem "activestorage", ">= 5.2.1.1"
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
+#iconを追加
+gem "font-awesome-rails"
+
  # vueの自動コンパイル
 gem 'foreman'
 
@@ -66,6 +69,9 @@ gem 'cloudinary'
 
 #環境変数
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+
+#favのカウント
+gem 'counter_culture', '~> 1.8'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

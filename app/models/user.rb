@@ -7,6 +7,7 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
     has_many :documents
     has_many :templates
+    has_many :likes, dependent: :destroy
     has_secure_password
     mount_uploader :picture, PictureUploader
 end

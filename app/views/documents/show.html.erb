@@ -12,12 +12,24 @@
       </div>
       <div class="card mb-md-3">
         <div class="card-body">
-          <%= @template.title %>
+        <span class="font-weight-bold"> このアシスタントが気に入ったら、いいねを押してね！→</span>
+          <span id = "template-<%=@template.id%>" data-template-id="<%= @template.id %>">
+            <%= render "likes/like", template: @template %>
+          </span>
         </div>
       </div>
-      <div class="card mb-md-3" style="height: 300px">
+      <div class="card mb-md-3">
         <div class="card-body">
+          <div>
+            <%= @template.title %>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-md-3">
+        <div class="card-body">
+          <div>
           <%= @template.topic %>
+          </div>
         </div>
       </div>
     </div>

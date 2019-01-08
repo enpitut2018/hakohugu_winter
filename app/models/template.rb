@@ -6,6 +6,8 @@ class Template < ApplicationRecord
   validates :topic, presence: true
   has_many :documents
   has_many :questions, inverse_of: :template, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :fav_users, through: :likes, source: :user
   accepts_nested_attributes_for :questions, allow_destroy: true, reject_if: :all_blank
 
   mount_uploader :picture, PictureUploader
@@ -14,7 +16,7 @@ class Template < ApplicationRecord
   #has_many :contains
   #accepts_nested_attributes_for :contains
 
-
+  #検索のメソッド
   def self.search(search,select)
     if search
       if select == 'title'
@@ -29,7 +31,20 @@ class Template < ApplicationRecord
     end
   end
 
+  # アシスタントをいいねする
+  def fav(user)
+    likes.create(user_id: user.id)
+  end
 
+  # アシスタントのいいねを解除する
+  def unfav(user)
+    likes.find_by(user_id: user.id).destroy
+  end
+
+   # 現在のユーザーがいいねしてたらtrueを返す
+  def fav?(user)
+    fav_users.include?(user)
+  end
 
   private
 
