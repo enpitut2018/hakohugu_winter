@@ -48,7 +48,7 @@
                 <figcaption class="kaiwa-img-description">{{temp_title}}</figcaption>
               </figure>
               <div class="kaiwa-text-right">
-                <p class="kaiwa-text">{{conversationLog.question}}</p>
+                <p class="kaiwa-text" v-html="conversationLog.question"></p>
               </div>
             </div>
 
@@ -129,28 +129,27 @@ export default {
       conversationLogs: [],
       tutorials: [
         ``,
-        `質問をするので、答えが書けたら「回答」ボタンで送信してください
-
-・回答を見直したい、編集したい　→　「回答の編集」タブ
-・質問に答えず次に進みたい　　　→　「スキップ」ボタン
-・質問の意味がわからない　　　　→　「詳しく」と入力
-・回答例を見たい　　　　　　　　→　「例えば」と入力
-・使い方をもう一度確認したい　　→　「ヘルプ」と入力
-
-準備はいいですか？
-それでは、最初の質問をします。「回答」ボタンをクリックしてください`
+        `質問をするので、答えが書けたら「回答」ボタンで送信してください<br>
+        ・回答を見直したい、編集したい　→　「回答の編集」タブ<br>
+        ・質問に答えず次に進みたい　　　→　「スキップ」ボタン<br>
+        ・質問の意味がわからない　　　　→　「詳しく」と入力<br>
+        ・回答例を見たい　　　　　　　　→　「例えば」と入力<br>
+        ・使い方をもう一度確認したい　　→　「ヘルプ」と入力<br>
+          <br>
+          準備はいいですか？<br>
+          それでは、最初の質問をします。「回答」ボタンをクリックしてください`
       ],
       helps: [
-        `アシスタントが質問をするので、書けたら「回答」ボタンで送信してください
-
-・回答を見直したい、編集したい　→　「回答の編集」タブ
-・質問に答えず次に進みたい　　　→　「スキップ」ボタン
-・質問の意味がわからない　　　　→　「詳しく」と入力
-・回答例を見たい　　　　　　　　→　「例えば」と入力
-・使い方をもう一度確認したい　　→　「ヘルプ」と入力
-
-準備はいいですか？
-それでは、先ほどの質問から再開します。「回答」ボタンをクリックしてください`
+        `アシスタントが質問をするので、書けたら「回答」ボタンで送信してください<br>
+        <br>
+        ・回答を見直したい、編集したい　→　「回答の編集」タブ<br>
+        ・質問に答えず次に進みたい　　　→　「スキップ」ボタン<br>
+        ・質問の意味がわからない　　　　→　「詳しく」と入力<br>
+        ・回答例を見たい　　　　　　　　→　「例えば」と入力<br>
+        ・使い方をもう一度確認したい　　→　「ヘルプ」と入力<br>
+        <br>
+        準備はいいですか？<br>
+        それでは、先ほどの質問から再開します。「回答」ボタンをクリックしてください`
       ],
       tutorial_flag: true,
       help_flag: false,
@@ -209,11 +208,11 @@ export default {
         that.user_name = res.data.user_name;
         that.conversationLogs = JSON.parse(res.data.conversation_logs);
         that.tutorials[0] =
-          `こんにちは、` +
+          "こんにちは、" +
           res.data.temp_title +
-          `です。
-・今すぐ会話を始める　→　「スキップ」ボタン
-・使い方を確認　　　　→　「回答」ボタン`;
+          "です。<br>" +
+          "・今すぐ会話を始める　→　「スキップ」ボタン<br>" +
+          "・使い方を確認　　　　→　「回答」ボタン";
         if (that.note == null) {
           that.note = "";
         }
@@ -347,6 +346,8 @@ export default {
             question: this.helps[this.count_h]
           });
         } else {
+          this.tutorial_flag = false;
+          this.help_flag = false;
           this.conversationLogs.push({
             question: this.questions[this.count].qtext
           });
@@ -355,7 +356,8 @@ export default {
 
       if (this.questions.length == this.count) {
         this.conversationLogs.push({
-          question: "この質問で終わりです"
+          question:
+            "この質問で終わりです、解答の編集タブを押して自分の解答を確認してみましょう。"
         });
       }
       /* スクロール位置を更新*/
