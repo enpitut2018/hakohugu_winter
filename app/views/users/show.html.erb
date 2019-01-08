@@ -43,6 +43,10 @@
                 <h5 class="card-title">
                   <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
                 </h5>
+                <p style="font-size:5%;">カテゴリ</p>
+                <p style="font-size:5%;">・
+                  <%= template_u.category.name%>
+                </p>
               </div>
             </div>
           </div>
@@ -66,6 +70,10 @@
                 <h5 class="card-title">
                   <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
                 </h5>
+                <p style="font-size:5%;">カテゴリ</p>
+                <p style="font-size:5%;">・
+                  <%= template.category.name%>
+                </p>
               </div>
             </div>
           </div>
