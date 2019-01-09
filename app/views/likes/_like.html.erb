@@ -1,20 +1,20 @@
-<% if !current_user?(template.user) %>
-  <span class="like pull-right">
-    <% if template.fav?(current_user) %>
-      <%= form_for(template.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
-        <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
-            <%= fa_icon("star 2x") %>
-            <%= content_tag :span, "#{template.likes_count}" %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <%= form_for(template.likes.build, remote: true) do |f| %>
-        <div><%= hidden_field_tag :template_id, template.id %></div>
-         <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
-            <%= fa_icon("star-o 2x") %>
-            <%= content_tag :span, "#{template.likes_count}" %>
-        <% end %>
+<span class="like pull-right">
+  <% if template.fav?(current_user) %>
+    <%= form_for(template.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
+      <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
+        <%= fa_icon("star 2x") %>
+        <%= content_tag :span, "#{template.likes_count}" %>
       <% end %>
     <% end %>
-  </span>
-<% end %>
+  <% else %>
+    <%= form_for(template.likes.build, remote: true) do |f| %>
+      <div>
+        <%= hidden_field_tag :template_id, template.id %>
+      </div>
+      <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
+        <%= fa_icon("star-o 2x") %>
+        <%= content_tag :span, "#{template.likes_count}" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</span>
