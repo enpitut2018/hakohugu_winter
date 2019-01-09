@@ -97,7 +97,10 @@
                 <p style="font-size:5%;">カテゴリ</p>
                 <p style="font-size:5%;">・
                   <%= template.category.name%>
-              </p>                
+                </p>
+                <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
+                <%= render "likes/like", template: template %>
+                </span>                
               </div>
             </div>
           </div>
