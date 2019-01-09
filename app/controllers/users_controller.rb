@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @my_templates_unreleased=@user.templates.where(scope: 0)
-    @my_templates_released=@user.templates.where(scope: 1)
+    @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
   end
 
   private 

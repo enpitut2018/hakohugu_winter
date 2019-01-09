@@ -2,10 +2,10 @@ class TemplatesController < ApplicationController
   before_action :logged_in_user
 
   def index
-    @templates=Template.paginate(page: params[:page],:per_page => 8).search(params[:search],params[:select]).where(scope: 1)
+    @templates=Template.paginate(page: params[:page],:per_page => 8).search(params[:search],params[:select]).where(scope: 1).order('likes_count DESC')
     @user = User.find(current_user.id)
     @my_templates_unreleased=@user.templates.where(scope: 0)
-    @my_templates_released=@user.templates.where(scope: 1)
+    @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
   end
 
   def new
