@@ -45,7 +45,7 @@
             <div class="kaiwa">
               <figure class="kaiwa-img-left">
                 <img :src="image_path1" alt="no-img2">
-                <figcaption class="kaiwa-img-description">{{temp_title}}</figcaption>
+                <!-- <figcaption class="kaiwa-img-description">{{temp_title}}</figcaption> -->
               </figure>
               <div class="kaiwa-text-right">
                 <p class="kaiwa-text" v-html="conversationLog.question"></p>
@@ -357,7 +357,7 @@ export default {
       if (this.questions.length == this.count) {
         this.conversationLogs.push({
           question:
-            "この質問で終わりです、解答の編集タブを押して自分の解答を確認してみましょう。"
+            "この質問で終わりです、回答の編集タブを押して自分の回答を確認してみましょう。"
         });
       }
       /* スクロール位置を更新*/

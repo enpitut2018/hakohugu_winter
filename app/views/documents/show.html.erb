@@ -11,14 +11,7 @@
       <%end%>
       </div>
       <div class="card mb-md-3">
-        <div class="card-body">
-        <span class="font-weight-bold"> このアシスタントが気に入ったら、いいねを押してね！→</span>
-          <span id = "template-<%=@template.id%>" data-template-id="<%= @template.id %>">
-            <%= render "likes/like", template: @template %>
-          </span>
-        </div>
-      </div>
-      <div class="card mb-md-3">
+       <p class="card-header font-weight-bold">アシスタント名</p>
         <div class="card-body">
           <div>
             <%= @template.title %>
@@ -26,10 +19,19 @@
         </div>
       </div>
       <div class="card mb-md-3">
+       <p class="card-header font-weight-bold">トピック</p>
         <div class="card-body">
           <div>
           <%= @template.topic %>
           </div>
+        </div>
+      </div>
+      <div class="card mb-md-3">
+        <div class="card-body">
+        <span class="font-weight-bold"> このアシスタントが気に入ったら、いいねを押してね！→</span>
+          <span id = "template-<%=@template.id%>" data-template-id="<%= @template.id %>">
+            <%= render "likes/like", template: @template %>
+          </span>
         </div>
       </div>
     </div>
