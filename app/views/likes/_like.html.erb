@@ -3,7 +3,7 @@
     <%= form_for(template.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
       <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
         <%= fa_icon("star 2x") %>
-        <%= content_tag :span, "#{template.likes_count}" %>
+        <span class="likes_count"><%=template.likes_count%></span>
       <% end %>
     <% end %>
   <% else %>
@@ -13,7 +13,7 @@
       </div>
       <%= button_tag class: "btn page-link text-dark d-inline-block"  do %>
         <%= fa_icon("star-o 2x") %>
-        <%= content_tag :span, "#{template.likes_count}" %>
+       <span class="likes_count"><%=template.likes_count%></span>
       <% end %>
     <% end %>
   <% end %>

@@ -1,1 +1,2 @@
 $("#template-<%= @template.id %> .like").html('<%= escape_javascript(render "likes/like", template: @template) %>');
+$("#template-<%= @template.id %> .like .likes_count").html('<%= @template.likes.count %>')
