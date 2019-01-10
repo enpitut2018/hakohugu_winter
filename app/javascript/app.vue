@@ -78,7 +78,7 @@
         <div id="transmission">
           <div class="transmissionBox">
             <div class="row">
-              <div id="transmissionMessage" class="col-sm-9 messageBox-col">
+              <div id="transmissionMessage" v-bind:class="toggleSize" class="messageBox-col">
                 <button
                   @click="transmissionMessage"
                   type="button"
@@ -89,7 +89,8 @@
                 <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
               </div>
 
-              <div id="recordButton" class="col-sm-1 recordButton-col">
+              <!-- ブラウザがChromeのときのみここを表示 -->
+              <div id="recordButton" v-if="chrome" class="col-sm-1 recordButton-col">
                 <template v-if="record_flag">
                   <button class="btn btn-secondary btn-block" @click="stop">
                     <i class="fa fa-microphone-slash"></i>
@@ -124,12 +125,16 @@ import swal from "sweetalert";
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 var simplemde;
 
-//音声認識APIの使用
-var recognition = new webkitSpeechRecognition();
-//言語を日本語に設定
-recognition.lang = "ja";
-recognition.interimResults = true;
-recognition.continuous = true;
+try {
+  //音声認識APIの使用
+  var recognition = new webkitSpeechRecognition();
+  //言語を日本語に設定
+  recognition.lang = "ja";
+  recognition.interimResults = true;
+  recognition.continuous = true;
+} catch (error) {
+  console.log("エラー内容：" + error);
+}
 
 export default {
   data: () => {
@@ -177,7 +182,8 @@ export default {
       help_flag: false,
       tab1: true,
       tab2: false,
-      record_flag: false
+      record_flag: false,
+      chrome: false
     };
   },
 
@@ -199,6 +205,7 @@ export default {
         simplemde.codemirror.on("change", function() {
           that.note = simplemde.value();
         });
+        this.checkBrowser();
       });
   },
 
@@ -208,6 +215,13 @@ export default {
         return `現在${this.count + 1}/${this.questions.length}問目`;
       } else {
         return `現在${this.questions.length}/${this.questions.length}問目`;
+      }
+    },
+    toggleSize: function() {
+      if (this.chrome) {
+        return "col-sm-9";
+      } else {
+        return "col-sm-10";
       }
     }
   },
@@ -526,6 +540,18 @@ export default {
     stop: function() {
       this.record_flag = false;
       recognition.stop();
+    },
+    checkBrowser: function() {
+      var agent = window.navigator.userAgent.toLowerCase();
+
+      if (agent.indexOf("msie") > -1) {
+      } else if (agent.indexOf("edge") > -1) {
+      } else if (agent.indexOf("chrome") > -1) {
+        this.chrome = true;
+      } else if (agent.indexOf("safari") > -1) {
+      } else if (agent.indexOf("firefox") > -1) {
+      } else {
+      }
     }
   }
 };
