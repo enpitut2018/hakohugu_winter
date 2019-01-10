@@ -78,7 +78,7 @@
         <div id="transmission">
           <div class="transmissionBox">
             <div class="row">
-              <div id="transmissionMessage" class="col-sm-10 messageBox-col">
+              <div id="transmissionMessage" class="col-sm-9 messageBox-col">
                 <button
                   @click="transmissionMessage"
                   type="button"
@@ -88,7 +88,21 @@
               <div id="skipQuestion" class="col-sm-2 skipBox-col">
                 <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
               </div>
+
+              <div id="recordButton" class="col-sm-1 recordButton-col">
+                <template v-if="record_flag">
+                  <button class="btn btn-secondary btn-block" @click="stop">
+                    <i class="fa fa-microphone-slash"></i>
+                  </button>
+                </template>
+                <template v-else>
+                  <button class="btn btn-secondary btn-block" @click="record">
+                    <i class="fa fa-microphone"></i>
+                  </button>
+                </template>
+              </div>
             </div>
+            <textarea class="form-control" v-if="record_flag" v-model="temp"></textarea>
           </div>
         </div>
       </div>
@@ -110,11 +124,19 @@ import swal from "sweetalert";
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 var simplemde;
 
+//音声認識APIの使用
+var recognition = new webkitSpeechRecognition();
+//言語を日本語に設定
+recognition.lang = "ja";
+recognition.interimResults = true;
+recognition.continuous = true;
+
 export default {
   data: () => {
     return {
       title: "",
       answer: "",
+      temp: "",
       note: "",
       questions: "",
       image_path1: "",
@@ -154,7 +176,8 @@ export default {
       tutorial_flag: true,
       help_flag: false,
       tab1: true,
-      tab2: false
+      tab2: false,
+      record_flag: false
     };
   },
 
@@ -350,12 +373,16 @@ export default {
           this.help_flag = false;
           //遅延処理
           this.conversationLogs.push({
-           question: "..."
+            question: "..."
           });
-          setTimeout(()=>{this.conversationLogs.pop();},500);
-          setTimeout(()=>{this.conversationLogs.push({
+          setTimeout(() => {
+            this.conversationLogs.pop();
+          }, 500);
+          setTimeout(() => {
+            this.conversationLogs.push({
               question: this.questions[this.count].qtext
-          });},500);
+            });
+          }, 500);
         }
       }
 
@@ -413,14 +440,18 @@ export default {
       }
 
       if (this.questions[this.count]) {
-       //遅延処理
+        //遅延処理
+        this.conversationLogs.push({
+          question: "..."
+        });
+        setTimeout(() => {
+          this.conversationLogs.pop();
+        }, 500);
+        setTimeout(() => {
           this.conversationLogs.push({
-           question: "..."
+            question: this.questions[this.count].qtext
           });
-          setTimeout(()=>{this.conversationLogs.pop();},500);
-          setTimeout(()=>{this.conversationLogs.push({
-              question: this.questions[this.count].qtext
-          });},500);
+        }, 500);
       }
 
       if (this.questions.length == this.count) {
@@ -473,6 +504,28 @@ export default {
             "error"
           );
         });
+    },
+    record: function() {
+      var that = this;
+
+      this.record_flag = true;
+      // 音声認識をスタート
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        var results = event.results;
+        for (var i = event.resultIndex; i < results.length; i++) {
+          if (results[i].isFinal) {
+            that.answer += results[i][0].transcript;
+          } else {
+            that.temp = results[i][0].transcript;
+          }
+        }
+      };
+    },
+    stop: function() {
+      this.record_flag = false;
+      recognition.stop();
     }
   }
 };
