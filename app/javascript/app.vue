@@ -348,9 +348,14 @@ export default {
         } else {
           this.tutorial_flag = false;
           this.help_flag = false;
+          //遅延処理
           this.conversationLogs.push({
-            question: this.questions[this.count].qtext
+           question: "..."
           });
+          setTimeout(()=>{this.conversationLogs.pop();},500);
+          setTimeout(()=>{this.conversationLogs.push({
+              question: this.questions[this.count].qtext
+          });},500);
         }
       }
 
@@ -408,9 +413,14 @@ export default {
       }
 
       if (this.questions[this.count]) {
-        this.conversationLogs.push({
-          question: this.questions[this.count].qtext
-        });
+       //遅延処理
+          this.conversationLogs.push({
+           question: "..."
+          });
+          setTimeout(()=>{this.conversationLogs.pop();},500);
+          setTimeout(()=>{this.conversationLogs.push({
+              question: this.questions[this.count].qtext
+          });},500);
       }
 
       if (this.questions.length == this.count) {
