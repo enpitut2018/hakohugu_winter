@@ -1,9 +1,13 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
+<nav class="navbar navbar-expand-md navbar-light fixed-top shadow" style="background-color: #009FA4;">
 
   <% if logged_in? %>
-    <%= link_to 'Cogito' , documents_path , :class => "navbar-brand  text-center text-warning" %>
+    <%= link_to documents_path  , style:'padding-right: 50px;' do %>
+      <%= image_tag "title.png" , :size => "150x50"%>
+    <% end %>
   <% else %>
-    <%= link_to 'Cogito' , '/' , :class => "navbar-brand  text-center text-warning" %>
+    <%= link_to  '/' , style:'padding-right: 50px;' do%>
+       <%= image_tag "title.png" ,:size => "150x50"%>
+    <% end %>
   <% end %>
 
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー">
@@ -24,14 +28,27 @@
         <%= link_to '新規アシスタント作成' , new_template_path , :class => 'nav-link' %>
       </li>
     </ul>
-    <span class="circle"></span>
+
     <% if logged_in? %>
-      <span class="navbar-text h3">
-        <%= current_user.name %>
-      </span>
-      <span class="navbar-text">
-        <%= link_to "ログアウト", logout_path, method: "delete" %>
-      </span>
+      <figure class="header-img">
+        <%if current_user.picture?%>
+              <%= image_tag current_user.picture.url, class: 'user-img'%>
+        <%else%>
+              <%= image_tag 'hakohugu2 200X200.png', class: 'user-img'%>
+        <%end%>
+      </figure>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class='h3'><%=current_user.name%></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= link_to 'ユーザーページ', current_user ,class: 'dropdown-item' %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "ログアウト", logout_path, method: "delete" ,class: 'dropdown-item'%>
+        </div>
+      </div>
+
     <% else %>
       <span class="navbar-text h3">
         <%= link_to "ログイン", login_path %>

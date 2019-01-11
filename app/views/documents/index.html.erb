@@ -6,7 +6,7 @@
         <div class="col-md-3">
           <div class="card img-thumbnail">
             <%if document.template.picture?%>
-              <%= image_tag document.template.picture , :class => 'ass-pic card-img-top'%>
+              <%= image_tag document.template.picture.url , :class => 'ass-pic card-img-top'%>
             <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
             <%end%>

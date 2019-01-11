@@ -42,16 +42,25 @@
       <div id="tab1" class="tab-pane" v-bind:class="{ active: tab1 }">
         <div id="conversation">
           <template v-if="questions" v-for="conversationLog in conversationLogs">
-            <div class="question-balloon">
-              <p>{{conversationLog.question}}</p>
+            <div class="kaiwa">
+              <figure class="kaiwa-img-left">
+                <img :src="image_path1" alt="no-img2">
+                <!-- <figcaption class="kaiwa-img-description">{{temp_title}}</figcaption> -->
+              </figure>
+              <div class="kaiwa-text-right">
+                <p class="kaiwa-text" v-html="conversationLog.question"></p>
+              </div>
             </div>
-            <br>
-            <div v-if="conversationLog.answer" class="answer-balloon float-right">
-              <p>{{conversationLog.answer}}</p>
+
+            <div v-if="conversationLog.answer" class="kaiwa">
+              <figure class="kaiwa-img-right">
+                <img :src="image_path2" alt="no-img2">
+                <figcaption class="kaiwa-img-description">{{user_name}}</figcaption>
+              </figure>
+              <div class="kaiwa-text-left">
+                <p class="kaiwa-text">{{conversationLog.answer}}</p>
+              </div>
             </div>
-            <br>
-            <br>
-            <br>
           </template>
         </div>
 
@@ -61,7 +70,7 @@
             @keyup.ctrl.space="skipQuestion"
             v-model="answer"
             placeholder="解答を入力"
-            style="width:100%;height:100%;"
+            style="width:100%;height:90%;"
           ></textarea>
         </div>
 
@@ -69,7 +78,7 @@
         <div id="transmission">
           <div class="transmissionBox">
             <div class="row">
-              <div id="transmissionMessage" class="col-sm-10 messageBox-col">
+              <div id="transmissionMessage" v-bind:class="toggleSize" class="messageBox-col">
                 <button
                   @click="transmissionMessage"
                   type="button"
@@ -77,9 +86,24 @@
                 >回答</button>
               </div>
               <div id="skipQuestion" class="col-sm-2 skipBox-col">
-                <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
+                <button @click="skipQuestion" type="button" class="btn btn-info btn-block">スキップ</button>
+              </div>
+
+              <!-- ブラウザがChromeのときのみここを表示 -->
+              <div id="recordButton" v-if="chrome" class="col-sm-1 recordButton-col">
+                <template v-if="record_flag">
+                  <button class="btn btn-secondary btn-block" @click="stop">
+                    <i class="fa fa-microphone-slash"></i>
+                  </button>
+                </template>
+                <template v-else>
+                  <button class="btn btn-secondary btn-block" @click="record">
+                    <i class="fa fa-microphone"></i>
+                  </button>
+                </template>
               </div>
             </div>
+            <textarea class="form-control" v-if="record_flag" v-model="temp"></textarea>
           </div>
         </div>
       </div>
@@ -101,13 +125,27 @@ import swal from "sweetalert";
 axios.defaults.headers.common["X-CSRF-Token"] = csrfToken();
 var simplemde;
 
+try {
+  //音声認識APIの使用
+  var recognition = new webkitSpeechRecognition();
+  //言語を日本語に設定
+  recognition.lang = "ja";
+  recognition.interimResults = true;
+  recognition.continuous = true;
+} catch (error) {
+  console.log("エラー内容：" + error);
+}
+
 export default {
   data: () => {
     return {
       title: "",
       answer: "",
+      temp: "",
       note: "",
       questions: "",
+      image_path1: "",
+      image_path2: "",
       count: 0,
       count_t: 0, //チュートリアル用カウント変数
       count_d: 0, //詳細を出す時のカウント変数
@@ -117,28 +155,35 @@ export default {
       sum_h: 0,
       conversationLogs: [],
       tutorials: [
-        "",
-        "",
-        "★回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。",
-        "★質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。",
-        "★他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。",
-        "★どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。",
-        "★これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。",
-        "★長くなってきましたので、そろそろ始めましょうか。"
+        ``,
+        `質問をするので、答えが書けたら「回答」ボタンで送信してください<br>
+        ・回答を見直したい、編集したい　→　「回答の編集」タブ<br>
+        ・質問に答えず次に進みたい　　　→　「スキップ」ボタン<br>
+        ・質問の意味がわからない　　　　→　「詳しく」と入力<br>
+        ・回答例を見たい　　　　　　　　→　「例えば」と入力<br>
+        ・使い方をもう一度確認したい　　→　「ヘルプ」と入力<br>
+          <br>
+          準備はいいですか？<br>
+          それでは、最初の質問をします。「回答」ボタンをクリックしてください`
       ],
       helps: [
-        "★もう一度使い方を説明します。回答ボタンをクリックして次に進みます。",
-        "★回答の一覧は回答の編集のタブをクリックすることでいつでも編集できます。",
-        "★質問の意味がわからない方は「くわしく」と回答欄に入力してください。私が質問の意図、意味をお答えします。",
-        "★他の回答例を参考にしたい、という場合には「例えば」と入力してくだされば、質問に対する回答例を提示させて頂きます。",
-        "★どうしても質問に答えられないという方はスキップボタンを押してください。その質問を飛ばして次の質問に行きます。",
-        "★これらの機能は「ヘルプ」と回答に入力することでいつでも見ることができます。",
-        "★それでは、先ほどの質問から再開します。"
+        `アシスタントが質問をするので、書けたら「回答」ボタンで送信してください<br>
+        <br>
+        ・回答を見直したい、編集したい　→　「回答の編集」タブ<br>
+        ・質問に答えず次に進みたい　　　→　「スキップ」ボタン<br>
+        ・質問の意味がわからない　　　　→　「詳しく」と入力<br>
+        ・回答例を見たい　　　　　　　　→　「例えば」と入力<br>
+        ・使い方をもう一度確認したい　　→　「ヘルプ」と入力<br>
+        <br>
+        準備はいいですか？<br>
+        それでは、先ほどの質問から再開します。「回答」ボタンをクリックしてください`
       ],
       tutorial_flag: true,
       help_flag: false,
       tab1: true,
-      tab2: false
+      tab2: false,
+      record_flag: false,
+      chrome: false
     };
   },
 
@@ -160,6 +205,7 @@ export default {
         simplemde.codemirror.on("change", function() {
           that.note = simplemde.value();
         });
+        this.checkBrowser();
       });
   },
 
@@ -170,6 +216,13 @@ export default {
       } else {
         return `現在${this.questions.length}/${this.questions.length}問目`;
       }
+    },
+    toggleSize: function() {
+      if (this.chrome) {
+        return "col-sm-9";
+      } else {
+        return "col-sm-10";
+      }
     }
   },
 
@@ -179,6 +232,7 @@ export default {
       return new Promise(function(resolve) {
         that.questions = res.data.questions;
         that.title = res.data.title;
+        that.temp_title = res.data.temp_title;
         that.note = res.data.content;
         that.count = res.data.question_number;
         that.count_t = res.data.count_t;
@@ -186,21 +240,16 @@ export default {
         that.count_e = res.data.count_e;
         that.count_called_h = res.data.count_called_h;
         that.sum_h = res.data.sum_h;
+        that.image_path1 = res.data.image_path1;
+        that.image_path2 = res.data.image_path2;
+        that.user_name = res.data.user_name;
         that.conversationLogs = JSON.parse(res.data.conversation_logs);
         that.tutorials[0] =
-          "★こんにちは、私は" +
+          "こんにちは、" +
           res.data.temp_title +
-          "です。あなたが" +
-          res.data.topic +
-          "について考えるサポートをさせて頂きます。会話を進めるには回答ボタンを押してください。チュートリアルをスキップしたい方はスキップボタンを押してください。";
-        that.tutorials[1] =
-          "★これから私" +
-          res.data.temp_title +
-          "が" +
-          res.data.topic +
-          "について質問していきます。質問と、あなたが入力した回答はノートとして成形されます。質問は全部で" +
-          that.questions.length +
-          "問です。";
+          "です。<br>" +
+          "・今すぐ会話を始める　→　「スキップ」ボタン<br>" +
+          "・使い方を確認　　　　→　「回答」ボタン";
         if (that.note == null) {
           that.note = "";
         }
@@ -334,15 +383,27 @@ export default {
             question: this.helps[this.count_h]
           });
         } else {
+          this.tutorial_flag = false;
+          this.help_flag = false;
+          //遅延処理
           this.conversationLogs.push({
-            question: this.questions[this.count].qtext
+            question: "..."
           });
+          setTimeout(() => {
+            this.conversationLogs.pop();
+          }, 500);
+          setTimeout(() => {
+            this.conversationLogs.push({
+              question: this.questions[this.count].qtext
+            });
+          }, 500);
         }
       }
 
       if (this.questions.length == this.count) {
         this.conversationLogs.push({
-          question: "この質問で終わりです"
+          question:
+            "この質問で終わりです、回答の編集タブを押して自分の回答を確認してみましょう。"
         });
       }
       /* スクロール位置を更新*/
@@ -353,8 +414,12 @@ export default {
     /*質問を飛ばす時に行う処理*/
     addSkipQuestionToNote: function() {
       this.note +=
-        `## Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
       this.note += "\t" + "" + "\n";
+      simplemde.value(this.note);
+      setTimeout(function() {
+        simplemde.codemirror.refresh();
+      }, 1);
     },
     skipQuestion: function() {
       if (this.tutorial_flag) {
@@ -369,7 +434,18 @@ export default {
       } else {
         //会話ログに「次の質問」と格納
         if (this.questions[this.count]) {
-          this.$set(this.conversationLogs[this.count], "answer", "次の質問は?");
+          this.$set(
+            this.conversationLogs[
+              this.count_t +
+                this.count +
+                this.count_d +
+                this.count_e +
+                this.sum_h +
+                this.count_called_h
+            ],
+            "answer",
+            "次の質問は?"
+          );
         }
         this.addSkipQuestionToNote();
         this.answer = "";
@@ -378,9 +454,18 @@ export default {
       }
 
       if (this.questions[this.count]) {
+        //遅延処理
         this.conversationLogs.push({
-          question: this.questions[this.count].qtext
+          question: "..."
         });
+        setTimeout(() => {
+          this.conversationLogs.pop();
+        }, 500);
+        setTimeout(() => {
+          this.conversationLogs.push({
+            question: this.questions[this.count].qtext
+          });
+        }, 500);
       }
 
       if (this.questions.length == this.count) {
@@ -433,6 +518,40 @@ export default {
             "error"
           );
         });
+    },
+    record: function() {
+      var that = this;
+
+      this.record_flag = true;
+      // 音声認識をスタート
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        var results = event.results;
+        for (var i = event.resultIndex; i < results.length; i++) {
+          if (results[i].isFinal) {
+            that.answer += results[i][0].transcript;
+          } else {
+            that.temp = results[i][0].transcript;
+          }
+        }
+      };
+    },
+    stop: function() {
+      this.record_flag = false;
+      recognition.stop();
+    },
+    checkBrowser: function() {
+      var agent = window.navigator.userAgent.toLowerCase();
+
+      if (agent.indexOf("msie") > -1) {
+      } else if (agent.indexOf("edge") > -1) {
+      } else if (agent.indexOf("chrome") > -1) {
+        this.chrome = true;
+      } else if (agent.indexOf("safari") > -1) {
+      } else if (agent.indexOf("firefox") > -1) {
+      } else {
+      }
     }
   }
 };

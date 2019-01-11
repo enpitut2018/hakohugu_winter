@@ -3,21 +3,28 @@
     <h1 class='mb-5'>
       <%= @template.title%>
     </h1>
-    <span class='h5'>
+    <div class='h5 mb-5'>
       <span class = 'font-weight-bold'> トピック:</span><span class='mr-3'><%= @template.topic%></span>
       <span class = 'font-weight-bold ml-3'>カテゴリ: </span><span><%= @category.name%></span>
-    </span>
+    </div>
+     <div class='h5'>
+      <span class = 'font-weight-bold mr-3'>作ったユーザー: </span>
+      <span class="mr-1">
+        <%= image_tag  "hakohugu2 200X200.png" , class: 'template-user-img' %>
+      </span>
+      <span><%= link_to @template.user.name, @template.user%></span>
+    </div>
   </div>
 
   <div>
     <% if @template.scope == 0 %>
-      <span class='h1 mt-5'>
+      <span class='h4 mt-5'>
         <%= link_to "編集", edit_template_path(@template.id)%>     
         <%= link_to "削除", @template, method: :delete,data: { confirm: "本当にこのアシスタントを削除しますか?" } %>
       </span>
 
       <% if @questions.present? %>
-        <p class='h1 mt-5'>
+        <p class='h4 mt-5'>
           <%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%>
         </p>
       <% else %>
