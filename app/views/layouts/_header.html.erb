@@ -1,9 +1,13 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top shadow bg-white">
+<nav class="navbar navbar-expand-md navbar-light fixed-top shadow" style="background-color: #009FA4;">
 
   <% if logged_in? %>
-    <%= link_to 'Cogito' , documents_path , :class => "navbar-brand  text-center text-warning" %>
+    <%= link_to documents_path  , style:'padding-right: 50px;' do %>
+      <%= image_tag "title.png" , :size => "150x50"%>
+    <% end %>
   <% else %>
-    <%= link_to 'Cogito' , '/' , :class => "navbar-brand  text-center text-warning" %>
+    <%= link_to  '/' , style:'padding-right: 50px;' do%>
+       <%= image_tag "title.png" ,:size => "150x50"%>
+    <% end %>
   <% end %>
 
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="レスポンシブ・ナビゲーションバー">

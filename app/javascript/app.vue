@@ -70,7 +70,7 @@
             @keyup.ctrl.space="skipQuestion"
             v-model="answer"
             placeholder="解答を入力"
-            style="width:100%;height:100%;"
+            style="width:100%;height:90%;"
           ></textarea>
         </div>
 
@@ -86,7 +86,7 @@
                 >回答</button>
               </div>
               <div id="skipQuestion" class="col-sm-2 skipBox-col">
-                <button @click="skipQuestion" type="button" class="btn btn-primary btn-block">スキップ</button>
+                <button @click="skipQuestion" type="button" class="btn btn-info btn-block">スキップ</button>
               </div>
 
               <!-- ブラウザがChromeのときのみここを表示 -->
