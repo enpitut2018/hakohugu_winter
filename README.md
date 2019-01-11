@@ -9,7 +9,7 @@ Cogito
 ## URL
 * https://vast-sands-25464.herokuapp.com 
 
-## メンバー- 
+## メンバー
 - [えびちゃん](https://github.com/ebi8A)
 - [うお](https://github.com/kousukeuo)
 - [ひなこち](https://github.com/HinakoIzumi)
