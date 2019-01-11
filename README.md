@@ -11,7 +11,8 @@
 * https://vast-sands-25464.herokuapp.com 
 
 ## メンバー
-![hakohugu 200x200](https://user-images.githubusercontent.com/38548489/51023964-a1497100-15cb-11e9-8e3f-e6400848a0c5.png)
+![hakohugu 200x200](https://user-images.githubusercontent.com/38548489/51023964-a1497100-15cb-11e9-8e3f-e6400848a0c5.png)   
+### feat.
 - [えびちゃん](https://github.com/ebi8A)
 - [うお](https://github.com/kousukeuo)
 - [ひなこち](https://github.com/HinakoIzumi)
