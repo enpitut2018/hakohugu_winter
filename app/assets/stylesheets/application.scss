@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
 @import "bootstrap";
@@ -19,7 +20,14 @@
 
 #hakohugu {
     font-size: .875rem;
-    padding-top:80px;
+    padding-top:120px;
+    padding-bottom:40px;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #ABD8DA;
 }
 
 .starter-template {
@@ -62,7 +70,7 @@ span.navbar-text.h3{
 
 #conversation{
     height: 370px;
-    background-color: #CCFFFF;
+    background-color: white;
     overflow: scroll;
     border-radius: 20px 20px 0px 0px;
 }
@@ -78,59 +86,153 @@ span.navbar-text.h3{
     height: 100px;
 }
 
-.question-balloon {
- 	position: relative;
-	display: inline-block;
- 	margin: 1.5em 0 1.5em 15px;
-	padding: 7px 10px;
-	min-width: 120px;
- 	max-width: 100%;
- 	color: #555;
-	font-size: 16px;
-	background: #e0edff;
+.header-img {
+  margin: 0;
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
 }
 
-.question-balloon:before{
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: -30px;
- 	margin-top: -15px;
-	border: 15px solid transparent;
-	border-right: 15px solid #e0edff;
+.template-user-img {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #f5e476;
+  border-radius: 50%;
+  margin: 0;
 }
 
-.question-balloon p {
-	margin: 0;
-	padding: 0;
+.user-img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #f5e476;
+  border-radius: 50%;
+  margin: 0;
 }
 
-.answer-balloon {
- 	position: relative;
- 	margin: 1.5em 15px 1.5em 0;
-	padding: 7px 10px;
-	min-width: 120px;
- 	max-width: 100%;
- 	color: #555;
-	font-size: 16px;
-	background: #e0edff;
+/*——————–
+ 吹き出しを作る
+——————–*/
+/* 全体のスタイル */
+.kaiwa {
+  margin-bottom: 25px;
+  margin-top: 20px;
 }
-
-.answer-balloon:before{
-	content: "";
-	position: absolute;
-	top: 50%;
-	left: 100%;
- 	margin-top: -15px;
-	border: 15px solid transparent;
-	border-left: 15px solid #e0edff;
+/* 左画像 */
+.kaiwa-img-left {
+  margin: 0;
+  float: left;
+  width: 60px;
+  /* height: 60px; */
+  margin-right: -70px;
 }
-
-.answer-balloon p {
-	margin: 0;
-	padding: 0;
+/* 右画像 */
+.kaiwa-img-right {
+  margin: 0;
+  float: right;
+  width: 60px;
+  /* height: 60px; */
+  margin-left: -70px;
+}
+.kaiwa figure img {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #baebee;
+  border-radius: 50%;
+  margin: 0;
+}
+/* 画像の下のテキスト */
+.kaiwa-img-description {
+  padding: 5px 0 0;
+  font-size: 5px;
+  text-align: center;
+  /* position: relative; */
+  bottom: 15px;
+}
+/* 左からの吹き出しテキスト */
+.kaiwa-text-right {
+  position: relative;
+  margin-left: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #baebee;
+  margin-right: 12%;
+  float: left;
+}
+/* 右からの吹き出しテキスト */
+.kaiwa-text-left {
+  position: relative;
+  margin-right: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffed7a;
+  margin-left: 12%;
+  float: right;
+}
+p.kaiwa-text {
+  margin: 0 0 20px;
+}
+p.kaiwa-text:last-child {
+  margin-bottom: 0;
+}
+/* 左の三角形を作る */
+.kaiwa-text-right:before {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  top: 15px;
+  left: -20px;
+}
+.kaiwa-text-right:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-right: 10px solid #baebee;
+  top: 15px;
+  left: -19px;
+}
+/* 右の三角形を作る */
+.kaiwa-text-left:before {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  top: 15px;
+  right: -20px;
+}
+.kaiwa-text-left:after {
+  position: absolute;
+  content: '';
+  border: 10px solid transparent;
+  border-left: 10px solid #ffed7a;
+  top: 15px;
+  right: -19px;
+}
+/* 回り込み解除 */
+.kaiwa:after,.kaiwa:before {
+  clear: both;
+  content: "";
+  display: block;
 }
 
 .CodeMirror, .CodeMirror-scroll {
 	min-height: 443px;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+  color: white;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #009FA4;
+    border-color: #009FA4;
+}
+.btn-primary {
+    color: #fff;
+    background-color: rgb(0, 166, 172);
+    border-color:  rgb(0, 166, 172);
+}
+
+.table {
+    background-color: white;
 }

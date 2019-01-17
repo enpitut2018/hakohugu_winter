@@ -4,20 +4,34 @@
     <div class="col-md-3">
       <div class="card mb-md-3">
         <!--<%= image_tag 'kitten.jpg', :size =>'200x200', :class => 'card-img' %>-->
-		<%if @template.picture?%>
-		  <%= image_tag @template.picture.url , :class => 'ass-pic'%>
-		<%else%>
-		  <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
-		<%end%>
+      <%if @template.picture?%>
+        <%= image_tag @template.picture.url , :size =>'200x200', :class => 'ass-pic card-img'%>
+      <%else%>
+        <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
+      <%end%>
+      </div>
+      <div class="card mb-md-3">
+       <p class="card-header font-weight-bold">アシスタント名</p>
+        <div class="card-body">
+          <div>
+            <%= @template.title %>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-md-3">
+       <p class="card-header font-weight-bold">トピック</p>
+        <div class="card-body">
+          <div>
+          <%= @template.topic %>
+          </div>
+        </div>
       </div>
       <div class="card mb-md-3">
         <div class="card-body">
-          <%= @template.title %>
-        </div>
-      </div>
-      <div class="card mb-md-3" style="height: 300px">
-        <div class="card-body">
-          <%= @template.topic %>
+        <span class="font-weight-bold"> このアシスタントが気に入ったら、いいねを押してね！→</span>
+          <span id = "template-<%=@template.id%>" data-template-id="<%= @template.id %>">
+            <%= render "likes/like", template: @template %>
+          </span>
         </div>
       </div>
     </div>
