@@ -10,7 +10,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     include Cloudinary::CarrierWave
   
     process :convert => 'png' # 画像の保存形式
-    process :tags => ['image'] # 保存時に添付されるタグ（管理しやすいように適宜変更しましょう）
+    process :tags => ['picture'] # 保存時に添付されるタグ（管理しやすいように適宜変更しましょう）
   
     process :resize_to_limit => [700, 700] # 任意でリサイズの制限
   
