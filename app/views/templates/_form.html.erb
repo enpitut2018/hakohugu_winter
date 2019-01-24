@@ -7,7 +7,7 @@
 <div class="form-group">
   <%= f.label :title, "アシスタント画像" ,class: 'font-weight-bold' %>
   <br>
-  <%= image_tag @template.picture.url , :class => 'ass-pic' if @template.picture?%>
+  <%= cl_image_tag(@user.picture) if @template.picture?%>
   <br>
   <span class = "picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
