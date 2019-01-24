@@ -3,7 +3,7 @@
     <div class=col-4>
       <div class="card img-thumbnail">
         <%if @user.picture?%>
-        <%= image_tag @user.picture.url, :class => 'ass-pic card-img-top'%>
+        <%= cl_image_tag(user.picture.url), :class => 'ass-pic card-img-top'%>
         <%else%>
         <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
         <%end%>
