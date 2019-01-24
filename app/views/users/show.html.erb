@@ -5,7 +5,7 @@
         <%if @user.picture?%>
         <%= cl_image_tag(@user.picture)%>
         <%else%>
-        <%= image_tag 'hakohugu2 200X200.png'%>
+        <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
         <%end%>
         <div class="card-body px-2 py-3 border-top">
           <h5 class="card-title">名前:
@@ -37,7 +37,7 @@
               <%if template_u.picture?%>
               <%= cl_image_tag(template_u.picture)%>
               <%else%>
-              <%= image_tag 'hakohugu 200X200.png'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
@@ -64,7 +64,7 @@
               <%if template.picture?%>
               <%= cl_image_tag(template.picture)%>
               <%else%>
-              <%= image_tag 'hakohugu 200X200.png'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
