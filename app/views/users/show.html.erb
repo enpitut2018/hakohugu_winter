@@ -35,7 +35,7 @@
           <div class="col-md-3">
             <div class="card img-thumbnail">
               <%if template_u.picture?%>
-              <%= cl_image_tag(template_u.picture), :class => 'ass-pic card-img-top'%>
+              <%= image_tag template_u.picture%>
               <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
@@ -62,7 +62,7 @@
           <div class="col-md-3">
             <div class="card img-thumbnail">
               <%if template.picture?%>
-              <%= cl_image_tag(template.picture)%>
+              <%= cl_image_tag(template.picture_url)%>
               <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
