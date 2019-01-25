@@ -30,7 +30,6 @@
 	<div class="form-group">
      <%= f.label :プロフィール画像%>
      <br>
-     <%= image_tag @user.picture.url , :class => 'ass-pic' if @user.picture?%>
      <br>
      <span class = "picture">
        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
