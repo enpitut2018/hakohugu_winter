@@ -36,6 +36,7 @@
     <% elsif @template.scope == 1 %>
     <span class='h4 mt-5'>
       <% if current_user.admin? && !current_user?(@user) %>
+      　<%= link_to "編集", edit_template_path(@template.id)%>
         <%= link_to "削除", @template, method: :delete, data: { confirm: "本当にこのアシスタントを削除しますか?" } %>
       <% end %>
     </span>

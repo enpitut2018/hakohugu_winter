@@ -48,6 +48,7 @@ class TemplatesController < ApplicationController
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
     @questions=Question.where(template_id: @template.id)
+    @document=Document.new
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
         render 'show'
