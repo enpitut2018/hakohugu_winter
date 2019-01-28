@@ -12,13 +12,30 @@
         <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
         <%end%>
         <div class="card-body px-2 py-3 border-top">
-          <h5 class="card-title">名前:
+          <h5 class="card-title">
             <%= @user.name %>
           </h5>
           <% if current_user?(@user)%>
-          <p class="card-text">メール:
-            <%= @user.email %>
+            <p class="card-text">メール:<br>
+              <%= @user.email %>
+            </p>
+          <% end %>
+		  <p class="card-text">プロフィール:<br>
+            <%= @user.bio %>
           </p>
+		  <% if @user.link1?%>
+		    <p class="card-text">ウェブサイト等:<br>
+              <a href="<%= @user.link1 %>"><%= @user.link1 %></a><br>
+			  <% if @user.link2?%>
+			    <a href="<%= @user.link2 %>"><%= @user.link2 %></a><br>
+			  <%end%>
+			  <% if @user.link3?%>
+			    <a href="<%= @user.link3 %>"><%= @user.link3 %></a><br>
+			  <%end%>
+            </p><br>
+		  <%end%>
+		  <% if current_user?(@user)%>
+            <%= link_to "編集", edit_user_path(@user.id)%>
           <% end %>
         </div>
       </div>
