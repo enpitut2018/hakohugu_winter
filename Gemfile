@@ -43,7 +43,7 @@ gem "activestorage", ">= 5.2.1.1"
 #bootstrapを追加
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
-
+gem 'jquery-ui-rails'
 #iconを追加
 gem "font-awesome-rails"
 

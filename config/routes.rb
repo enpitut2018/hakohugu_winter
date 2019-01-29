@@ -8,6 +8,10 @@ Rails.application.routes.draw do
       member do
         get 'release'
       end
+      collection do 
+      get 'category_auto_complete'
+      get 'template_auto_complete'
+      end
     end
     resources :likes, only: [:create, :destroy]
     get    'login'   => 'sessions#new'
