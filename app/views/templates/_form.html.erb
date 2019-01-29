@@ -1,4 +1,4 @@
-<%= form_for @template do |f| %>
+<%= form_for @template , html: {autocomplete: "off"} do |f| %>
 <div class="form-group">
   <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
   <%= f.text_field :title, class: 'form-control'%>
@@ -27,6 +27,8 @@
     <%= i.label :name, "カテゴリ" ,class: 'font-weight-bold'%>
     <%= i.text_field :name ,class: 'form-control'%>
   <% end %>
+
+  <%= autocomplete_field_tag 'category[name]', nil,  autocomplete_category_name_templates_path %>
 
   <%
 =begin%>

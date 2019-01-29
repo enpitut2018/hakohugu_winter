@@ -1,4 +1,5 @@
 class TemplatesController < ApplicationController
+  autocomplete :category, :name, full: true
   before_action :logged_in_user
 
   def index
@@ -6,7 +7,22 @@ class TemplatesController < ApplicationController
     @user = User.find(current_user.id)
     @my_templates_unreleased=@user.templates.where(scope: 0)
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
+
+    @category_name = []
+    @categories = Category.all
+    @categories.each do |category|
+      @category_name.push(category.name)
+    end
+    @category_name =  @category_name.each_with_object(Hash.new(0)){|v,o| o[v]+=1}
+    @category_name = @category_name.sort do |a, b|
+      b[1] <=> a[1]
+    end
+    @category_name = @category_name.to_h.first(3).to_h
+    @categories = @categories.select(:name).distinct
+    
   end
+
+
 
   def new
     @template=Template.new

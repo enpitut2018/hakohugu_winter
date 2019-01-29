@@ -1,8 +1,25 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+     <h2 class="mt-4">Hot キーワード</h2>
+        <div>
+          <% @category_name.each do |key,value| %>
+            <%= link_to  "#{key}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{key}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
+          <%end%>
+        </div>
+
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample">
+      すべてのキーワードを見る
+      </button>
+      <div class="collapse" id="categories">        
+        <% @categories.each do |category| %>
+            <%= link_to  "#{category.name}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{category.name}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
+          <%end%>
+      </div>
       <h2 class="mb-4 mt-4">すべてのアシスタント</h2>
 
+    
+      
 
       <!-- 検索 -->
       <div class='mb-4'>
