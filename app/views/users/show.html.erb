@@ -3,7 +3,11 @@
     <div class=col-4>
       <div class="card img-thumbnail">
         <%if @user.picture?%>
-        <%= image_tag @user.picture.url, :class => 'ass-pic card-img-top'%>
+		  <%if Rails.env.production?%>
+            <%= cl_image_tag(@user.picture,:class => 'ass-pic')%>
+		  <%else%>
+			<%= image_tag @user.picture.url,:class => 'ass-pic'%>
+		  <%end%>
         <%else%>
         <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
         <%end%>
@@ -35,7 +39,11 @@
           <div class="col-md-3">
             <div class="card img-thumbnail">
               <%if template_u.picture?%>
-              <%= image_tag template_u.picture.url , :class => 'ass-pic card-img-top'%>
+			  　　<%if Rails.env.production?%>
+                   <%= cl_image_tag(template_u.picture,:class => 'ass-pic')%>
+				 <%else%>
+				   <%= image_tag template_u.picture.url,:class => 'ass-pic'%>
+				 <%end%>
               <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
@@ -62,7 +70,11 @@
           <div class="col-md-3">
             <div class="card img-thumbnail">
               <%if template.picture?%>
-              <%= image_tag template.picture.url , :class => 'ass-pic card-img-top'%>
+			    <%if Rails.env.production?%>
+                   <%= cl_image_tag(template.picture,:class => 'ass-pic')%>
+				 <%else%>
+				   <%= image_tag template.picture.url,:class => 'ass-pic'%>
+				 <%end%>
               <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
               <%end%>
