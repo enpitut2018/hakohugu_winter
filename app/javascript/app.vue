@@ -89,15 +89,37 @@
                 <button @click="skipQuestion" type="button" class="btn btn-info btn-block">スキップ</button>
               </div>
 
-              <!-- ブラウザがChromeのときのみここを表示 -->
+              <!-- ブラウザがChromeのときのみ音読ボタンを表示 -->
+              <div id="recordButton" v-if="chrome" class="col-sm-1 readButton-col">
+                <template v-if="read_flag">
+                  <button
+                    class="btn btn-secondary btn-block"
+                    title="質問の音読を終了"
+                    @click="read_flag = false"
+                  >
+                    <i class="fa fa-volume-off"></i>
+                  </button>
+                </template>
+                <template v-else>
+                  <button
+                    class="btn btn-secondary btn-block"
+                    title="質問の音読を開始"
+                    @click="read_flag = true"
+                  >
+                    <i class="fa fa-volume-up"></i>
+                  </button>
+                </template>
+              </div>
+
+              <!-- ブラウザがChromeのときのみ音声入力を表示 -->
               <div id="recordButton" v-if="chrome" class="col-sm-1 recordButton-col">
                 <template v-if="record_flag">
-                  <button class="btn btn-secondary btn-block" @click="stop">
+                  <button class="btn btn-secondary btn-block" title="音声入力を終了" @click="stop">
                     <i class="fa fa-microphone-slash"></i>
                   </button>
                 </template>
                 <template v-else>
-                  <button class="btn btn-secondary btn-block" @click="record">
+                  <button class="btn btn-secondary btn-block" title="音声入力を開始" @click="record">
                     <i class="fa fa-microphone"></i>
                   </button>
                 </template>
@@ -183,6 +205,7 @@ export default {
       tab1: true,
       tab2: false,
       record_flag: false,
+      read_flag: false,
       chrome: false
     };
   },
@@ -219,7 +242,7 @@ export default {
     },
     toggleSize: function() {
       if (this.chrome) {
-        return "col-sm-9";
+        return "col-sm-8";
       } else {
         return "col-sm-10";
       }
@@ -318,6 +341,7 @@ export default {
           "answer",
           this.answer
         );
+        /*  this.speakQuestion(this.answer); */
       }
       //チュートリアル中と本番の質問で場合分け
       if (this.tutorial_flag && this.count_t < this.tutorials.length) {
@@ -397,6 +421,7 @@ export default {
               question: this.questions[this.count].qtext
             });
           }, 500);
+          this.speakQuestion(this.questions[this.count].qtext);
         }
       }
 
@@ -466,6 +491,7 @@ export default {
             question: this.questions[this.count].qtext
           });
         }, 500);
+        this.speakQuestion(this.questions[this.count].qtext);
       }
 
       if (this.questions.length == this.count) {
@@ -551,6 +577,14 @@ export default {
       } else if (agent.indexOf("safari") > -1) {
       } else if (agent.indexOf("firefox") > -1) {
       } else {
+      }
+    },
+    speakQuestion: function(text) {
+      if (this.read_flag == true) {
+        // 発言を作成
+        const uttr = new SpeechSynthesisUtterance(text);
+        // 発言を再生 (発言キューに発言を追加)
+        speechSynthesis.speak(uttr);
       }
     }
   }
