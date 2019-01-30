@@ -27,6 +27,16 @@
         <p class='h4 mt-5'>
           <%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%>
         </p>
+        <%= form_for(@document) do |f| %>
+        <div class="form-group">
+            <%= f.hidden_field :title,value:'テスト'  %>
+        </div>
+           
+        <%= f.hidden_field :template_id, :value => @template.id %>
+        <div class="form-group">
+          <%= f.submit "このボタンでアシスタントをテストします。公開はされません", class: "btn btn-primary" %>
+        </div>
+      <% end %>
       <% else %>
         <div class="alert alert-warning" role="alert">
           質問が一つ以上ないとこのアシスタントは公開できません
