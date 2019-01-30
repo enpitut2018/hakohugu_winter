@@ -36,6 +36,17 @@ class UsersController < ApplicationController
           render 'edit'
       end
   end
+  
+  def destroy
+      @user=User.find(params[:id])
+      @my_templates_unreleased=@user.templates.where(scope: 0)
+      @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
+      if User.find(params[:id]).destroy
+          redirect_to('/')
+      else
+          render 'show'
+      end
+  end
 
   private 
 
