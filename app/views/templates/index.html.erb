@@ -4,7 +4,7 @@
      <h2 class="mt-4">Hot カテゴリ</h2>
         <div>
           <% @category_name.each do |key,value| %>
-            <%= link_to  "#{key}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{key}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
+            <%= link_to  "#{key}: #{value}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{key}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
           <%end%>
         </div>
 

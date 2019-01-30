@@ -8,16 +8,17 @@ class TemplatesController < ApplicationController
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
 
     @category_name = []
-    @categories = Category.all
-    @categories.each do |category|
-      @category_name.push(category.name)
+    @my_templates_released.each do |template_released|
+      @category_name.push(template_released.category.name)
     end
+
     @category_name =  @category_name.each_with_object(Hash.new(0)){|v,o| o[v]+=1}
     @category_name = @category_name.sort do |a, b|
       b[1] <=> a[1]
     end
     @category_name = @category_name.to_h.first(3).to_h
-    @categories = @categories.select(:name).distinct
+
+    @categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
     
   end
 
