@@ -39,8 +39,8 @@ class UsersController < ApplicationController
   
   def destroy
       @user=User.find(params[:id])
-      @my_templates_unreleased=@user.templates.where(scope: 0)
-      @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
+      @user.templates.update_all(:user_id => 3)
+      @user.documents.destroy_all
       if User.find(params[:id]).destroy
           redirect_to('/')
       else
