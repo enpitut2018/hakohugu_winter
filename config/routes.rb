@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :documents do 
       member do
         get 'release'
+        get 'read'
       end
     end
     resources :templates do

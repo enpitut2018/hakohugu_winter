@@ -62,6 +62,13 @@ class DocumentsController < ApplicationController
     @user = User.find(current_user.id)
   end
 
+  def read
+    @document = Document.find(params[:id])
+    @template = Template.find(@document.template_id)
+    @category=Category.find(@template.category_id)
+    @questions=Question.where(template_id: @template.id)
+  end
+
 
    private
 

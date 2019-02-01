@@ -1,0 +1,32 @@
+<div class="starter-template">
+  <div class = 'mb-5'>
+    <h1 class='mb-5'>
+      <%= @document.title%>
+    </h1>
+
+    <div class='h5'>
+      <span class = 'font-weight-bold mr-3'>このノートを作ったユーザー: </span>
+      <span class="mr-1">
+	  <%if @document.user.picture?%>
+	    <%if Rails.env.production?%>
+          <%= cl_image_tag(@document.user.picture,:class => 'document-user-img')%>
+	    <%else%>
+		  <%= image_tag @document.user.picture.url,:class => 'document-user-img'%>
+		<%end%>
+	  <%else%>
+        <%= image_tag  "hakohugu2 200X200.png" , class: 'document-user-img' %>
+	  <%end%>
+      </span>
+      <span><%= link_to @document.user.name, @document.user%></span>
+    </div>
+
+
+    <div class='h5 mb-5'>
+    <span class = 'font-weight-bold'> アシスタント名:</span><span class='mr-3'><%= link_to @template.title ,template_path(@template.id), data: {"turbolinks" => false}%></span>
+      <span class = 'font-weight-bold'> トピック:</span><span class='mr-3'><%= @template.topic%></span>
+      <span class = 'font-weight-bold ml-3'>カテゴリ: </span><span><%= @category.name%></span>
+    </div>
+     
+  </div>
+  
+</div>
