@@ -3,7 +3,13 @@ Rails.application.routes.draw do
     resources :users
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
-    resources :documents, :only => [:index,:new,:show,:create,:update,:destroy]
+    
+    resources :documents do
+      member do
+        post 'test'
+      end
+    end
+
     resources :templates do
       member do
         get 'release'

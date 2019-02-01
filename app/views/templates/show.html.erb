@@ -30,6 +30,7 @@
         <%= form_for(@document) do |f| %>
         <div class="form-group">
             <%= f.hidden_field :title,value:'テスト'  %>
+            <%= hidden_field_tag 'test', true %>
         </div>
            
         <%= f.hidden_field :template_id, :value => @template.id %>

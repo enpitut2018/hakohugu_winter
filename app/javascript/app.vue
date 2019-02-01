@@ -5,7 +5,8 @@
         <input type="text" class="form-control" id="Input" v-model="title">
       </div>
       <div class="col">
-        <button type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
+        <button v-if="test_flag" type="button" class="btn btn-success" @click="endTest">テストを終了</button>
+        <button v-else type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
       </div>
     </div>
 
@@ -183,11 +184,16 @@ export default {
       tab1: true,
       tab2: false,
       record_flag: false,
-      chrome: false
+      chrome: false,
+      test_flag: false
     };
   },
 
   mounted: function() {
+    let test = this.getParams().test;
+    if (test == 1) {
+      this.test_flag = true;
+    }
     let path = location.pathname.split("/");
     let documentNumber = path[2];
     axios
@@ -293,6 +299,18 @@ export default {
         });
         resolve();
       });
+    },
+    getParams: function() {
+      var vars = {};
+      var param = location.search.substring(1).split("&");
+      for (var i = 0; i < param.length; i++) {
+        var keySearch = param[i].search(/=/);
+        var key = "";
+        if (keySearch != -1) key = param[i].slice(0, keySearch);
+        var val = param[i].slice(param[i].indexOf("=", 0) + 1);
+        if (key != "") vars[key] = decodeURI(val);
+      }
+      return vars;
     },
     addAnswerToNote: function() {
       this.note +=
@@ -552,6 +570,18 @@ export default {
       } else if (agent.indexOf("firefox") > -1) {
       } else {
       }
+    },
+    endTest: function() {
+      let path = location.pathname.split("/");
+      let documentNumber = path[2];
+      var form = document.createElement("form");
+
+      form.method = "POST";
+      form.action = `/documents/${documentNumber}/test`;
+
+      document.body.appendChild(form);
+
+      form.submit();
     }
   }
 };
