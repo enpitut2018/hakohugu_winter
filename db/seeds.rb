@@ -21,8 +21,8 @@ Document.create!(title:'自己分析',user_id:1,template_id:2,scope: 0,content: 
 
 Question.create!(qtext:'1 あなたの研究分野は何ですか？',template_id:1,qdetail:'あなたが取り組もうと考えている分野を教えてください。',example:'')
 Question.create!(qtext:'2 なぜその分野に興味を持ったのでしょうか？その理由になるような特に興味のある単語を二つ、三つ挙げてみましょう。',template_id:1,qdetail:'',example:'')
-Question.create!(qtext:'3 それではその単語をcinii・Googlescholor等で調べてみましょう。',template_id:1,qdetail:'参考になりそうな論文を見つけたらそのタイトルと関連語を2つ、３つ挙げてみましよう。',example:'')
-Question.create!(qtext:'4 その中から三つキーワードをピックアップしてもう一度検索してみましょう。',template_id:1,qdetail:'参考になりそうな論文のタイトルを入力してみてください。',example:'')
+Question.create!(qtext:'3 それではその単語をcinii・Googlescholor等で調べてみましょう。参考になりそうな論文を見つけたらそのタイトルと関連語を2つ、３つ挙げてみましよう。',template_id:1,qdetail:'',example:'')
+Question.create!(qtext:'4 その中から三つキーワードをピックアップしてもう一度検索してみましょう。参考になりそうな論文のタイトルを入力してみてください。',template_id:1,qdetail:'',example:'')
 Question.create!(qtext:'5 調べた論文の中から、あなたの研究の先行事例となりそうな論文のタイトルをあげてみましょう。',template_id:1,qdetail:'',example:'')
 Question.create!(qtext:'6 先行事例の限界や問題点を考えてみましょう。',template_id:1,qdetail:'',example:'')
 Question.create!(qtext:'7 6で挙げた先行事例の問題点に対する解決策の仮説を立ててみましょう。',template_id:1,qdetail:'',example:'')
