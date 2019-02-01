@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :logged_in_user, only: [:index,:new, :update,:show]
   before_action :correct_user,   only: [:show]
+  protect_from_forgery except: :test
   
   def index
     @user = User.find(current_user.id)
@@ -13,9 +14,14 @@ class DocumentsController < ApplicationController
   end
 
   def create
+    test = params["test"]
     @document = Document.new(document_params)
     if @document.save
-      redirect_to "/documents/#{@document.id}"
+      if test
+        redirect_to "/documents/#{@document.id}?test=1"
+      else
+        redirect_to "/documents/#{@document.id}"
+      end
     else
       render 'new'
     end
@@ -38,7 +44,14 @@ class DocumentsController < ApplicationController
     else
       redirect_to documents_path
     end
+  end
 
+  def test
+    @document = Document.find(params[:id])
+    @template = @document.template
+    if @document.destroy
+      redirect_to @template
+    end
   end
 
    private
