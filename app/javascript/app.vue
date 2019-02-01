@@ -229,6 +229,7 @@ export default {
           that.note = simplemde.value();
         });
         this.checkBrowser();
+		setInterval(() => {this.autoSave()},10000);
       });
   },
 
@@ -544,6 +545,23 @@ export default {
             "error"
           );
         });
+    },
+	autoSave: function(){
+	
+		 let document = this.note;
+       axios
+        .patch("", {
+          title: this.title,
+          content: document,
+          conversation_logs: JSON.stringify(this.conversationLogs),
+          question_number: this.count,
+          count_t: this.count_t,
+          count_d: this.count_d,
+          count_e: this.count_e,
+          count_called_h: this.count_called_h,
+          sum_h: this.sum_h
+        });
+		
     },
     record: function() {
       var that = this;
