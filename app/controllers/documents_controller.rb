@@ -41,6 +41,28 @@ class DocumentsController < ApplicationController
 
   end
 
+  def release
+    @document = Document.find(params[:id])
+    if @document.scope == 0
+      val = 1
+    elsif @document.scope == 1
+      val = 0
+    end
+
+    if @document.update(scope: val)
+      @documents = Document.where('scope = ?',1)
+      redirect_to documents_open_path
+    else
+      render 'index'
+    end
+  end
+
+  def open
+    @documents = Document.where('scope = ?',1)
+    @user = User.find(current_user.id)
+  end
+
+
    private
 
     def update_params

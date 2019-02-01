@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+  <h2>みんなのノート</h2>
     <div class="col-md-12">
       <div class="card-deck">
         <% @documents.each do |document| %>
@@ -17,18 +18,20 @@
             <div class="card-body px-2 py-3 border-top">
               <h5 class="card-title">
                 <p>
-                  <%= link_to document.title ,document, data: {"turbolinks" => false}%>
+                  <%= link_to document.title ,document_path(document.id), data: {"turbolinks" => false}%>
                 </p>
                 <p style="font-size:5%;">アシスタント</p>
                 <p style="font-size:5%;">・
                   <%= document.template.title %>
                 </p>
               </h5>
+              <% if document.user_id == @user.id %>
               <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %>
-              <% if document.scope == 0 %>
-      　　　　　  <%= link_to "公開", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
-              <% elsif document.scope == 1%>
-                <%= link_to "非公開", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                <% if document.scope == 0 %>
+      　　　　　    <%= link_to "公開", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
+                <% elsif document.scope == 1%>
+                  <%= link_to "非公開", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                <% end %>
               <% end %>
             </div>
           </div>
