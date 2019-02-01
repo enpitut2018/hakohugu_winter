@@ -3,9 +3,12 @@
   <div class="row">
     <div class="col-md-3">
       <div class="card mb-md-3">
-        <!--<%= image_tag 'kitten.jpg', :size =>'200x200', :class => 'card-img' %>-->
       <%if @template.picture?%>
-        <%= image_tag @template.picture.url , :size =>'200x200', :class => 'ass-pic card-img'%>
+	    <%if Rails.env.production?%>
+          <%= cl_image_tag(@template.picture,:class => 'ass-pic')%>
+	    <%else%>
+		  <%= image_tag @template.picture.url,:class => 'ass-pic'%>
+		<%end%>
       <%else%>
         <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
       <%end%>

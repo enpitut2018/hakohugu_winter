@@ -32,9 +32,13 @@
     <% if logged_in? %>
       <figure class="header-img">
         <%if current_user.picture?%>
-              <%= image_tag current_user.picture.url, class: 'user-img'%>
+		  <%if Rails.env.production?%>
+            <%= cl_image_tag(current_user.picture,:class => 'user-img')%>
+		  <%else%>
+		    <%= image_tag current_user.picture.url,:class => 'user-img'%>
+		  <%end%>
         <%else%>
-              <%= image_tag 'hakohugu2 200X200.png', class: 'user-img'%>
+          <%= image_tag 'hakohugu2 200X200.png', class: 'user-img'%>
         <%end%>
       </figure>
 
