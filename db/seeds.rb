@@ -12,21 +12,22 @@ User.create!(name:'Unknown',email:'user2@gmail.com', password: "foobar", passwor
 Category.create!(name:'研究')
 Category.create!(name:'自己分析')
 
-Template.create!(title:'研究アイデア出しアシスタント',user_id:1,category_id:1,scope:1,topic:'研究アイデア')
-Template.create!(title:'自己分析アシスタント',user_id:1,category_id:1,scope:1,topic:'自己分析')
+Template.create!(title:'研究テーマ決定支援アシスタント',user_id:1,category_id:1,scope:1,topic:'研究テーマをまとめます。')
+Template.create!(title:'自己分析アシスタント',user_id:1,category_id:1,scope:1,topic:'自分の興味の対象にフォーカスを当てて自己分析をします。')
 
 Document.create!(title:'研究アイデア',user_id:1,template_id:1,scope: 0,content: nil)
 Document.create!(title:'自己分析',user_id:1,template_id:2,scope: 0,content: nil)
 
 
-Question.create!(qtext:'研究テーマ名',template_id:1,qdetail:'興味のあるテーマを書いてみましょう',example:'電気刺激によるリズム学習')
-Question.create!(qtext:'何が課題か',template_id:1)
-Question.create!(qtext:'課題の背景',template_id:1)
-Question.create!(qtext:'自分の提案　どう解決するか',template_id:1)
-Question.create!(qtext:'関連研究　何が課題か',template_id:1)
-Question.create!(qtext:'関連リンク',template_id:1)
-Question.create!(qtext:'カテゴリ',template_id:1)
-Question.create!(qtext:'自分の提案との差分',template_id:1)
+Question.create!(qtext:'1 あなたの研究分野は何ですか？',template_id:1,qdetail:'あなたが取り組もうと考えている分野を教えてください。',example:'')
+Question.create!(qtext:'2 なぜその分野に興味を持ったのでしょうか？その理由になるような特に興味のある単語を二つ、三つ挙げてみましょう。',template_id:1,qdetail:'',example:'')
+Question.create!(qtext:'3 それではその単語をcinii・Googlescholor等で調べてみましょう。',template_id:1,qdetail:'参考になりそうな論文を見つけたらそのタイトルと関連語を2つ、３つ挙げてみましよう。',example:'')
+Question.create!(qtext:'4 その中から三つキーワードをピックアップしてもう一度検索してみましょう。',template_id:1,qdetail:'参考になりそうな論文のタイトルを入力してみてください。',example:'')
+Question.create!(qtext:'5 調べた論文の中から、あなたの研究の先行事例となりそうな論文のタイトルをあげてみましょう。',template_id:1,qdetail:'',example:'')
+Question.create!(qtext:'6 先行事例の限界や問題点を考えてみましょう。',template_id:1,qdetail:'',example:'')
+Question.create!(qtext:'7 6で挙げた先行事例の問題点に対する解決策の仮説を立ててみましょう。',template_id:1,qdetail:'',example:'')
+Question.create!(qtext:'8 では、質問6,7の回答をもとにしてあなたの研究の方針を決めましょう。書き方は「私は『研究分野』における『問題点』に対する『解決策』の研究をします。」です。',template_id:1,qdetail:'',example:'')
+
 
 Question.create!(qtext:'自分が今興味を持ってるものはなんですか',template_id:2,qdetail:'まずはどんな領域のことでも自由に書いてみましょう',example:'構造色、物理的な構造による発色の原理')
 Question.create!(qtext:'なぜ興味を持っていますか？',template_id:2,qdetail:'興味を持つきっかけとなった出来事やエピソードを書いてみましょう',example:'物理で勉強した光の干渉が美しい色を発色する構造色の原理の一つになっていることに感動した。構造色の発色は鮮やかですき。構造色を持つ，モルフォ蝶やカワセミ，オパールが好きだった。')
