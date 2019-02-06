@@ -5,9 +5,19 @@
 //回答ボタンエリアのcss上書き
 .transmissionBox{
   .row{margin: 0 0px};
-  .messageBox-col{padding: 0 0px;}
- //.skipBox-col{padding: 0 0px;}
-  .recordButton-col{padding: 0 0px;}
+  .messageBox-col{
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+  .skipBox-col{
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+  .readButton-col{
+    padding-left: 0px;
+    padding-right: 5px;
+  }
+  .recordButton-col{padding: 0 5px;}
 }
 
 //拡張

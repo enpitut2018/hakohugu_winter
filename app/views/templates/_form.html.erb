@@ -7,7 +7,13 @@
 <div class="form-group">
   <%= f.label :title, "アシスタント画像" ,class: 'font-weight-bold' %>
   <br>
-  <%= image_tag @template.picture.url , :class => 'ass-pic' if @template.picture?%>
+  <%if @template.picture?%>
+    <%if Rails.env.production?%>
+      <%= cl_image_tag(@template.picture,:class => 'ass-pic')%>
+    <%else%>
+	  <%= image_tag @template.picture.url,:class => 'ass-pic'%>
+    <%end%>
+  <%end%>
   <br>
   <span class = "picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
@@ -25,7 +31,7 @@
 <div class="form-group">
   <%= fields_for @category do |i| %>
     <%= i.label :name, "カテゴリ" ,class: 'font-weight-bold'%>
-    <%= i.text_field :name ,class: 'form-control'%>
+    <%= i.text_field :name ,class: 'form-control' , id: :category_name%>
   <% end %>
 
   <%
@@ -52,10 +58,22 @@
 <% end %>
 
 <script>
+$( function() {
   $('#micropost_picture').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {
       alert('ファイルサイズが上限の5MBを超えています。');
     }
   });
+
+  $( "#category_name" ).autocomplete({
+    autoFocus: true,
+     source: "/templates/category_auto_complete.json",
+      minLength: 1,
+    messages: {
+      noResults: '',
+      results: function() {}
+    }
+  });
+});
 </script>

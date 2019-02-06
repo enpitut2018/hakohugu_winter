@@ -6,9 +6,13 @@
         <div class="col-md-3">
           <div class="card img-thumbnail">
             <%if document.template.picture?%>
-              <%= image_tag document.template.picture.url , :class => 'ass-pic card-img-top'%>
+			  <%if Rails.env.production?%>
+                <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
+			  <%else%>
+				<%= image_tag document.template.picture.url,:class => 'ass-pic'%>
+			  <%end%>
             <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
             <%end%>
             <div class="card-body px-2 py-3 border-top">
               <h5 class="card-title">

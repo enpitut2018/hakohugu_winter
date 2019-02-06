@@ -5,7 +5,8 @@
         <input type="text" class="form-control" id="Input" v-model="title">
       </div>
       <div class="col">
-        <button type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
+        <button v-if="test_flag" type="button" class="btn btn-success" @click="endTest">テストを終了</button>
+        <button v-else type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
       </div>
     </div>
 
@@ -89,15 +90,37 @@
                 <button @click="skipQuestion" type="button" class="btn btn-info btn-block">スキップ</button>
               </div>
 
-              <!-- ブラウザがChromeのときのみここを表示 -->
+              <!-- ブラウザがChromeのときのみ音読ボタンを表示 -->
+              <div id="recordButton" v-if="chrome" class="col-sm-1 readButton-col">
+                <template v-if="read_flag">
+                  <button
+                    class="btn btn-secondary btn-block"
+                    title="質問の音読を終了"
+                    @click="read_flag = false"
+                  >
+                    <i class="fa fa-volume-off"></i>
+                  </button>
+                </template>
+                <template v-else>
+                  <button
+                    class="btn btn-secondary btn-block"
+                    title="質問の音読を開始"
+                    @click="read_flag = true"
+                  >
+                    <i class="fa fa-volume-up"></i>
+                  </button>
+                </template>
+              </div>
+
+              <!-- ブラウザがChromeのときのみ音声入力を表示 -->
               <div id="recordButton" v-if="chrome" class="col-sm-1 recordButton-col">
                 <template v-if="record_flag">
-                  <button class="btn btn-secondary btn-block" @click="stop">
+                  <button class="btn btn-secondary btn-block" title="音声入力を終了" @click="stop">
                     <i class="fa fa-microphone-slash"></i>
                   </button>
                 </template>
                 <template v-else>
-                  <button class="btn btn-secondary btn-block" @click="record">
+                  <button class="btn btn-secondary btn-block" title="音声入力を開始" @click="record">
                     <i class="fa fa-microphone"></i>
                   </button>
                 </template>
@@ -183,11 +206,17 @@ export default {
       tab1: true,
       tab2: false,
       record_flag: false,
-      chrome: false
+      chrome: false,
+      test_flag: false,
+      read_flag: false
     };
   },
 
   mounted: function() {
+    let test = this.getParams().test;
+    if (test == 1) {
+      this.test_flag = true;
+    }
     let path = location.pathname.split("/");
     let documentNumber = path[2];
     axios
@@ -206,6 +235,7 @@ export default {
           that.note = simplemde.value();
         });
         this.checkBrowser();
+		setInterval(() => {this.autoSave()},10000);
       });
   },
 
@@ -219,7 +249,7 @@ export default {
     },
     toggleSize: function() {
       if (this.chrome) {
-        return "col-sm-9";
+        return "col-sm-8";
       } else {
         return "col-sm-10";
       }
@@ -294,6 +324,18 @@ export default {
         resolve();
       });
     },
+    getParams: function() {
+      var vars = {};
+      var param = location.search.substring(1).split("&");
+      for (var i = 0; i < param.length; i++) {
+        var keySearch = param[i].search(/=/);
+        var key = "";
+        if (keySearch != -1) key = param[i].slice(0, keySearch);
+        var val = param[i].slice(param[i].indexOf("=", 0) + 1);
+        if (key != "") vars[key] = decodeURI(val);
+      }
+      return vars;
+    },
     addAnswerToNote: function() {
       this.note +=
         ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
@@ -318,6 +360,7 @@ export default {
           "answer",
           this.answer
         );
+        /*  this.speakQuestion(this.answer); */
       }
       //チュートリアル中と本番の質問で場合分け
       if (this.tutorial_flag && this.count_t < this.tutorials.length) {
@@ -397,6 +440,7 @@ export default {
               question: this.questions[this.count].qtext
             });
           }, 500);
+          this.speakQuestion(this.questions[this.count].qtext);
         }
       }
 
@@ -466,6 +510,7 @@ export default {
             question: this.questions[this.count].qtext
           });
         }, 500);
+        this.speakQuestion(this.questions[this.count].qtext);
       }
 
       if (this.questions.length == this.count) {
@@ -519,6 +564,23 @@ export default {
           );
         });
     },
+	autoSave: function(){
+	
+		 let document = this.note;
+       axios
+        .patch("", {
+          title: this.title,
+          content: document,
+          conversation_logs: JSON.stringify(this.conversationLogs),
+          question_number: this.count,
+          count_t: this.count_t,
+          count_d: this.count_d,
+          count_e: this.count_e,
+          count_called_h: this.count_called_h,
+          sum_h: this.sum_h
+        });
+		
+    },
     record: function() {
       var that = this;
 
@@ -551,6 +613,26 @@ export default {
       } else if (agent.indexOf("safari") > -1) {
       } else if (agent.indexOf("firefox") > -1) {
       } else {
+      }
+    },
+    endTest: function() {
+      let path = location.pathname.split("/");
+      let documentNumber = path[2];
+      var form = document.createElement("form");
+
+      form.method = "POST";
+      form.action = `/documents/${documentNumber}/test`;
+
+      document.body.appendChild(form);
+
+      form.submit();
+    },
+    speakQuestion: function(text) {
+      if (this.read_flag == true) {
+        // 発言を作成
+        const uttr = new SpeechSynthesisUtterance(text);
+        // 発言を再生 (発言キューに発言を追加)
+        speechSynthesis.speak(uttr);
       }
     }
   }

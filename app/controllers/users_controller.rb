@@ -20,12 +20,39 @@ class UsersController < ApplicationController
     @my_templates_unreleased=@user.templates.where(scope: 0)
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
   end
+  
+  def edit
+      @user=User.find(params[:id])
+      @submit='更新'
+  end
+  
+  def update
+      @user=User.find(params[:id])
+      @my_templates_unreleased=@user.templates.where(scope: 0)
+      @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
+      if @user.update_attributes(user_params)
+          render 'show'
+      else
+          render 'edit'
+      end
+  end
+  
+  def destroy
+      @user=User.find(params[:id])
+      @user.templates.update_all(:user_id => 3)
+      @user.documents.destroy_all
+      if User.find(params[:id]).destroy
+          redirect_to('/')
+      else
+          render 'show'
+      end
+  end
 
   private 
 
     def user_params
         params.require(:user).permit(:name, :email, :password,
-                                     :password_confirmation,:picture)
+                                     :password_confirmation,:picture,:bio,:link1,:link2,:link3)
     end
 
      # beforeアクション

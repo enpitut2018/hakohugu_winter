@@ -3,10 +3,20 @@ Rails.application.routes.draw do
     resources :users
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
-    resources :documents, :only => [:index,:new,:show,:create,:update,:destroy]
+    
+    resources :documents do
+      member do
+        post 'test'
+      end
+    end
+
     resources :templates do
       member do
         get 'release'
+      end
+      collection do 
+      get 'category_auto_complete'
+      get 'template_auto_complete'
       end
     end
     resources :likes, only: [:create, :destroy]

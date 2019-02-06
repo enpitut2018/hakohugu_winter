@@ -10,7 +10,15 @@
      <div class='h5'>
       <span class = 'font-weight-bold mr-3'>作ったユーザー: </span>
       <span class="mr-1">
+	  <%if @template.user.picture?%>
+	    <%if Rails.env.production?%>
+          <%= cl_image_tag(@template.user.picture,:class => 'template-user-img')%>
+	    <%else%>
+		  <%= image_tag @template.user.picture.url,:class => 'template-user-img'%>
+		<%end%>
+	  <%else%>
         <%= image_tag  "hakohugu2 200X200.png" , class: 'template-user-img' %>
+	  <%end%>
       </span>
       <span><%= link_to @template.user.name, @template.user%></span>
     </div>
@@ -27,6 +35,17 @@
         <p class='h4 mt-5'>
           <%= link_to "公開する", release_template_path(@template.id), data:{confirm: "本当にこのアシスタントを公開しますか？\n一度公開されると戻せません。"}%>
         </p>
+        <%= form_for(@document) do |f| %>
+        <div class="form-group">
+            <%= f.hidden_field :title,value:'テスト'  %>
+            <%= hidden_field_tag 'test', true %>
+        </div>
+           
+        <%= f.hidden_field :template_id, :value => @template.id %>
+        <div class="form-group">
+          <%= f.submit "このボタンでアシスタントをテストします。公開はされません", class: "btn btn-primary" %>
+        </div>
+      <% end %>
       <% else %>
         <div class="alert alert-warning" role="alert">
           質問が一つ以上ないとこのアシスタントは公開できません
@@ -34,6 +53,12 @@
       <% end %>
 
     <% elsif @template.scope == 1 %>
+    <span class='h4 mt-5'>
+      <% if current_user.admin? %>
+      　<%= link_to "編集", edit_template_path(@template.id)%>
+        <%= link_to "削除", @template, method: :delete, data: { confirm: "本当にこのアシスタントを削除しますか?" } %>
+      <% end %>
+    </span>
       <%= form_for(@document) do |f| %>
         <div class="form-group">
             <%= f.label :ノートタイトル %>
