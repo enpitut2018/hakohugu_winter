@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="assets/simplemde.min.css">
+<script src="assets/simplemde.min.js"></script>
+
 <div class="starter-template">
   <div class = 'mb-5'>
     <h1 class='mb-5'>
@@ -25,6 +28,26 @@
     <span class = 'font-weight-bold'> アシスタント名:</span><span class='mr-3'><%= link_to @template.title ,template_path(@template.id), data: {"turbolinks" => false}%></span>
       <span class = 'font-weight-bold'> トピック:</span><span class='mr-3'><%= @template.topic%></span>
       <span class = 'font-weight-bold ml-3'>カテゴリ: </span><span><%= @category.name%></span>
+    </div>
+
+    <div>
+
+    
+
+    <%= fields_for @document do |f| %>
+      <%= f.text_area :content %>
+    <% end %>
+
+
+    
+      <script>
+         var simplemde = new SimpleMDE({
+          toolbar: true,
+          spellChecker: false,
+         });
+
+         simplemde.togglePreview();
+      </script>
     </div>
      
   </div>
