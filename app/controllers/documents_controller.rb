@@ -5,6 +5,8 @@ class DocumentsController < ApplicationController
   def index
     @user = User.find(current_user.id)
     @documents = @user.documents.all
+    @my_documnts_unreleased=@user.documents.where(scope: 0)
+    @my_documents_released=@user.documents.where(scope: 1)
   end
 
   def new

@@ -27,10 +27,8 @@
               </h5>
               <% if document.user_id == @user.id %>
               <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %>
-                <% if document.scope == 0 %>
-      　　　　　    <%= link_to "公開", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
-                <% elsif document.scope == 1%>
-                  <%= link_to "非公開", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                <% if document.scope == 1%>
+                  <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
                 <% end %>
               <% end %>
             </div>

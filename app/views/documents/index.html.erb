@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row">
+  <h2>マイノート</h2>
     <div class="col-md-12">
+    <div class="my_released">
+    <h3>公開しているノート</h3>
       <div class="card-deck">
-        <% @documents.each do |document| %>
+        <% @my_documents_released.each do |document| %>
         <div class="col-md-3">
           <div class="card img-thumbnail">
             <%if document.template.picture?%>
@@ -26,15 +29,56 @@
               </h5>
               <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %>
               <% if document.scope == 0 %>
-      　　　　　  <%= link_to "公開", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
+      　　　　　  <%= link_to "公開にする", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
               <% elsif document.scope == 1%>
-                <%= link_to "非公開", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
               <% end %>
             </div>
           </div>
         </div>
         <% end %>
       </div>
+      </div>
+
+      <div class="my_unreleased">
+      <h3>非公開のノート</h3>
+      <div class="card-deck">
+        <% @my_documnts_unreleased.each do |document| %>
+        <div class="col-md-3">
+          <div class="card img-thumbnail">
+            <%if document.template.picture?%>
+			  <%if Rails.env.production?%>
+                <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
+			  <%else%>
+				<%= image_tag document.template.picture.url,:class => 'ass-pic'%>
+			  <%end%>
+            <%else%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
+            <%end%>
+            <div class="card-body px-2 py-3 border-top">
+              <h5 class="card-title">
+                <p>
+                  <%= link_to document.title ,document, data: {"turbolinks" => false}%>
+                </p>
+                <p style="font-size:5%;">アシスタント</p>
+                <p style="font-size:5%;">・
+                  <%= document.template.title %>
+                </p>
+              </h5>
+              <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %>
+              <% if document.scope == 0 %>
+      　　　　　  <%= link_to "公開にする", release_document_path(document.id), data:{confirm: "このノートを公開します"}%>
+              <% elsif document.scope == 1%>
+                <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      </div>
+
+
       <div style="padding-top: 160px;">
         <%= link_to "+", new_document_path, class: 'btn btn-success rounded-circle p-0 float-right',style: 'width:6rem;height:6rem; font-size:3.5rem;' %>
       </div>
