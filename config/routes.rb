@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :users
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
-    
+
     resources :documents do
       member do
         post 'test'
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       member do
         get 'release'
       end
-      collection do 
+      collection do
       get 'category_auto_complete'
       get 'template_auto_complete'
       end

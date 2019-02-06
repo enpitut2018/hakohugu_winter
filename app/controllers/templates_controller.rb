@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
     @category_name = @category_name.to_h.first(3).to_h
 
     @categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
-    
+
   end
 
 
@@ -38,18 +38,22 @@ class TemplatesController < ApplicationController
 
   def create
     @category=Category.new(category_params)
+    @template=Template.new(template_params)
     if @category.save
-      @template=Template.new(template_params)
       @template.category_id = @category.id
       @template.scope = 0
       if @template.save
         redirect_to templates_path
       else
         @category.destroy
-        redirect_to new_template_path, alert: "アシスタントのタイトル、または概要を入力してください。"
+        flash.now[:alert] = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
+        render :new
+        # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-       redirect_to new_template_path, alert: "カテゴリを入力してください。"
+      flash.now[:alert] = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
+      render :new
+      # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
@@ -68,10 +72,14 @@ class TemplatesController < ApplicationController
       if @template.update_attributes(template_params)
         render 'show'
       else
-        redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+        flash.now[:alert] = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
+        render :edit
+        # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-      redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+      flash.now[:alert] = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
+      render :edit
+      # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
