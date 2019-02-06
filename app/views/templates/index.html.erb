@@ -1,22 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+	<h1>アシスタント一覧</h1>
      <h2 class="mt-4">Hot カテゴリ</h2>
         <div>
           <% @category_name.each do |key,value| %>
-            <%= link_to  "#{key}: #{value}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{key}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
+            <%= link_to  "#{key}(#{value})", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{key}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
           <%end%>
         </div>
 
       <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#categories" aria-expanded="false" aria-controls="collapseExample">
       すべてのキーワードを見る
       </button>
+	  <p></p>
       <div class="collapse" id="categories">        
         <% @categories.each do |category| %>
             <%= link_to  "#{category.name}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{category.name}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
           <%end%>
       </div>
-      <h2 class="mb-4 mt-4">すべてのアシスタント</h2>
+	  
 
     
       
@@ -73,69 +75,7 @@
       <%= will_paginate(:renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
       <br>
 
-      <h2>マイアシスタント</h2>
-      <div class="my_unreleased">
-        <h3>未公開</h3>
-        <div class="card-deck">
-          <% @my_templates_unreleased.each do |template_u| %>
-          <div class="col-md-3">
-            <div class="card img-thumbnail">
-              <%if template_u.picture?%>
-			    <%if Rails.env.production?%>
-                  <%= cl_image_tag(template_u.picture, :class => 'ass-pic')%>
-				<%else%>
-				  <%= image_tag template_u.picture.url, :class => 'ass-pic'%>
-				<%end%>
-              <%else%>
-                <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
-              <%end%>
-              <div class="card-body px-2 py-3 border-top">
-                <h5 class="card-title">
-                  <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
-                </h5>
-                <p style="font-size:5%;">カテゴリ</p>
-                <p style="font-size:5%;">・
-                  <%= template_u.category.name%>
-              </p>
-              </div>
-            </div>
-          </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="my_released">
-        <h3>公開済</h3>
-        <div class="card-deck">
-          <% @my_templates_released.each do |template| %>
-          <div class="col-md-3">
-            <div class="card img-thumbnail">
-              <%if template.picture?%>
-			    <%if Rails.env.production?%>
-                  <%= cl_image_tag(template.picture)%>
-				<%else%>
-				  <%= image_tag template.picture.url%>
-				<%end%>
-              <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
-              <%end%>
-              <div class="card-body px-2 py-3 border-top">
-                <h5 class="card-title">
-                  <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
-                </h5>
-                <p style="font-size:5%;">カテゴリ</p>
-                <p style="font-size:5%;">・
-                  <%= template.category.name%>
-                </p>
-                <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
-                <%= render "likes/like", template: template %>
-                </span>                
-              </div>
-            </div>
-          </div>
-          <% end %>
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>

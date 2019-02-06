@@ -53,6 +53,7 @@
       <div class="my_unreleased">
         <h3>未公開</h3>
         <div class="card-deck">
+		<%if @my_templates_unreleased.length > 0 %>
           <% @my_templates_unreleased.each do |template_u| %>
           <div class="col-md-3">
             <div class="card img-thumbnail">
@@ -77,6 +78,9 @@
             </div>
           </div>
           <% end %>
+		  <%else%>
+			  <p>非公開状態のアシスタントはまだいません<p>
+		  <%end%>
         </div>
       </div>
       <%end%>
@@ -84,6 +88,7 @@
       <div class="my_released">
         <h3>公開済</h3>
         <div class="card-deck">
+		<%if @my_templates_released.length > 0 %>
           <% @my_templates_released.each do |template| %>
           <div class="col-md-3">
             <div class="card img-thumbnail">
@@ -110,7 +115,11 @@
               </div>
             </div>
           </div>
+		  <% end %>
+		  <% else %>
+			   <p>公開状態のアシスタントはいません<p>
           <% end %>
+		  
         </div>
       </div>
     </div>
