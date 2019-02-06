@@ -60,9 +60,17 @@ class DocumentsController < ApplicationController
   end
 
   def open
+    @templates=Template.paginate(page: params[:page],:per_page => 8).search(params[:search],params[:select]).where(scope: 1).order('likes_count DESC')
     @documents = Document.where('scope = ?',1)
     @user = User.find(current_user.id)
   end
+
+  def assistant
+    @template = Template.find(params[:format])
+    @documents = Document.where('scope = ?',1).where(template_id: @template.id)
+    @user = User.find(current_user.id)
+  end
+
 
   def read
     @document = Document.find(params[:id])

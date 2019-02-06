@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
     get 'documents/open' => 'documents#open'
+    get 'documents/assistant' => 'documents#assistant'
     resources :documents do 
       member do
         get 'release'
