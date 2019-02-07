@@ -49,7 +49,7 @@
 			    <%= image_tag template.picture.url %>
 			  <%end%>
             <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
             <%end%>
             <div class="card-body px-2 py-3 border-top">
               <h5 class="card-title">
@@ -82,12 +82,12 @@
             <div class="card img-thumbnail">
               <%if template_u.picture?%>
 			    <%if Rails.env.production?%>
-                  <%= cl_image_tag(template_u.picture, :class => 'ass-pic')%>
+                  <%= cl_image_tag(template_u.picture, :class => 'card-img-top')%>
 				<%else%>
-				  <%= image_tag template_u.picture.url, :class => 'ass-pic'%>
+				  <%= image_tag template_u.picture.url, :class => 'card-img-top'%>
 				<%end%>
               <%else%>
-                <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+                <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
@@ -117,7 +117,7 @@
 				  <%= image_tag template.picture.url%>
 				<%end%>
               <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">

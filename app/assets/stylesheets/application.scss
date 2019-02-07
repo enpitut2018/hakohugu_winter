@@ -22,6 +22,9 @@
     font-size: .875rem;
     padding-top:120px;
     padding-bottom:40px;
+	width: 1000px;
+	height: auto;
+	margin: 0 auto;
 }
 
 body {
@@ -62,12 +65,27 @@ span.navbar-text.h3{
 	margin-right: 25px;
 }
 
+.card-deck{
+  width: 100%;
+  height: auto;
+}
+
 .card{
     width: 200px;
+	height: 400px;
 	margin: 10px auto;
 	max-width: 100%;
-	.ass-pic{
-		width: 100%;
+	overflow: hidden;
+	.card-img-top{
+	  width: 100%;
+	  height: auto;
+	}
+	.card-title{
+	  p{
+        white-space:nowrap;
+        overflow: hidden;
+	    text-overflow:ellipsis;
+	  }
 	}
 }
 
