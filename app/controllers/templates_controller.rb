@@ -12,6 +12,11 @@ class TemplatesController < ApplicationController
     @template=Template.new
     @category=Category.new
     @submit='作成'
+    @parents_template_id = params[:id]
+    if @parents_template_id
+      @parents_template = Template.find(@parents_template_id)
+    end
+    
   end
 
   def show

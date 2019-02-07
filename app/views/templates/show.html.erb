@@ -47,11 +47,14 @@
             <%= f.label :ノートタイトル %>
             <%= f.text_field :title, class: 'form-control w-50 mx-auto', value:'無題'  %>
         </div>
-           
+
         <%= f.hidden_field :template_id, :value => @template.id %>
 
         <div class="form-group">
           <%= f.submit "このアシスタントとトークを開始", class: "btn btn-primary" %>
+        </div>
+        <div class="re-form-group">
+          <span><%= link_to "このアシスタントを引用して新規アシスタントの作成",new_template_path(id: @template.id)%></span>
         </div>
       <% end %>
     <% end %>

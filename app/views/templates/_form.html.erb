@@ -1,8 +1,15 @@
 <%= form_for @template do |f| %>
+
+
 <div class="form-group">
-  <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
-  <%= f.text_field :title, class: 'form-control'%>
+    <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
+    <% if @parents_template%>
+      <%= f.text_field :title, class: 'form-control',value: @parents_template.title%>
+    <% else %>
+      <%= f.text_field :title, class: 'form-control'%>
+    <%end%>
 </div>
+
 
 <div class="form-group">
   <%= f.label :title, "アシスタント画像" ,class: 'font-weight-bold' %>
@@ -25,13 +32,21 @@
   <p>
     誰がどんな目的で何をすることを助けるアシスタントなのかの説明
   </p>
-  <%= f.text_field :topic, class: 'form-control'%>
+  <% if @parents_template%>
+    <%= f.text_field :topic, class: 'form-control',value: @parents_template.topic%>
+  <% else %>
+      <%= f.text_field :topic, class: 'form-control'%>
+  <%end%>
 </div>
 
 <div class="form-group">
   <%= fields_for @category do |i| %>
     <%= i.label :name, "カテゴリ" ,class: 'font-weight-bold'%>
-    <%= i.text_field :name ,class: 'form-control'%>
+    <% if @parents_template%>
+      <%= i.text_field :name ,class: 'form-control',value: @parents_template.category.name%>
+    <% else %>
+      <%= i.text_field :name ,class: 'form-control'%>
+    <%end%>
   <% end %>
 
   <%
@@ -43,13 +58,25 @@
 </div>
 
 <h3>質問</h3>
+
+<h3>質問</h3>
+<div class="form-group">
+    <%= f.label :title, "質問" ,class: 'font-weight-bold'%>
+    <% if @parents_template%>
+      <%= f.text_field :questions_attributes, class: 'form-control',value: @parents_template.questions%>
+    <% else %>
+      <%= f.text_field :questions_attributes, class: 'form-control'%>
+    <%end%>
+</div>
+
+
 <div id="questions">
   <%= f.fields_for :questions do |question| %>
-  <%= render 'question_fields', f: question %>
-<% end %>
-<div class="links">
-  <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
-</div>
+    <%= render 'question_fields', f: question %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
+  </div>
 </div>
 
 <div class="actions">
