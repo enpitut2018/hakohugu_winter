@@ -1,22 +1,30 @@
 <div class="container">
+	<h1>ノート一覧</h1>
   <div class="row">
   <h2>マイノート</h2>
     <div class="col-md-12">
+
     <div class="my_released">
-    <h3>公開しているノート</h3>
+    <h3>公開中のノート</h3>
+
+    <%if @my_documents_released.length == 0%>
+      <p class='mt-5'style="font-size:30px;">公開中のノートはありません</p>
+    <%else%>
+
       <div class="card-deck">
         <% @my_documents_released.each do |document| %>
         <div class="col-md-3">
-          <div class="card img-thumbnail">
-            <%if document.template.picture?%>
-			          <%if Rails.env.production?%>
-                    <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
-			          <%else%>
-				            <%= image_tag document.template.picture.url,:class => 'ass-pic'%>
-			          <%end%>
+          <div class="card">
+        <%if document.template.picture?%>
+            <%if Rails.env.production?%>
+                    <%= cl_image_tag(document.template.picture,:class => 'card-img-top')%>
             <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
+            <%= image_tag document.template.picture.url,:class => 'card-img-top'%>
             <%end%>
+
+        <%else%>
+            <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
+        <%end%>
             <div class="card-body px-2 py-3 border-top">
               <h5 class="card-title">
                 <p>
@@ -38,14 +46,18 @@
             </div>
           </div>
         </div>
-        <% end %>
       </div>
-      </div>
+      <% end %>
 
       <div class="my_unreleased">
       <h3>非公開のノート</h3>
+        
+      <%if @my_documents_unreleased.length == 0%>
+        <p class='mt-5'style="font-size:30px;">非公開のノートはありません</p>
+      <%else%>
+        
       <div class="card-deck">
-        <% @my_documnts_unreleased.each do |document| %>
+        <% @my_documents_unreleased.each do |document| %>
         <div class="col-md-3">
           <div class="card img-thumbnail">
             <%if document.template.picture?%>
@@ -78,8 +90,8 @@
             </div>
           </div>
         </div>
-        <% end %>
       </div>
+      <% end %>
       </div>
 
       <div style="padding-top: 160px;">

@@ -1,30 +1,26 @@
 <div class="container">
+  <!--indexからコピペ-->
   <div class="starter-template">
-    <h1>ユーザー新規作成</h1>
+    <h1>ユーザ情報編集</h1>
   </div>
 
-  <%= form_for(@user,url: '/users/new') do |f| %>
+   <!-- エラーメッセージを表示 -->
+  <% if flash[:alert] %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+
+  <!--ここから「入力フォーム」-->
+  <%= form_for @user do |f| %>
 
     <%= render 'shared/error_messages' %>
 
     <div class="form-group">
       <%= f.label :名前 %>
       <%= f.text_field :name , class: 'form-control'%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :メールアドレス %>
-      <%= f.email_field :email , class: 'form-control'%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :パスワード %>
-      <%= f.password_field :password , class: 'form-control'%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :パスワードの確認%>
-      <%= f.password_field :password_confirmation , class: 'form-control'%>
     </div>
 	
 	<div class="form-group">
@@ -33,7 +29,7 @@
     </div>
 	
 	<div class="form-group">
-      <%= f.label :ホームページ、SNS  %>
+      <%= f.label :ホームページ、SNS %>
       <%= f.text_field :link1 , class: 'form-control'%>
     </div>
 	
@@ -48,8 +44,9 @@
     </div>
 
     <div class="form-group">
-      <%= f.submit "アカウントの作成", class: "btn btn-primary" %>
+      <%= f.submit @submit, class: "btn btn-primary" %>
     </div>
 
   <% end %>
+
 </div>

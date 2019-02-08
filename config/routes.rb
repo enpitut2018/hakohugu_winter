@@ -3,17 +3,24 @@ Rails.application.routes.draw do
     resources :users
     post '/users/new',  to: 'users#create'
     resources :sessions, :only => [:new,:create]
+  
     get 'documents/open' => 'documents#open'
     get 'documents/assistant' => 'documents#assistant'
     resources :documents do 
       member do
         get 'release'
         get 'read'
+        post 'test'
       end
     end
+  
     resources :templates do
       member do
         get 'release'
+      end
+      collection do 
+      get 'category_auto_complete'
+      get 'template_auto_complete'
       end
     end
     

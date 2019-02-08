@@ -10,9 +10,10 @@ Rails.application.config.content_security_policy do |policy|
   policy.img_src     :self, :https, :data
   policy.object_src  :none
   policy.style_src   :self, :https, :unsafe_inline 
+  policy.frame_src   :self, :https
   policy.connect_src :self, :https, 'http://localhost:3035', 'ws://localhost:3035' if Rails.env.development?
   if Rails.env.development?
-    policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
+   policy.script_src :self, :https, :unsafe_eval, :unsafe_inline
   else
     policy.script_src :self, :https, :unsafe_inline
   end

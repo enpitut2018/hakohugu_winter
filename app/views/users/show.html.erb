@@ -4,21 +4,39 @@
       <div class="card img-thumbnail">
         <%if @user.picture?%>
 		  <%if Rails.env.production?%>
-            <%= cl_image_tag(@user.picture,:class => 'ass-pic')%>
+            <%= cl_image_tag(@user.picture,:class => 'card-img-top')%>
 		  <%else%>
-			<%= image_tag @user.picture.url,:class => 'ass-pic'%>
+			<%= image_tag @user.picture.url,:class => 'card-img-top'%>
 		  <%end%>
         <%else%>
-        <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
+        <%= image_tag 'hakohugu2 200X200.png', :class => 'card-img-top'%>
         <%end%>
         <div class="card-body px-2 py-3 border-top">
-          <h5 class="card-title">名前:
+          <h5 class="card-title">
             <%= @user.name %>
           </h5>
           <% if current_user?(@user)%>
-          <p class="card-text">メール:
-            <%= @user.email %>
+            <p class="card-text">メール:<br>
+              <%= @user.email %>
+            </p>
+          <% end %>
+		  <p class="card-text">プロフィール:<br>
+            <%= @user.bio %>
           </p>
+		  <% if @user.link1?%>
+		    <p class="card-text">ホームページ、SNS:<br>
+              <a href="<%= @user.link1 %>"><%= @user.link1 %></a><br>
+			  <% if @user.link2?%>
+			    <a href="<%= @user.link2 %>"><%= @user.link2 %></a><br>
+			  <%end%>
+			  <% if @user.link3?%>
+			    <a href="<%= @user.link3 %>"><%= @user.link3 %></a><br>
+			  <%end%>
+            </p><br>
+		  <%end%>
+		  <% if current_user?(@user)%>
+            <%= link_to "編集", edit_user_path(@user.id)%><br>
+			<%= link_to "退会", @user, method: :delete,data: { confirm: "本当に退会しますか?退会後のユーザ情報、作成したノートやアシスタントは復元できません。" } %>
           <% end %>
         </div>
       </div>
@@ -35,6 +53,7 @@
       <div class="my_unreleased">
         <h3>未公開</h3>
         <div class="card-deck">
+		<%if @my_templates_unreleased.length > 0 %>
           <% @my_templates_unreleased.each do |template_u| %>
           <div class="col-md-3">
             <div class="card img-thumbnail">
@@ -59,6 +78,9 @@
             </div>
           </div>
           <% end %>
+		  <%else%>
+			  <p>非公開状態のアシスタントはまだいません<p>
+		  <%end%>
         </div>
       </div>
       <%end%>
@@ -66,6 +88,7 @@
       <div class="my_released">
         <h3>公開済</h3>
         <div class="card-deck">
+		<%if @my_templates_released.length > 0 %>
           <% @my_templates_released.each do |template| %>
           <div class="col-md-3">
             <div class="card img-thumbnail">
@@ -92,7 +115,11 @@
               </div>
             </div>
           </div>
+		  <% end %>
+		  <% else %>
+			   <p>公開状態のアシスタントはいません<p>
           <% end %>
+		  
         </div>
       </div>
     </div>

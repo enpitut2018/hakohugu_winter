@@ -21,8 +21,9 @@
 
 #hakohugu {
   font-size: .875rem;
-  padding-top: 120px;
-  padding-bottom: 40px;
+  padding-top:120px;
+  padding-bottom:40px;
+	margin: 0 auto;
 }
 
 body {
@@ -67,14 +68,28 @@ span.navbar-text.h3 {
   margin-right: 25px;
 }
 
-.card {
-  width: 200px;
-  margin: 10px auto;
-  max-width: 100%;
+.card-deck{
+  width: 100%;
+  height: auto;
+}
 
-  .ass-pic {
-    width: 100%;
-  }
+.card{
+    width: 200px;
+	height: 400px;
+	margin: 10px auto;
+	max-width: 100%;
+	overflow: hidden;
+	.card-img-top{
+	  width: 100%;
+	  height: auto;
+	}
+	.card-title{
+	  p{
+        white-space:nowrap;
+        overflow: hidden;
+	    text-overflow:ellipsis;
+	  }
+	}
 }
 
 #conversation {
@@ -277,4 +292,27 @@ p.kaiwa-text:last-child {
 /*　公開ノート */
 .note_read_only {
   text-align: left;
+}
+
+ul.ui-autocomplete {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: solid 1px #999;
+  cursor: default;
+  li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 2px 15px;
+    a {
+      color: #000;
+      display: block;
+      padding: 3px;
+    }
+    a.ui-state-hover, a.ui-state-active {
+      background-color: #FFFCB2;
+    }
+  }
 }
