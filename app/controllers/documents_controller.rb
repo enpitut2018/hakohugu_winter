@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
 
     if @document.update(scope: val)
       @documents = Document.where('scope = ?',1)
-      redirect_to documents_open_path
+      redirect_to documents_path
     else
       render 'index'
     end
