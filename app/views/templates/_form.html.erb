@@ -9,9 +9,9 @@
   <br>
   <%if @template.picture?%>
     <%if Rails.env.production?%>
-      <%= cl_image_tag(@template.picture,:class => 'ass-pic')%>
+      <%= cl_image_tag(@template.picture,:class => 'card-img-top')%>
     <%else%>
-	  <%= image_tag @template.picture.url,:class => 'ass-pic'%>
+	  <%= image_tag @template.picture.url,:class => 'card-img-top'%>
     <%end%>
   <%end%>
   <br>

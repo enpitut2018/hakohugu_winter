@@ -40,42 +40,46 @@
         <% end %>
       </div>
 
-      <div class="card-deck">
-        <% @templates.each do |template| %>
-        <div class="col-md-3">
-          <div class="card img-thumbnail">
-            <%if template.picture?%>
-			  <%if Rails.env.production?%>
-                 <%= cl_image_tag(template.picture)%>
-			  <%else%>
-			    <%= image_tag template.picture.url %>
-			  <%end%>
-            <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
-            <%end%>
-            <div class="card-body px-2 py-3 border-top">
-              <h5 class="card-title">
-                <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
-              </h5>
-              <p style="font-size:5%;">カテゴリ</p>
-              <p style="font-size:5%;">・
+      <% if @templates.present? %>
+        <div class="card-deck"> 
+          <% @templates.each do |template| %>
+          <div class="col-md-3">
+            <div class="card img-thumbnail">
+              <%if template.picture?%>
+			    <%if Rails.env.production?%>
+                  <%= cl_image_tag(template.picture)%>
+			    <%else%>
+			      <%= image_tag template.picture.url %>
+			    <%end%>
+              <%else%>
+                <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
+              <%end%>
+              <div class="card-body px-2 py-3 border-top">
+                <h5 class="card-title">
+                  <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+                </h5>
+                <p style="font-size:5%;">カテゴリ</p>
+                <p style="font-size:5%;">・
                   <%= template.category.name%>
-              </p>
-              <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
-                <%= render "likes/like", template: template %>
-              </span>
+                </p>
+                <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
+                  <%= render "likes/like", template: template %>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
         <% end %>
       </div>
+	  <%else%>
+        <h3>該当するアシスタントがありません。</h3>
+      <%end%>
 
       <br>
 
       <%= will_paginate(:renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
       <br>
 
-      
+
     </div>
   </div>
 </div>

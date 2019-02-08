@@ -4,12 +4,12 @@
       <div class="card img-thumbnail">
         <%if @user.picture?%>
 		  <%if Rails.env.production?%>
-            <%= cl_image_tag(@user.picture,:class => 'ass-pic')%>
+            <%= cl_image_tag(@user.picture,:class => 'card-img-top')%>
 		  <%else%>
-			<%= image_tag @user.picture.url,:class => 'ass-pic'%>
+			<%= image_tag @user.picture.url,:class => 'card-img-top'%>
 		  <%end%>
         <%else%>
-        <%= image_tag 'hakohugu2 200X200.png', :class => 'ass-pic card-img-top'%>
+        <%= image_tag 'hakohugu2 200X200.png', :class => 'card-img-top'%>
         <%end%>
         <div class="card-body px-2 py-3 border-top">
           <h5 class="card-title">
