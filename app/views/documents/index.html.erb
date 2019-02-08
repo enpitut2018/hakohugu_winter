@@ -1,102 +1,108 @@
 <div class="container">
-	<h1>ノート一覧</h1>
+  <h1>マイノート一覧</h1>
   <div class="row">
-  <h2>マイノート</h2>
     <div class="col-md-12">
 
-    <div class="my_released">
-    <h3>公開中のノート</h3>
+      <div class="my_released">
+        <h3>公開中のノート</h3>
 
-    <%if @my_documents_released.length == 0%>
-      <p class='mt-5'style="font-size:30px;">公開中のノートはありません</p>
-    <%else%>
-
-      <div class="card-deck">
-        <% @my_documents_released.each do |document| %>
-        <div class="col-md-3">
-          <div class="card">
-        <%if document.template.picture?%>
-            <%if Rails.env.production?%>
-                    <%= cl_image_tag(document.template.picture,:class => 'card-img-top')%>
-            <%else%>
-            <%= image_tag document.template.picture.url,:class => 'card-img-top'%>
-            <%end%>
-
+        <%if @my_documents_released.length == 0%>
+        <p class='mt-3' style="font-size:20px;">公開中のノートはありません</p>
         <%else%>
-            <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
-        <%end%>
-            <div class="card-body px-2 py-3 border-top">
-              <h5 class="card-title">
-                <p>
-                  <%= link_to document.title ,document, data: {"turbolinks" => false}%>
-                </p>
-                <p style="font-size:5%;">アシスタント</p>
-                <p style="font-size:5%;">・
-                  <%= document.template.title %>
-                </p>
-              </h5>
-              <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
-              <div class='open'>
-              <% if document.scope == 0 %>
-              <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
-              <% elsif document.scope == 1%>
-              <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
-              <% end %>
+
+        <div class="card-deck">
+          <% @my_documents_released.each do |document| %>
+          <div class="col-md-3">
+            <div class="card">
+              <%if document.template.picture?%>
+                <%if Rails.env.production?%>
+                <%= cl_image_tag(document.template.picture,:class => 'card-img-top')%>
+                <%else%>
+                <%= image_tag document.template.picture.url,:class => 'card-img-top'%>
+                <%end%>
+
+              <%else%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
+              <%end%>
+              <div class="card-body px-2 py-3 border-top">
+                <h5 class="card-title">
+                  <p>
+                    <%= link_to document.title ,document, data: {"turbolinks" => false}%>
+                  </p>
+                  <p style="font-size:5%;">アシスタント</p>
+                  <p style="font-size:5%;">・
+                    <%= document.template.title %>
+                  </p>
+                </h5>
+                <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+
+                <div class='open'>
+                  <% if document.scope == 0 %>
+                  <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
+                  <% elsif document.scope == 1%>
+                  <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
+          <% end %>
         </div>
+        <% end %>
       </div>
-      <% end %>
 
       <div class="my_unreleased">
-      <h3>非公開のノート</h3>
-        
-      <%if @my_documents_unreleased.length == 0%>
-        <p class='mt-5'style="font-size:30px;">非公開のノートはありません</p>
-      <%else%>
-        
-      <div class="card-deck">
-        <% @my_documents_unreleased.each do |document| %>
-        <div class="col-md-3">
-          <div class="card img-thumbnail">
-            <%if document.template.picture?%>
-			          <%if Rails.env.production?%>
-                    <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
-			          <%else%>
-				            <%= image_tag document.template.picture.url,:class => 'ass-pic'%>
-			          <%end%>
-            <%else%>
+        <h3>非公開のノート</h3>
+
+        <%if @my_documents_unreleased.length == 0%>
+        <p class='mt-3' style="font-size:20px;">非公開のノートはありません</p>
+        <%else%>
+
+        <div class="card-deck">
+          <% @my_documents_unreleased.each do |document| %>
+          <div class="col-md-3">
+            <div class="card img-thumbnail">
+              <%if document.template.picture?%>
+                <%if Rails.env.production?%>
+                <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
+                <%else%>
+                <%= image_tag document.template.picture.url,:class => 'ass-pic'%>
+                <%end%>
+              <%else%>
               <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
-            <%end%>
-            <div class="card-body px-2 py-3 border-top">
-              <h5 class="card-title">
-                <p>
-                  <%= link_to document.title ,document, data: {"turbolinks" => false}%>
-                </p>
-                <p style="font-size:5%;">アシスタント</p>
-                <p style="font-size:5%;">・
-                  <%= document.template.title %>
-                </p>
-              </h5>
-              <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
-              <div class = 'open'>
-              <% if document.scope == 0 %>
-              <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
-              <% elsif document.scope == 1%>
-              <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
-              <% end %>
+              <%end%>
+              <div class="card-body px-2 py-3 border-top">
+                <h5 class="card-title">
+                  <p>
+                    <%= link_to document.title ,document, data: {"turbolinks" => false}%>
+                  </p>
+                  <p style="font-size:5%;">アシスタント</p>
+                  <p style="font-size:5%;">・
+                    <%= document.template.title %>
+                  </p>
+                </h5>
+                <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+
+                <div class='open'>
+                  <% if document.scope == 0 %>
+                  <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
+                  <% elsif document.scope == 1%>
+                  <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
+                  <% end %>
+                </div>
+
               </div>
             </div>
           </div>
+          <% end %>
         </div>
-      </div>
-      <% end %>
+        <% end %>
       </div>
 
       <div style="padding-top: 160px;">
         <%= link_to "+", new_document_path, class: 'btn btn-success rounded-circle p-0 float-right',style: 'width:6rem;height:6rem; font-size:3.5rem;' %>
       </div>
+
     </div>
   </div>
 </div>
