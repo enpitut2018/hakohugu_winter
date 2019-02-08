@@ -7,8 +7,9 @@ class TemplatesController < ApplicationController
     @my_templates_unreleased=@user.templates.where(scope: 0)
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
 
+    @templates_released = Template.where(scope: 1)
     @category_name = []
-    @my_templates_released.each do |template_released|
+    @templates_released.each do |template_released|
       @category_name.push(template_released.category.name)
     end
 
