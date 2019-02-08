@@ -2,6 +2,9 @@
 	<h1>ノート一覧</h1>
   <div class="row">
     <div class="col-md-12">
+    <%if @documents.length == 0%>
+      <p class='mt-5'style="font-size:30px;">ノートがまだありません</p>
+    <%else%>
       <div class="card-deck">
         <% @documents.each do |document| %>
         <div class="col-md-3">
@@ -31,6 +34,7 @@
         </div>
         <% end %>
       </div>
+    <%end%>
       <div style="padding-top: 160px;">
         <%= link_to "+", new_document_path, class: 'btn btn-success rounded-circle p-0 float-right',style: 'width:6rem;height:6rem; font-size:3.5rem;' %>
       </div>
