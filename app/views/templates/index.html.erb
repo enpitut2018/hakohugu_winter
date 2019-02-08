@@ -44,7 +44,7 @@
         <div class="card-deck"> 
           <% @templates.each do |template| %>
           <div class="col-md-3">
-            <div class="card img-thumbnail">
+            <div class="card">
               <%if template.picture?%>
 			    <%if Rails.env.production?%>
                   <%= cl_image_tag(template.picture)%>
@@ -56,7 +56,9 @@
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
+				  <p>
                   <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+				  </p>
                 </h5>
                 <p style="font-size:5%;">カテゴリ</p>
                 <p style="font-size:5%;">・
