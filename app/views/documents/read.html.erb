@@ -29,13 +29,12 @@
       <span class = 'font-weight-bold'> トピック:</span><span class='mr-3'><%= @template.topic%></span>
       <span class = 'font-weight-bold ml-3'>カテゴリ: </span><span><%= @category.name%></span>
     </div>
+  
+</div>
 
-    <div>
-
-    
-
+ <div class='note_read_only'>
     <%= fields_for @document do |f| %>
-      <%= f.text_area :content %>
+      <%= f.text_area :content%>
     <% end %>
 
 
@@ -48,8 +47,4 @@
 
          simplemde.togglePreview();
       </script>
-    </div>
-     
   </div>
-  
-</div>
