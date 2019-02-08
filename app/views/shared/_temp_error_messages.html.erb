@@ -1,7 +1,7 @@
 <% if @template.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      アシスタントに<%= @template.errors.count %>つのエラーが見つかりました。
+      <%= @template.errors.count %>つのエラーが見つかりました。
     </div>
     <ul>
     <% @template.errors.full_messages.each do |msg| %>
