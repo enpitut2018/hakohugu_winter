@@ -45,7 +45,6 @@ class TemplatesController < ApplicationController
       if @template.save #templateの保存とバリデーションチェック
         redirect_to templates_path
       else
-        flash.now[:alert] #エラーメッセージの表示
         @category.destroy
         render :new
         # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
@@ -54,7 +53,6 @@ class TemplatesController < ApplicationController
       if @template.save #バリデーションチェック用
         @template.destroy
       end
-      flash.now[:alert] #エラーメッセージの表示
       render :new
       # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
@@ -75,12 +73,10 @@ class TemplatesController < ApplicationController
       if @template.update_attributes(template_params)
         render 'show'
       else
-        flash.now[:alert] # = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
         render :edit
         # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-      flash.now[:alert] # = "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       render :edit
       # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
