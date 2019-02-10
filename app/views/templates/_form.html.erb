@@ -1,4 +1,5 @@
 <%= form_for @template do |f| %>
+<%= render 'shared/temp_error_messages' %>
 <div class="form-group">
   <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
   <%= f.text_field :title, class: 'form-control'%>
