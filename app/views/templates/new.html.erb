@@ -4,15 +4,6 @@
     <h1>新規アシスタント作成</h1>
   </div>
 
-  <!-- エラーメッセージを表示 -->
-  <% if flash[:alert] %>
-    <div id="error_explanation">
-      <div class="alert alert-danger">
-        <%= flash[:alert] %>
-      </div>
-    </div>
-  <% end %>
-
   <!--ここから「入力フォーム」-->
   <%= render 'form', {template: @template}%>
 
