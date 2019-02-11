@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class=col-4>
-      <div class="card img-thumbnail">
+      <div class="card img-thumbnail" style="height: auto;">
         <%if @user.picture?%>
 		  <%if Rails.env.production?%>
             <%= cl_image_tag(@user.picture,:class => 'card-img-top')%>
@@ -13,17 +13,25 @@
         <%end%>
         <div class="card-body px-2 py-3 border-top">
           <h5 class="card-title">
+		    <p>
             <%= @user.name %>
+			</p>
           </h5>
           <% if current_user?(@user)%>
             <p class="card-text">メール:<br>
               <%= @user.email %>
             </p>
           <% end %>
-		  <p class="card-text">プロフィール:<br>
-            <%= @user.bio %>
-          </p>
-		  <% if @user.link1?%>
+		  <% if @user.bio?%>
+		    <p class="card-text">プロフィール:<br>
+			  <% text = @user.bio
+                  uri_reg = URI.regexp(%w[http https])
+                  text.gsub!(uri_reg) {%Q{<a href="#{$&}">#{$&}</a>}}%>
+              <%= text.html_safe %>
+			  
+            </p>
+		  <%end%>
+		  <!--<% if @user.link1?%>
 		    <p class="card-text">ホームページ、SNS:<br>
               <a href="<%= @user.link1 %>"><%= @user.link1 %></a><br>
 			  <% if @user.link2?%>
@@ -33,11 +41,15 @@
 			    <a href="<%= @user.link3 %>"><%= @user.link3 %></a><br>
 			  <%end%>
             </p><br>
-		  <%end%>
-		  <% if current_user?(@user)%>
-            <%= link_to "編集", edit_user_path(@user.id)%><br>
-			<%= link_to "退会", @user, method: :delete,data: { confirm: "本当に退会しますか?退会後のユーザ情報、作成したノートやアシスタントは復元できません。" } %>
-          <% end %>
+		  <%end%>-->
+		  <div class="card-footer">
+		    
+		    <% if current_user?(@user)%>
+              <%= link_to "編集", edit_user_path(@user.id)%><br>
+			  <%= link_to "退会", @user, method: :delete,data: { confirm: "本当に退会しますか?退会後のユーザ情報、作成したノートやアシスタントは復元できません。" } %>
+            <% end %>
+			
+          </div>
         </div>
       </div>
     </div>
@@ -55,20 +67,22 @@
         <div class="card-deck">
 		<%if @my_templates_unreleased.length > 0 %>
           <% @my_templates_unreleased.each do |template_u| %>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="card img-thumbnail">
               <%if template_u.picture?%>
 			  　　<%if Rails.env.production?%>
-                   <%= cl_image_tag(template_u.picture,:class => 'ass-pic')%>
+                   <%= cl_image_tag(template_u.picture,:class => 'card-img-top')%>
 				 <%else%>
-				   <%= image_tag template_u.picture.url,:class => 'ass-pic'%>
+				   <%= image_tag template_u.picture.url,:class => 'card-img-top'%>
 				 <%end%>
               <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
+				  <p>
                   <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
+				  </p>
                 </h5>
                 <p style="font-size:5%;">カテゴリ</p>
                 <p style="font-size:5%;">・
@@ -90,20 +104,22 @@
         <div class="card-deck">
 		<%if @my_templates_released.length > 0 %>
           <% @my_templates_released.each do |template| %>
-          <div class="col-md-3">
+          <div class="col-md-6">
             <div class="card img-thumbnail">
               <%if template.picture?%>
 			    <%if Rails.env.production?%>
-                   <%= cl_image_tag(template.picture,:class => 'ass-pic')%>
+                   <%= cl_image_tag(template.picture,:class => 'card-img-top')%>
 				 <%else%>
-				   <%= image_tag template.picture.url,:class => 'ass-pic'%>
+				   <%= image_tag template.picture.url,:class => 'card-img-top'%>
 				 <%end%>
               <%else%>
-              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic card-img-top'%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
+				  <p>
                   <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+				  </p>
                 </h5>
                 <p style="font-size:5%;">カテゴリ</p>
                 <p style="font-size:5%;">・
