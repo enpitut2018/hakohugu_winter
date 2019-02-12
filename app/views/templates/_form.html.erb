@@ -49,34 +49,41 @@
     <%end%>
   <% end %>
 
-  <%
-=begin%>
- <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {:class => "custom-select"}) %> 
-<%
-=end%>
-
 </div>
 
 <h3>質問</h3>
-
-<h3>質問</h3>
-<div class="form-group">
-    <%= f.label :title, "質問" ,class: 'font-weight-bold'%>
-    <% if @parents_template%>
-      <%= f.text_field :questions_attributes, class: 'form-control',value: @parents_template.questions%>
-    <% else %>
-      <%= f.text_field :questions_attributes, class: 'form-control'%>
-    <%end%>
-</div>
-
 
 <div id="questions">
-  <%= f.fields_for :questions do |question| %>
-    <%= render 'question_fields', f: question %>
-  <% end %>
-  <div class="links">
-    <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
-  </div>
+  <% if @parents_template%>
+    <%@questions.each do |q|%>
+      <div class="nested-fields">
+        <div class="form-group">
+          <%= f.label :qtext, "質問" ,class: 'font-weight-bold' %>
+          <%= f.text_field :qtext, class: 'form-control' ,value: q.qtext%>
+          <br/>
+          <%= f.label :qdetail, "質問の意図や意味" ,class: 'font-weight-bold'%>
+          <%= f.text_field :qdetail, class: 'form-control' ,value: q.qdetail%>
+          <br/>
+          <%= f.label :example, "回答例" ,class: 'font-weight-bold'%>
+          <%= f.text_field :example, class: 'form-control' ,value: q.example%>
+          <br/>
+        </div>
+      <%= link_to_remove_association "この質問を削除", f ,class: 'btn btn-danger mb-5'%>
+      </div>
+    <% end %>
+
+    <%= f.fields_for :questions do |question| %>
+      <%= render 'question_fields', f: question %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
+    </div>
+  <% else %>
+    <div class="links">
+      <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
+    </div>
+  <%end%>
 </div>
 
 <div class="actions">

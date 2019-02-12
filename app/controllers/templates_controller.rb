@@ -13,8 +13,10 @@ class TemplatesController < ApplicationController
     @category=Category.new
     @submit='作成'
     @parents_template_id = params[:id]
+    @questions = params[:id]
     if @parents_template_id
       @parents_template = Template.find(@parents_template_id)
+      @questions = Question.where(template_id: @parents_template_id)
     end
     
   end
@@ -47,12 +49,12 @@ class TemplatesController < ApplicationController
     @template=Template.find(params[:id])
     @category=Category.find(@template.category.id)
     @submit='更新'
+    @questions=Question.where(template_id: @template.id)
   end
 
   def update
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id)
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
         render 'show'
