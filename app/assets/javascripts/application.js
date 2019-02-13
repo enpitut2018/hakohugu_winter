@@ -17,4 +17,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require cocoon
+//= require simplemde.min
 //= require jquery-ui
+

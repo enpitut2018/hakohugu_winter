@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+  <h2>「<%= link_to @template.title,template_path(@template.id),data: {"turbolinks" => false}%>」を使ったみんなのノート</h2>
+    <div class="col-md-12">
+      <div class="card-deck">
+        <% @documents.each do |document| %>
+        <div class="col-md-3">
+          <div class="card img-thumbnail">
+            <%if document.template.picture?%>
+			  <%if Rails.env.production?%>
+                <%= cl_image_tag(document.template.picture,:class => 'ass-pic')%>
+			  <%else%>
+				<%= image_tag document.template.picture.url,:class => 'ass-pic'%>
+			  <%end%>
+            <%else%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'ass-pic'%>
+            <%end%>
+            <div class="card-body px-2 py-3 border-top">
+              <h5 class="card-title">
+                <p>
+                  <%= link_to document.title,read_document_path(document.id), data: {"turbolinks" => false}%>
+                </p>
+                <p style="font-size:5%;">アシスタント</p>
+                <p style="font-size:5%;">・
+                  <%= document.template.title %>
+                </p>
+              </h5>
+              <% if document.user_id == @user.id %>
+              <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+              <% if document.scope == 1%>
+              <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+              <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div style="padding-top: 160px;">
+        <%= link_to "+", new_document_path, class: 'btn btn-success rounded-circle p-0 float-right',style: 'width:6rem;height:6rem; font-size:3.5rem;' %>
+      </div>
+    </div>
+  </div>
+</div>
