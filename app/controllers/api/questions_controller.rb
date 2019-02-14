@@ -6,9 +6,9 @@ class Api::QuestionsController < ApplicationController
      template_id = @document.template_id
      @template = Template.find(template_id)
      @questions = @template.questions
-     @template.picture? ? @image_path1 = view_context.image_path(@template.picture.url) : @image_path1 = view_context.image_path('hakohugu 200X200.png')
+     @template.picture? ? @image_path1 = view_context.cl_image_path(@template.picture) : @image_path1 = view_context.image_path('hakohugu 200X200.png')
      @user = @document.user
-     @user.picture? ? @image_path2 = view_context.image_path(@user.picture.url) : @image_path2 = view_context.image_path('hakohugu2 200X200.png')
+     @user.picture? ? @image_path2 = view_context.cl_image_path(@user.picture) : @image_path2 = view_context.image_path('hakohugu2 200X200.png')
      render 'show', formats: 'json', handlers: 'jbuilder'
    end
 
