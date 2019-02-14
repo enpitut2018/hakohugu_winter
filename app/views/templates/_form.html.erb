@@ -80,6 +80,9 @@
       <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
     </div>
   <% else %>
+    <%= f.fields_for :questions do |question| %>
+      <%= render 'question_fields', f: question %>
+    <% end %>
     <div class="links">
       <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
     </div>

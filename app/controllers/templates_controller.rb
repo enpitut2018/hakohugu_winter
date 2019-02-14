@@ -72,7 +72,7 @@ class TemplatesController < ApplicationController
     @category=Category.find(@template.category_id)
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
-        render 'show'
+        redirect_to template_path
       else
         redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
       end
