@@ -29,10 +29,12 @@ class TemplatesController < ApplicationController
     @category=Category.new
     @submit='作成'
     @parents_template_id = params[:id]
-    @questions = params[:id]
     if @parents_template_id
-      @parents_template = Template.find(@parents_template_id)
-      @questions = Question.where(template_id: @parents_template_id)
+      parents_template = Template.find(@parents_template_id)
+      if parents_template.scope == 1
+         @parents_template = parents_template
+         @parents_questions = @parents_template.questions
+      end
     end
   end
 
