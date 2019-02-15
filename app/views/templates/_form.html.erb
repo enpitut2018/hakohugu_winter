@@ -2,6 +2,7 @@
 <%= render 'shared/temp_error_messages' %>
 <div class="form-group">
   <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
+  <span class="must">[必須]</span>
   <%= f.text_field :title, class: 'form-control'%>
 </div>
 
@@ -23,6 +24,7 @@
 
 <div class="form-group">
   <%= f.label :topic, "概要" ,class: 'font-weight-bold'%>
+  <span class="must">[必須]</span>
   <p>
     誰がどんな目的で何をすることを助けるアシスタントなのかの説明
   </p>
@@ -32,6 +34,7 @@
 <div class="form-group">
   <%= fields_for @category do |i| %>
     <%= i.label :name, "カテゴリ" ,class: 'font-weight-bold'%>
+    <span class="must">[必須]</span>
     <%= i.text_field :name ,class: 'form-control' , id: :category_name%>
   <% end %>
 
