@@ -62,6 +62,7 @@ class TemplatesController < ApplicationController
   def edit
     @template=Template.find(params[:id])
     @category=Category.find(@template.category.id)
+	@questions=Question.where(template_id: @template.id).order(:id)
     @submit='更新'
   end
 

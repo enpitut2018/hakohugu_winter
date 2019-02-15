@@ -47,9 +47,9 @@
             <div class="card">
               <%if template.picture?%>
 			    <%if Rails.env.production?%>
-                  <%= cl_image_tag(template.picture)%>
+                  <%= cl_image_tag(template.picture,:class => 'card-img-top')%>
 			    <%else%>
-			      <%= image_tag template.picture.url %>
+			      <%= image_tag template.picture.url,:class => 'card-img-top' %>
 			    <%end%>
               <%else%>
                 <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
