@@ -62,7 +62,9 @@
     </div>
 </div>
 
+<%if @parent_template%>
 <%= f.hidden_field :parent_template_id, value: @parents_template.id %> 
+<%end%>
 
 <div class="actions">
   <%= f.submit @submit, class: "btn btn-primary mb-5"%>
