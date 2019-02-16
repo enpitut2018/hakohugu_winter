@@ -44,7 +44,6 @@ class TemplatesController < ApplicationController
     @questions=Question.where(template_id: @template.id)
     @document = Document.new
     @parent_tamplates= find_parent_templates(@template,[@template])
-    print @parent_tamplates
   end
 
   def create
