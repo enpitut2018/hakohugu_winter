@@ -43,6 +43,8 @@ class TemplatesController < ApplicationController
     @category=Category.find(@template.category_id)
     @questions=Question.where(template_id: @template.id)
     @document = Document.new
+    @parent_tamplates= find_parent_templates(@template,[@template])
+    print @parent_tamplates
   end
 
   def create
@@ -52,7 +54,7 @@ class TemplatesController < ApplicationController
       @template.category_id = @category.id
       @template.scope = 0
       if @template.save
-        redirect_to templates_path
+        redirect_to @template
       else
         @category.destroy
         redirect_to new_template_path, alert: "アシスタントのタイトル、または概要を入力してください。"
@@ -116,7 +118,7 @@ class TemplatesController < ApplicationController
   private
 
     def template_params
-        params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+        params.require(:template).permit(:title,:topic,:category_id,:picture,:parent_template_id,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
     end
 
     def category_params
@@ -128,6 +130,17 @@ class TemplatesController < ApplicationController
       unless logged_in?
         flash[:danger] = "ログインしてください"
         redirect_to login_url
+      end
+    end
+
+    #再帰で歴代親テンプレートをとってくる。
+    def find_parent_templates(template,array)
+      if template.parent_template_id
+        parent_template = Template.find(template.parent_template_id)
+        array.unshift(parent_template)
+        find_parent_templates(parent_template,array)
+      else
+        return array
       end
     end
 
