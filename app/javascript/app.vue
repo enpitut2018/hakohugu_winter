@@ -235,7 +235,9 @@ export default {
           that.note = simplemde.value();
         });
         this.checkBrowser();
-		setInterval(() => {this.autoSave()},10000);
+        setInterval(() => {
+          this.autoSave();
+        }, 10000);
       });
   },
 
@@ -338,7 +340,7 @@ export default {
     },
     addAnswerToNote: function() {
       this.note +=
-        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + "  " + this.questions[this.count].qtext + "\n";
       this.note += `  ## ${this.answer}` + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
@@ -458,7 +460,7 @@ export default {
     /*質問を飛ばす時に行う処理*/
     addSkipQuestionToNote: function() {
       this.note +=
-        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + "  " + this.questions[this.count].qtext + "\n";
       this.note += "\t" + "" + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
@@ -564,22 +566,19 @@ export default {
           );
         });
     },
-	autoSave: function(){
-	
-		 let document = this.note;
-       axios
-        .patch("", {
-          title: this.title,
-          content: document,
-          conversation_logs: JSON.stringify(this.conversationLogs),
-          question_number: this.count,
-          count_t: this.count_t,
-          count_d: this.count_d,
-          count_e: this.count_e,
-          count_called_h: this.count_called_h,
-          sum_h: this.sum_h
-        });
-		
+    autoSave: function() {
+      let document = this.note;
+      axios.patch("", {
+        title: this.title,
+        content: document,
+        conversation_logs: JSON.stringify(this.conversationLogs),
+        question_number: this.count,
+        count_t: this.count_t,
+        count_d: this.count_d,
+        count_e: this.count_e,
+        count_called_h: this.count_called_h,
+        sum_h: this.sum_h
+      });
     },
     record: function() {
       var that = this;
