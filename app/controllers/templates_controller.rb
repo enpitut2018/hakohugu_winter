@@ -27,13 +27,14 @@ class TemplatesController < ApplicationController
 
   def new
     @template=Template.new
+	@template.questions.build
     @category=Category.new
   end
 
   def show
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id).order(:id)
+    @questions=@template.questions.order(:id)
     @document = Document.new
   end
 
@@ -62,14 +63,14 @@ class TemplatesController < ApplicationController
   def edit
     @template=Template.find(params[:id])
     @category=Category.find(@template.category.id)
-	@questions=Question.where(template_id: @template.id).order(:id)
+	@questions=@template.questions.order(:id)
     @submit='更新'
   end
 
   def update
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id).order(:id)
+    @questions=@template.questions.order(:id)
     @document=Document.new
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
@@ -118,6 +119,10 @@ class TemplatesController < ApplicationController
 
     def template_params
         params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+    end
+	
+	def question_params
+        params.require(:question).permit(:qtext, :qdetail, :example)
     end
 
     def category_params
