@@ -41,4 +41,4 @@ yarn-debug.log*
 /public/uploads
 
 #vscode
-.vscode/ 
+.vscode/

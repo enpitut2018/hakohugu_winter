@@ -7,8 +7,9 @@ class TemplatesController < ApplicationController
     @my_templates_unreleased=@user.templates.where(scope: 0)
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
 
+    @templates_released = Template.where(scope: 1)
     @category_name = []
-    @my_templates_released.each do |template_released|
+    @templates_released.each do |template_released|
       @category_name.push(template_released.category.name)
     end
 
@@ -19,7 +20,7 @@ class TemplatesController < ApplicationController
     @category_name = @category_name.to_h.first(3).to_h
 
     @categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
-    
+
   end
 
 
@@ -48,18 +49,23 @@ class TemplatesController < ApplicationController
 
   def create
     @category=Category.new(category_params)
+    @template=Template.new(template_params)
+    @template.scope = 0
     if @category.save
-      @template=Template.new(template_params)
       @template.category_id = @category.id
-      @template.scope = 0
-      if @template.save
+      if @template.save #templateの保存とバリデーションチェック
         redirect_to @template
       else
         @category.destroy
-        redirect_to new_template_path, alert: "アシスタントのタイトル、または概要を入力してください。"
+        render :new
+        # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-       redirect_to new_template_path, alert: "カテゴリを入力してください。"
+      if @template.save #バリデーションチェック用
+        @template.destroy
+      end
+      render :new
+      # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
@@ -77,10 +83,12 @@ class TemplatesController < ApplicationController
       if @template.update_attributes(template_params)
         redirect_to template_path
       else
-        redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+        render :edit
+        # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-      redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+      render :edit
+      # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
