@@ -35,7 +35,7 @@ class TemplatesController < ApplicationController
       parents_template = Template.find(@parents_template_id)
       if parents_template.scope == 1
          @parents_template = parents_template
-         @parents_questions = @parents_template.questions
+         @parents_questions = @parents_template.questions.order(:id)
       end
     end
   end
@@ -75,7 +75,6 @@ class TemplatesController < ApplicationController
     @category=Category.find(@template.category.id)
 	@questions=@template.questions.order(:id)
     @submit='更新'
-    @questions=Question.where(template_id: @template.id)
   end
 
   def update
