@@ -342,7 +342,7 @@ export default {
     },
     addAnswerToNote: function() {
       this.note +=
-        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + "  " + this.questions[this.count].qtext + "\n";
       this.note += `  ## ${this.answer}` + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
@@ -462,7 +462,7 @@ export default {
     /*質問を飛ばす時に行う処理*/
     addSkipQuestionToNote: function() {
       this.note +=
-        ` Q${this.count + 1}` + this.questions[this.count].qtext + "\n";
+        ` Q${this.count + 1}` + "  " + this.questions[this.count].qtext + "\n";
       this.note += "\t" + "" + "\n";
       simplemde.value(this.note);
       setTimeout(function() {
