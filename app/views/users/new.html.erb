@@ -9,21 +9,25 @@
 
     <div class="form-group">
       <%= f.label :名前 %>
+      <span class="must">[必須]</span>
       <%= f.text_field :name , class: 'form-control'%>
     </div>
 
     <div class="form-group">
       <%= f.label :メールアドレス %>
+      <span class="must">[必須]</span>
       <%= f.email_field :email , class: 'form-control'%>
     </div>
 
     <div class="form-group">
       <%= f.label :パスワード %>
+      <span class="must">[必須]</span>
       <%= f.password_field :password , class: 'form-control'%>
     </div>
 
     <div class="form-group">
       <%= f.label :パスワードの確認%>
+      <span class="must">[必須]</span>
       <%= f.password_field :password_confirmation , class: 'form-control'%>
     </div>
 	
