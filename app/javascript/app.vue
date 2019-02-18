@@ -7,6 +7,7 @@
       <div class="col">
         <button v-if="test_flag" type="button" class="btn btn-success" @click="endTest">テストを終了</button>
         <button v-else type="button" class="btn btn-success" @click="saveNote">ノートを保存</button>
+        <span class="ml-3">{{auto_save_text}}</span>
       </div>
     </div>
 
@@ -208,7 +209,8 @@ export default {
       record_flag: false,
       chrome: false,
       test_flag: false,
-      read_flag: false
+      read_flag: false,
+      auto_save_text: ""
     };
   },
 
@@ -579,6 +581,28 @@ export default {
         count_called_h: this.count_called_h,
         sum_h: this.sum_h
       });
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      var hour = date.getHours();
+      var minute = date.getMinutes();
+      var second = date.getSeconds();
+
+      this.auto_save_text =
+        "自動保存しました  " +
+        year +
+        "/" +
+        month +
+        "/" +
+        day +
+        "  " +
+        hour +
+        "時" +
+        minute +
+        "分" +
+        second +
+        "秒";
     },
     record: function() {
       var that = this;
