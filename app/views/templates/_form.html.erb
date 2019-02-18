@@ -45,13 +45,12 @@
 
 <h3>質問</h3>
 <div id="questions">
-
-    <%= render 'question_fields', object:@question %>
-  
- 
-  <div class="links">
-    <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
-  </div>
+  <%= f.fields_for :questions, @questions do |question| %>
+  <%= render 'question_fields', f: question %>
+<% end %>
+<div class="links">
+  <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
+</div>
 </div>
 
 <div class="actions">
