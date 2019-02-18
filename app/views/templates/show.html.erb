@@ -24,6 +24,18 @@
     </div>
   </div>
 
+  <div class='mb-5'>
+    <p class ='font-weight-bold h5'>引用されたアシスタント</p>
+    <%@parent_tamplates.each_with_index do |template,index|%>
+      <%if index != @parent_tamplates.length-1 %>
+        <p>・<%= link_to template.title,template %></p>
+        <p>&darr; &darr; &darr; &darr; &darr; &darr; &darr; &darr; &darr;</p>
+      <%else%>
+         <p>・<%= link_to template.title,template %>(現在のアシスタント)</p>
+      <%end%>
+    <%end%>
+  </div>
+
   <div>
     <% if @template.scope == 0 %>
       <span class='h4 mt-5'>
@@ -67,11 +79,14 @@
             <%= f.label :ノートタイトル %>
             <%= f.text_field :title, class: 'form-control w-50 mx-auto', value:'無題'  %>
         </div>
-           
+
         <%= f.hidden_field :template_id, :value => @template.id %>
 
         <div class="form-group">
           <%= f.submit "このアシスタントとトークを開始", class: "btn btn-primary" %>
+        </div>
+        <div class="re-form-group">
+          <span><%= link_to "このアシスタントを引用して新規アシスタントの作成",new_template_path(id: @template.id)%></span>
         </div>
       <% end %>
     <% end %>
