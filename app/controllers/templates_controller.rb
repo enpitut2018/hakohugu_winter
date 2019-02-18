@@ -29,6 +29,15 @@ class TemplatesController < ApplicationController
     @template=Template.new
 	@template.questions.build
     @category=Category.new
+    @submit='作成'
+    @parents_template_id = params[:id]
+    if @parents_template_id
+      parents_template = Template.find(@parents_template_id)
+      if parents_template.scope == 1
+         @parents_template = parents_template
+         @parents_questions = @parents_template.questions
+      end
+    end
   end
 
   def show
@@ -36,6 +45,7 @@ class TemplatesController < ApplicationController
     @category=Category.find(@template.category_id)
     @questions=@template.questions.order(:id)
     @document = Document.new
+    @parent_tamplates= find_parent_templates(@template,[@template])
   end
 
   def create
@@ -45,7 +55,7 @@ class TemplatesController < ApplicationController
     if @category.save
       @template.category_id = @category.id
       if @template.save #templateの保存とバリデーションチェック
-        redirect_to templates_path
+        redirect_to @template
       else
         @category.destroy
         render :new
@@ -65,16 +75,19 @@ class TemplatesController < ApplicationController
     @category=Category.find(@template.category.id)
 	@questions=@template.questions.order(:id)
     @submit='更新'
+    @questions=Question.where(template_id: @template.id)
   end
 
   def update
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
+
     @questions=@template.questions.order(:id)
     @document=Document.new
+
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
-        render 'show'
+        redirect_to template_path
       else
         render :edit
         # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
@@ -118,7 +131,7 @@ class TemplatesController < ApplicationController
   private
 
     def template_params
-        params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+        params.require(:template).permit(:title,:topic,:category_id,:picture,:parent_template_id,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
     end
 	
 	def question_params
@@ -134,6 +147,17 @@ class TemplatesController < ApplicationController
       unless logged_in?
         flash[:danger] = "ログインしてください"
         redirect_to login_url
+      end
+    end
+
+    #再帰で歴代親テンプレートをとってくる。
+    def find_parent_templates(template,array)
+      if template.parent_template_id
+        parent_template = Template.find(template.parent_template_id)
+        array.unshift(parent_template)
+        find_parent_templates(parent_template,array)
+      else
+        return array
       end
     end
 

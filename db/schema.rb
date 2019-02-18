@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_01_074213) do
+ActiveRecord::Schema.define(version: 2019_02_16_052059) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 2019_02_01_074213) do
     t.string "topic"
     t.string "picture"
     t.integer "likes_count", default: 0, null: false
+    t.integer "parent_template_id"
     t.index ["category_id"], name: "index_templates_on_category_id"
     t.index ["user_id"], name: "index_templates_on_user_id"
   end
