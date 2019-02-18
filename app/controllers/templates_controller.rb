@@ -111,13 +111,13 @@ class TemplatesController < ApplicationController
   end
 
   def category_auto_complete
-    categories = Category.select(:name).where("name like '%" + params[:term] + "%'").order(:name)
+    categories = Category.select(:name).where("name like '%" + params[:term] + "%'").distinct.order(:name)
     categories = categories.map(&:name)
     render json: categories.to_json
   end
 
   def template_auto_complete
-    templates = Template.where(scope: 1).select(:title).where("title like '%" + params[:term] + "%'").order(:title)
+    templates = Template.where(scope: 1).select(:title).where("title like '%" + params[:term] + "%'").distinct.order(:title)
     templates = templates.map(&:title)
     render json: templates.to_json
   end
