@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :logged_in_user, only: [:index,:new, :update,:show]
+  before_action :logged_in_user
   before_action :correct_user,   only: [:show]
   protect_from_forgery except: :test
   
@@ -87,9 +87,13 @@ class DocumentsController < ApplicationController
 
   def read
     @document = Document.find(params[:id])
-    @template = Template.find(@document.template_id)
-    @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id)
+    if @document.scope == 0
+      redirect_to documents_open_path
+    else
+      @template = Template.find(@document.template_id)
+      @category=Category.find(@template.category_id)
+      @questions=Question.where(template_id: @template.id)
+    end
   end
 
 
