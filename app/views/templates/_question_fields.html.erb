@@ -1,13 +1,13 @@
 <div class="nested-fields">
   <div class="form-group">
     <%= f.label :qtext, "質問" ,class: 'font-weight-bold' %>
-    <%= f.text_field :qtext, class: 'form-control' %>
+    <%= f.text_field :qtext, {class: 'form-control qtext'}%>
     <br/>
     <%= f.label :qdetail, "質問の意図や意味" ,class: 'font-weight-bold'%>
-    <%= f.text_field :qdetail, class: 'form-control' %>
+    <%= f.text_field :qdetail,{class: 'form-control qdetail'}%>
     <br/>
     <%= f.label :example, "回答例" ,class: 'font-weight-bold'%>
-    <%= f.text_field :example, class: 'form-control' %>
+    <%= f.text_field :example, {class: 'form-control example',id: 'example'} %>
     <br/>
   </div>
   <%= link_to_remove_association "この質問を削除", f ,class: 'btn btn-danger mb-5'%>

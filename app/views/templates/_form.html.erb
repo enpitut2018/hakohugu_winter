@@ -1,9 +1,14 @@
 <%= form_for @template do |f| %>
 <%= render 'shared/temp_error_messages' %>
 <div class="form-group">
-  <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
-  <%= f.text_field :title, class: 'form-control'%>
+    <%= f.label :title, "アシスタント名" ,class: 'font-weight-bold'%>
+    <% if @parents_template%>
+      <%= f.text_field :title, class: 'form-control',value: @parents_template.title%>
+    <% else %>
+      <%= f.text_field :title, class: 'form-control'%>
+    <%end%>
 </div>
+
 
 <div class="form-group">
   <%= f.label :title, "アシスタント画像" ,class: 'font-weight-bold' %>
@@ -26,37 +31,46 @@
   <p>
     誰がどんな目的で何をすることを助けるアシスタントなのかの説明
   </p>
-  <%= f.text_field :topic, class: 'form-control'%>
+  <% if @parents_template%>
+    <%= f.text_field :topic, class: 'form-control',value: @parents_template.topic%>
+  <% else %>
+      <%= f.text_field :topic, class: 'form-control'%>
+  <%end%>
 </div>
 
 <div class="form-group">
   <%= fields_for @category do |i| %>
     <%= i.label :name, "カテゴリ" ,class: 'font-weight-bold'%>
-    <%= i.text_field :name ,class: 'form-control' , id: :category_name%>
+    <% if @parents_template%>
+      <%= i.text_field :name ,class: 'form-control',value: @parents_template.category.name%>
+    <% else %>
+      <%= i.text_field :name ,class: 'form-control'%>
+    <%end%>
   <% end %>
-
-  <%
-=begin%>
- <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {:class => "custom-select"}) %> 
-<%
-=end%>
 
 </div>
 
 <h3>質問</h3>
+
 <div id="questions">
-  <%= f.fields_for :questions do |question| %>
-  <%= render 'question_fields', f: question %>
-<% end %>
-<div class="links">
-  <%= link_to_add_association '+質問を追加', f, :questions, class: 'btn btn-light mb-5'%>
+    <%= f.fields_for :questions do |question| %>
+      <%= render 'question_fields', f: question %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association '+質問を追加', f, :questions, {class: 'btn btn-light mb-5',id: 'questionButton'}%>
+    </div>
 </div>
-</div>
+
+<%if @parent_template%>
+<%= f.hidden_field :parent_template_id, value: @parents_template.id %> 
+<%end%>
 
 <div class="actions">
   <%= f.submit @submit, class: "btn btn-primary mb-5"%>
 </div>
 <% end %>
+
+<input id="questionsData" type="hidden"  value="<%= @parents_questions.to_json if @parents_questions%>">
 
 <script>
 $( function() {
@@ -76,5 +90,41 @@ $( function() {
       results: function() {}
     }
   });
+
+  getQuestion()
+  .then(function(questions){return insertQuestionEvent(questions)})
+  .then(function(questions){clickButton(questions)})
+
 });
+
+function getQuestion(){
+  return new Promise(function(resolve,reject){
+    if($('#questionsData').val()){
+      var questions = JSON.parse($('#questionsData').val());
+    }
+    resolve(questions);    
+  });
+}
+
+function insertQuestionEvent(questions){
+  return new Promise(function(resolve,reject){
+    var i = 0;
+      $('#questions').on('cocoon:after-insert',function(){
+        $('#questions .qtext:last').val(questions[i].qtext);
+        $('#questions .qdetail:last').val(questions[i].qdetail);
+        $('#questions .example:last').val(questions[i].example);
+        i += 1;
+      })
+    resolve(questions);    
+  });
+}
+
+function clickButton(questions){
+  return new Promise(function(resolve,reject){
+    for(let j = 0; j<questions.length; j++){
+      $("#questionButton").trigger('click');
+    }
+    resolve();    
+  })
+}
 </script>
