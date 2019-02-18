@@ -56,13 +56,13 @@
 <h3>質問</h3>
 
 <div id="questions">
-    <%= f.fields_for :questions do |question| %>
-      <%= render 'question_fields', f: question %>
-    <% end %>
-    <div class="links">
-      <%= link_to_add_association '+質問を追加', f, :questions, {class: 'btn btn-light mb-5',id: 'questionButton'}%>
-    </div>
+  <%= f.fields_for :questions, @questions do |question| %>
+  <%= render 'question_fields', f: question %>
+<% end %>
+<div class="links">
+  <%= link_to_add_association '+質問を追加', f, :questions, {class: 'btn btn-light mb-5',id: 'questionButton'}%>
 </div>
+
 
 <%if @parents_template%>
 <%= f.hidden_field :parent_template_id, value: @parents_template.id %> 

@@ -27,6 +27,7 @@ class TemplatesController < ApplicationController
 
   def new
     @template=Template.new
+	@template.questions.build
     @category=Category.new
     @submit='作成'
     @parents_template_id = params[:id]
@@ -34,7 +35,7 @@ class TemplatesController < ApplicationController
       parents_template = Template.find(@parents_template_id)
       if parents_template.scope == 1
          @parents_template = parents_template
-         @parents_questions = @parents_template.questions
+         @parents_questions = @parents_template.questions.order(:id)
       end
     end
   end
@@ -42,7 +43,7 @@ class TemplatesController < ApplicationController
   def show
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id)
+    @questions=@template.questions.order(:id)
     @document = Document.new
     @parent_tamplates= find_parent_templates(@template,[@template])
   end
@@ -72,13 +73,17 @@ class TemplatesController < ApplicationController
   def edit
     @template=Template.find(params[:id])
     @category=Category.find(@template.category.id)
+	@questions=@template.questions.order(:id)
     @submit='更新'
-    @questions=Question.where(template_id: @template.id)
   end
 
   def update
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
+
+    @questions=@template.questions.order(:id)
+    @document=Document.new
+
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
         redirect_to template_path
@@ -126,6 +131,10 @@ class TemplatesController < ApplicationController
 
     def template_params
         params.require(:template).permit(:title,:topic,:category_id,:picture,:parent_template_id,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+    end
+	
+	def question_params
+        params.require(:question).permit(:qtext, :qdetail, :example)
     end
 
     def category_params
