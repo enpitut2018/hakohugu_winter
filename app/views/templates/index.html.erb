@@ -40,7 +40,7 @@
         <div class="card-deck"> 
           <% @templates.each do |template| %>
           <div class="col-md-3">
-            <div class="card">
+            <div class="card img-thumbnail">
               <%if template.picture?%>
 			    <%if Rails.env.production?%>
                   <%= cl_image_tag(template.picture,:class => 'card-img-top')%>
