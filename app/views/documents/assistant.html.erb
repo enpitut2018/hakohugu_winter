@@ -21,17 +21,21 @@
                   <p>
                     <%= link_to document.title,read_document_path(document.id), data: {"turbolinks" => false}%>
                   </p>
-                  <p style="font-size:5%;">アシスタント</p>
-                  <p style="font-size:5%;">・
+                </h5>
+                <h4 class="card-title">
+                  <p style="font-size:50%;">-アシスタント-</p>
+                  <p style="font-size:50%;">
                     <%= document.template.title %>
                   </p>
-                </h5>
-                <% if document.user_id == @user.id %>
-                  <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
-                  <% if document.scope == 1%>
-                    <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                </h4>
+                <div class="card-footer">
+                  <% if document.user_id == @user.id %>
+                    <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+                    <% if document.scope == 1%>
+                      <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>

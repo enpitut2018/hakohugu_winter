@@ -16,6 +16,6 @@ ja:
       question:
         id: ID
         qtext: 質問
-      template/questions: 
+      template/questions:
         id: ID
         qtext: 質問
