@@ -13,9 +13,9 @@
       すべてのカテゴリを見る
       </button>
 	  <p></p>
-      <div class="collapse" id="categories">
-        <% @categories.each do |category| %>
-            <%= link_to  "#{category.name}", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{category.name}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
+      <div class="collapse" id="categories">        
+        <% @categories.each do |category,value| %>
+            <%= link_to  "#{category}(#{value})", templates_path({"utf8"=>"✓", "select"=>"category", "search"=>"#{category}", "button"=>""}) , class: 'mr-4',style:'font-size: 1.5rem;'%>
           <%end%>
       </div>
 

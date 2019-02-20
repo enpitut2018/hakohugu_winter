@@ -17,9 +17,10 @@ class TemplatesController < ApplicationController
     @category_name = @category_name.sort do |a, b|
       b[1] <=> a[1]
     end
+    @categories = @category_name.to_h
     @category_name = @category_name.to_h.first(3).to_h
 
-    @categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
+    #@categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
 
   end
 
