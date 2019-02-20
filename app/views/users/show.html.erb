@@ -80,14 +80,16 @@
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
-				  <p>
-                  <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
-				  </p>
+				          <p>
+                    <%= link_to template_u.title ,template_path(template_u.id), data: {"turbolinks" => false}%>
+				          </p>
                 </h5>
-                <p style="font-size:5%;">カテゴリ</p>
-                <p style="font-size:5%;">・
-                  <%= template_u.category.name%>
-                </p>
+                <h4 class="card-title">
+                  <p style="font-size:50%;">-カテゴリ-</p>
+                  <p style="font-size:50%;">
+                    <%= template_u.category.name%>
+                  </p>
+                </h4>
               </div>
             </div>
           </div>
@@ -117,14 +119,16 @@
               <%end%>
               <div class="card-body px-2 py-3 border-top">
                 <h5 class="card-title">
-				  <p>
-                  <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
-				  </p>
+				          <p>
+                    <%= link_to template.title ,template_path(template.id), data: {"turbolinks" => false}%>
+				          </p>
                 </h5>
-                <p style="font-size:5%;">カテゴリ</p>
-                <p style="font-size:5%;">・
-                  <%= template.category.name%>
-                </p>
+                <h4 class="card-title">
+                  <p style="font-size:50%;">-カテゴリ-</p>
+                  <p style="font-size:50%;">
+                    <%= template.category.name%>
+                  </p>
+                </h4>
                 <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
                 <%= render "likes/like", template: template %>
                 </span>  
