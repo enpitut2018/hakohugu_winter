@@ -29,19 +29,23 @@
                   <p>
                     <%= link_to document.title ,document, data: {"turbolinks" => false}%>
                   </p>
-                  <p style="font-size:5%;">アシスタント</p>
-                  <p style="font-size:5%;">・
+                </h5>
+                <h4 class="card-title">
+                  <p style="font-size:50%;">-アシスタント-</p>
+                  <p style="font-size:50%;">
                     <%= document.template.title %>
                   </p>
-                </h5>
-                <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+                </h4>
+                <div class="card-footer">
+                  <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
 
-                <div class='open'>
-                  <% if document.scope == 0 %>
-                  <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
-                  <% elsif document.scope == 1%>
-                  <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
-                  <% end %>
+                  <div class='open'>
+                    <% if document.scope == 0 %>
+                    <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
+                    <% elsif document.scope == 1%>
+                    <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,19 +80,23 @@
                   <p>
                     <%= link_to document.title ,document, data: {"turbolinks" => false}%>
                   </p>
-                  <p style="font-size:5%;">アシスタント</p>
-                  <p style="font-size:5%;">・
+                </h5>
+                <h4 class="card-title">
+                  <p style="font-size:50%;">-アシスタント-</p>
+                  <p style="font-size:50%;">
                     <%= document.template.title %>
                   </p>
-                </h5>
-                <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
+                </h4>
+                <div class="card-footer">
+                  <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
 
-                <div class='open'>
-                  <% if document.scope == 0 %>
-                  <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
-                  <% elsif document.scope == 1%>
-                  <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
-                  <% end %>
+                  <div class='open'>
+                    <% if document.scope == 0 %>
+                    <%= link_to "公開する", release_document_path(document.id), data:{confirm: "このノートを公開します"}%><br>
+                    <% elsif document.scope == 1%>
+                    <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%><br>
+                    <% end %>
+                  </div>
                 </div>
 
               </div>

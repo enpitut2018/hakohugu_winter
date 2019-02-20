@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2 class="mb-4 mt-4">みんなのノート</h2>
+      <h1 class="mb-4 mt-4">みんなのノート</h1>
       <h3>アシスタントごとに表示</h3>
 
 
@@ -39,10 +39,12 @@
               <h5 class="card-title">
                 <%= link_to template.title ,documents_assistant_path(template.id), data: {"turbolinks" => false}%>
               </h5>
-              <p style="font-size:5%;">カテゴリ</p>
-              <p style="font-size:5%;">・
+              <h4 class="card-title">
+              <p style="font-size:50%;">-カテゴリ-</p>
+              <p style="font-size:50%;">
                   <%= template.category.name%>
               </p>
+              </h4>
               <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
                 <%= render "likes/like", template: template %>
               </span>
