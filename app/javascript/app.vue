@@ -99,7 +99,7 @@
                     title="質問の音読を終了"
                     @click="read_flag = false"
                   >
-                    <i class="fa fa-volume-off"></i>
+                    <i class="fa fa-volume-up"></i>
                   </button>
                 </template>
                 <template v-else>
@@ -108,7 +108,7 @@
                     title="質問の音読を開始"
                     @click="read_flag = true"
                   >
-                    <i class="fa fa-volume-up"></i>
+                    <i class="fa fa-volume-off"></i>
                   </button>
                 </template>
               </div>
@@ -117,12 +117,12 @@
               <div id="recordButton" v-if="chrome" class="col-sm-1 recordButton-col">
                 <template v-if="record_flag">
                   <button class="btn btn-secondary btn-block" title="音声入力を終了" @click="stop">
-                    <i class="fa fa-microphone-slash"></i>
+                    <i class="fa fa-microphone"></i>
                   </button>
                 </template>
                 <template v-else>
                   <button class="btn btn-secondary btn-block" title="音声入力を開始" @click="record">
-                    <i class="fa fa-microphone"></i>
+                    <i class="fa fa-microphone-slash"></i>
                   </button>
                 </template>
               </div>
