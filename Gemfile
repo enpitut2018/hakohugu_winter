@@ -67,6 +67,9 @@ gem 'mini_magick',             '4.7.0'
 gem 'fog',                     '1.40.0'
 gem 'cloudinary'
 
+#SimpleMDE 他の人のノート公開用
+gem 'simplemde-rails'
+
 #環境変数
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 

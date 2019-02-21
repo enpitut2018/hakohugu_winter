@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      template: アシスタント
+      question: 質問
+    attributes:
+      template:
+        id: ID
+        created_at: 登録日時
+        updated_at: 更新日時
+        title: アシスタント名
+        scope: 公開フラグ
+        topic: 概要
+        category: カテゴリ
+        picture_size: 画像サイズ
+      question:
+        id: ID
+        qtext: 質問
+      template/questions:
+        id: ID
+        qtext: 質問

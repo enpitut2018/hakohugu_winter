@@ -1,11 +1,13 @@
 class DocumentsController < ApplicationController
-  before_action :logged_in_user, only: [:index,:new, :update,:show]
+  before_action :logged_in_user
   before_action :correct_user,   only: [:show]
   protect_from_forgery except: :test
   
   def index
     @user = User.find(current_user.id)
     @documents = @user.documents.all
+    @my_documents_unreleased=@user.documents.where(scope: 0)
+    @my_documents_released=@user.documents.where(scope: 1)
   end
 
   def new
@@ -53,6 +55,47 @@ class DocumentsController < ApplicationController
       redirect_to @template
     end
   end
+
+  def release
+    @document = Document.find(params[:id])
+    if @document.scope == 0
+      val = 1
+    elsif @document.scope == 1
+      val = 0
+    end
+
+    if @document.update(scope: val)
+      @documents = Document.where('scope = ?',1)
+      redirect_to documents_path
+    else
+      render 'index'
+    end
+  end
+
+  def open
+    @templates=Template.paginate(page: params[:page],:per_page => 8).search(params[:search],params[:select]).where(scope: 1).order('likes_count DESC')
+    @documents = Document.where('scope = ?',1)
+    @user = User.find(current_user.id)
+  end
+
+  def assistant
+    @template = Template.find(params[:format])
+    @documents = Document.where('scope = ?',1).where(template_id: @template.id)
+    @user = User.find(current_user.id)
+  end
+
+
+  def read
+    @document = Document.find(params[:id])
+    if @document.scope == 0
+      redirect_to documents_open_path
+    else
+      @template = Template.find(@document.template_id)
+      @category=Category.find(@template.category_id)
+      @questions=Question.where(template_id: @template.id)
+    end
+  end
+
 
    private
 

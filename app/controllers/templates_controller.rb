@@ -7,8 +7,9 @@ class TemplatesController < ApplicationController
     @my_templates_unreleased=@user.templates.where(scope: 0)
     @my_templates_released=@user.templates.where(scope: 1).order('likes_count DESC')
 
+    @templates_released = Template.where(scope: 1)
     @category_name = []
-    @my_templates_released.each do |template_released|
+    @templates_released.each do |template_released|
       @category_name.push(template_released.category.name)
     end
 
@@ -16,62 +17,84 @@ class TemplatesController < ApplicationController
     @category_name = @category_name.sort do |a, b|
       b[1] <=> a[1]
     end
+    @categories = @category_name.to_h
     @category_name = @category_name.to_h.first(3).to_h
 
-    @categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
-    
+    #@categories = Category.joins(:templates).select("categories.name").where("templates.scope =1").distinct
+
   end
 
 
 
   def new
     @template=Template.new
+	@template.questions.build
     @category=Category.new
+    @submit='作成'
+    @parents_template_id = params[:id]
+    if @parents_template_id
+      parents_template = Template.find(@parents_template_id)
+      if parents_template.scope == 1
+         @parents_template = parents_template
+         @parents_questions = @parents_template.questions.order(:id)
+      end
+    end
   end
 
   def show
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id)
+    @questions=@template.questions.order(:id)
     @document = Document.new
+    @parent_tamplates= find_parent_templates(@template,[@template])
   end
 
   def create
     @category=Category.new(category_params)
+    @template=Template.new(template_params)
+    @template.scope = 0
     if @category.save
-      @template=Template.new(template_params)
       @template.category_id = @category.id
-      @template.scope = 0
-      if @template.save
-        redirect_to templates_path
+      if @template.save #templateの保存とバリデーションチェック
+        redirect_to @template
       else
         @category.destroy
-        redirect_to new_template_path, alert: "アシスタントのタイトル、または概要を入力してください。"
+        render :new
+        # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-       redirect_to new_template_path, alert: "カテゴリを入力してください。"
+      if @template.save #バリデーションチェック用
+        @template.destroy
+      end
+      render :new
+      # redirect_to new_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
   def edit
     @template=Template.find(params[:id])
     @category=Category.find(@template.category.id)
+	@questions=@template.questions.order(:id)
     @submit='更新'
   end
 
   def update
     @template=Template.find(params[:id])
     @category=Category.find(@template.category_id)
-    @questions=Question.where(template_id: @template.id)
+
+    @questions=@template.questions.order(:id)
     @document=Document.new
+
     if @category.update_attributes(category_params)
       if @template.update_attributes(template_params)
-        render 'show'
+        redirect_to template_path
       else
-        redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+        render :edit
+        # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
       end
     else
-      redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、またはカテゴリを入力してください。"
+      render :edit
+      # redirect_to edit_template_path, alert: "アシスタントのタイトル、概要、カテゴリ全てを入力してください。"
     end
   end
 
@@ -108,7 +131,11 @@ class TemplatesController < ApplicationController
   private
 
     def template_params
-        params.require(:template).permit(:title,:topic,:category_id,:picture,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+        params.require(:template).permit(:title,:topic,:category_id,:picture,:parent_template_id,questions_attributes: [:id, :qtext, :qdetail, :example, :_destroy]).merge(user_id: current_user.id)
+    end
+	
+	def question_params
+        params.require(:question).permit(:qtext, :qdetail, :example)
     end
 
     def category_params
@@ -120,6 +147,17 @@ class TemplatesController < ApplicationController
       unless logged_in?
         flash[:danger] = "ログインしてください"
         redirect_to login_url
+      end
+    end
+
+    #再帰で歴代親テンプレートをとってくる。
+    def find_parent_templates(template,array)
+      if template.parent_template_id
+        parent_template = Template.find(template.parent_template_id)
+        array.unshift(parent_template)
+        find_parent_templates(parent_template,array)
+      else
+        return array
       end
     end
 

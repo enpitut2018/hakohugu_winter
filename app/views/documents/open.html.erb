@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="mb-4 mt-4">みんなのノート</h1>
+      <h3>アシスタントごとに表示</h3>
+
+
+      <!-- 検索 -->
+      <div class='mb-4'>
+        <%= form_tag(documents_open_path, :method => 'get') do %>
+          <div class="form-row">
+            <div>
+              <%= select_tag :select, options_for_select([["タイトル", 'title'], ["カテゴリ", 'category']]) , class:"custom-select", id:"select_key"%>
+            </div>
+            <div class="col">
+              <%= text_field_tag :search ,'',:class => 'form-control',:placeholder =>'アシスタントを検索' ,:id=>'template_or_category_name'%>
+            </div>
+            <div class="col">
+              <%= button_tag '検索', class: 'btn btn-primary' %>
+            </div>
+         </div>
+        <% end %>
+      </div>
+
+      <div class="card-deck">
+        <% @templates.each do |template| %>
+        <div class="col-md-3">
+          <div class="card img-thumbnail">
+            <%if template.picture?%>
+			  <%if Rails.env.production?%>
+                 <%= cl_image_tag(template.picture,:class => 'card-img-top')%>
+			  <%else%>
+			    <%= image_tag template.picture.url,:class => 'card-img-top' %>
+			  <%end%>
+            <%else%>
+              <%= image_tag 'hakohugu 200X200.png', :class => 'card-img-top'%>
+            <%end%>
+            <div class="card-body px-2 py-3 border-top">
+              <h5 class="card-title">
+                <%= link_to template.title ,documents_assistant_path(template.id), data: {"turbolinks" => false}%>
+              </h5>
+              <h4 class="card-title">
+              <p style="font-size:50%;">-カテゴリ-</p>
+              <p style="font-size:50%;">
+                  <%= template.category.name%>
+              </p>
+              </h4>
+              <span id = "template-<%=template.id%>" data-template-id="<%= template.id %>">
+                <%= render "likes/like", template: template %>
+              </span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+      <br>
+
+      <%= will_paginate(@templates,:renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer) %>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  $( "#template_or_category_name" ).autocomplete({
+    autoFocus: true,
+     source: "/templates/template_auto_complete.json",
+      minLength: 1,
+    messages: {
+      noResults: '',
+      results: function() {}
+    }
+  });
+
+  var key; 
+  $("#select_key").on("change",function(){
+    key = this.value;
+      if(key == 'title'){
+        $( "#template_or_category_name" ).autocomplete({
+          autoFocus: true,
+          source: "/templates/template_auto_complete.json",
+            minLength: 1,
+          messages: {
+            noResults: '',
+            results: function() {}
+          }
+        });
+      }
+      else{
+        $( "#template_or_category_name" ).autocomplete({
+        autoFocus: true,
+        source: "/templates/category_auto_complete.json",
+          minLength: 1,
+        messages: {
+          noResults: '',
+          results: function() {}
+        }
+      });
+      }
+  });
+});
+</script>
