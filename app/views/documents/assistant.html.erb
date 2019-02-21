@@ -28,14 +28,14 @@
                     <%= document.template.title %>
                   </p>
                 </h4>
-                <div class="card-footer">
-                  <% if document.user_id == @user.id %>
+                <% if document.user_id == @user.id %>
+				  <div class="card-footer">
                     <%= link_to "削除" ,document, method: :delete, data: { confirm: "本当にこのノートを削除しますか?" } %><br>
                     <% if document.scope == 1%>
                       <%= link_to "非公開にする", release_document_path(document.id), data:{confirm: "このノートを非公開にします"}%>
                     <% end %>
-                  <% end %>
-                </div>
+                  </div>
+				<% end %>
               </div>
             </div>
           </div>
