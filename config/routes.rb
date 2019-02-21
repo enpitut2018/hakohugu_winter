@@ -32,4 +32,6 @@ Rails.application.routes.draw do
     namespace :api do
         get 'questions/(:document_id)' , to: 'questions#show'
     end
+
+    get '/help', to: 'application#help'
 end
